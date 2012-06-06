@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="ads_lib/libzc1.6.jar"/>
+	<classpathentry kind="lib" path="ads_lib/TADsdk.2.45.43.5.jar"/>
+	<classpathentry kind="lib" path="ads_lib/Ad@mPublisherSDK-2.0.3.0.jar"/>
+	<classpathentry kind="lib" path="ads_lib/adlibr.2.0.0.jar"/>
+	<classpathentry kind="lib" path="ads_lib/CaulyADSDK_1.4.7.jar"/>
+	<classpathentry kind="lib" path="ads_lib/GoogleAdMobAdsSdk-6.0.1.jar"/>
+	<classpathentry kind="lib" path="ads_lib/InMobiAndroidSDK.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
