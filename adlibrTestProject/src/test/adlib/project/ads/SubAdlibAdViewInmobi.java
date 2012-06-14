@@ -11,6 +11,9 @@
 
 package test.adlib.project.ads;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.inmobi.androidsdk.IMAdListener;
 import com.inmobi.androidsdk.IMAdRequest;
 import com.inmobi.androidsdk.IMAdRequest.ErrorCode;
@@ -21,7 +24,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 
 public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
@@ -79,7 +81,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		ad = new IMAdView((Activity) context, IMAdView.INMOBI_AD_UNIT_320X50, inmobiKey);
 		LayoutParams params = new LayoutParams(getPixels(320),getPixels(50));
 		ad.setLayoutParams(params);
-		
+
 		this.addView(ad);
 	}
 	
@@ -91,6 +93,12 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		// when distributing to the users)
 		mAdRequest = new IMAdRequest();
 		//mAdRequest.setTestMode(true);
+
+		// 애드립 리워드 포인트 적립을 위해 필요한 코드입니다. -- 삭제하지 마세요.
+		Map<String,String> reqParams = new HashMap<String,String>();
+		reqParams.put("tp","c_adlib");
+		mAdRequest.setRequestParams(reqParams);		
+		// 애드립 리워드 포인트 적립을 위해 필요한 코드입니다. -- 삭제하지 마세요.
 		
 		ad.setIMAdRequest(mAdRequest);
 
