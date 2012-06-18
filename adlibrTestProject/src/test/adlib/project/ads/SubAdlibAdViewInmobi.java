@@ -26,6 +26,13 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
+/*
+ AndroidManifest.xml 에 아래 내용을 추가해주세요.
+
+ <activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
+ android:configChanges="keyboardHidden|orientation|keyboard" /> 
+ */
+
 public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	
 	protected IMAdView ad;
