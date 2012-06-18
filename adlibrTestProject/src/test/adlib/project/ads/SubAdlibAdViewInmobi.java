@@ -70,8 +70,9 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewInmobi(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		// 여기에 애드립에서 발급받은 inmobi - key 를 입력하세요.
-		// 애드립에서 발급받은 key 를 적용해야 리워드 포인트를 정상적으로 적립받을 수 있습니다.
+		// 여기에 인모비에서 발급받은 key 를 입력하세요.
+        // 마찬가지로 애드립의 스케줄 설정창에도 발급받은 키를 입력해주세요.
+        // 같은 키를 소스파일, 애드립 페이지 두 곳에 입력해야 리워드 포인트를 적립받을 수 있습니다.
 		String inmobiKey = "INMOBI - API - KEY";
 
 		// Get the IMAdView instance
