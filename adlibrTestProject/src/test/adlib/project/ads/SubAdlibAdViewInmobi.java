@@ -37,7 +37,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	
 	protected IMAdView ad;
 	private IMAdRequest mAdRequest;
-
+	protected boolean bShowed = false;
+    
 	private IMAdListener mIMAdListener = new IMAdListener() {
 
 		@Override
@@ -50,12 +51,16 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 
 		@Override
 		public void onAdRequestFailed(IMAdView adView, ErrorCode errorCode) {
+            if(bShowed)
+                return;
+    
 			failed();
 		}
 
 		@Override
 		public void onAdRequestCompleted(IMAdView adView) {
 			gotAd();
+            bShowed = true;
 		}
 		
 		@Override
