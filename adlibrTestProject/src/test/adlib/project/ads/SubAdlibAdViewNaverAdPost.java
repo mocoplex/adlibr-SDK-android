@@ -36,7 +36,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		ad = new MobileAdView(context);
 		ad.setChannelID(naverAdPostKey);
-		ad.setTest(true);
+//		ad.setTest(true);
 		
 		this.addView(ad);
 		
