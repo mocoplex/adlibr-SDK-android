@@ -42,10 +42,15 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		ad = new MobileAdView(context);
 		ad.setChannelID(naverAdPostKey);
-//		ad.setTest(true);
-		
+		ad.setTest(false);
+				
 		this.addView(ad);
 		
+		LayoutParams l = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT);
+		ad.setLayoutParams(l);
+		
+        // 검수를 위해 무조건 화면에 보이게 합니다.
+		this.gotAd();
 	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
