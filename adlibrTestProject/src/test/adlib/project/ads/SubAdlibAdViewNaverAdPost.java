@@ -19,6 +19,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 
+/*
+ AndroidManifest.xml 에 아래 내용을 추가해주세요.
+ 
+ <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
+ */
+
 public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	
 	protected MobileAdView ad;
