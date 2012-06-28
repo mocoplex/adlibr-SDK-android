@@ -49,8 +49,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		LayoutParams l = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT);
 		ad.setLayoutParams(l);
 		
-        // 검수를 위해 무조건 화면에 보이게 합니다.
-		this.gotAd();
+		ad.start();
 	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
@@ -62,8 +61,9 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 			@Override
 			public void onReceive(int arg0) {
 				
-				if(arg0 == 0)
+				if(arg0 == 0 || arg0 == 104)
 				{
+					// 광고 수신 성공인 경우나, 검수중인 경우만 화면에 보입니다.
 					gotAd();
 				}
 				else
@@ -82,7 +82,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			ad.destroy();
-			ad = null;			
+			ad = null;
 		}
 
 		super.clearAdView();
