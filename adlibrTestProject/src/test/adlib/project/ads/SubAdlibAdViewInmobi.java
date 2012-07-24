@@ -37,7 +37,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	
 	protected IMAdView ad;
 	private IMAdRequest mAdRequest;
-	protected boolean bShowed = false;
+	protected boolean bGotAd = false;
     
 	private IMAdListener mIMAdListener = new IMAdListener() {
 
@@ -51,7 +51,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 
 		@Override
 		public void onAdRequestFailed(IMAdView adView, ErrorCode errorCode) {
-            if(bShowed)
+            if(bGotAd)
                 return;
     
 			failed();
@@ -60,7 +60,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		@Override
 		public void onAdRequestCompleted(IMAdView adView) {
 			gotAd();
-            bShowed = true;
+			bGotAd = true;
 		}
 		
 		@Override
@@ -85,7 +85,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		// 여기에 인모비에서 발급받은 key 를 입력하세요.
         // 마찬가지로 애드립의 스케줄 설정창에도 발급받은 키를 입력해주세요.
         // 같은 키를 소스파일, 애드립 페이지 두 곳에 입력해야 리워드 포인트를 적립받을 수 있습니다.
-		String inmobiKey = "INMOBI - API - KEY";
+		String inmobiKey = "INMOBI ID";
 
 		// Get the IMAdView instance
 		
@@ -117,8 +117,11 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 
 		// set the listener if the app has to know ad status notifications
 		ad.setIMAdListener(mIMAdListener);
-
+		
 		ad.loadNewAd();
+		
+		if(bGotAd)
+			gotAd();		
 	}
 	
 	// 광고뷰를 삭제하는 경우 호출됩니다. 

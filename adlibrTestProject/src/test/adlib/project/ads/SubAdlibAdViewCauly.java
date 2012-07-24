@@ -22,6 +22,7 @@ import android.util.AttributeSet;
 public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 	
 	protected com.cauly.android.ad.AdView ad;
+	protected boolean bGotAd = false;
 
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -31,7 +32,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		// 여기에 CAULY ID를 입력합니다.
-		String caulyID = "CAULY";
+		String caulyID = "CAULY ID";
 		
 		com.cauly.android.ad.AdInfo ai = new com.cauly.android.ad.AdInfo();
 		ai.initData(caulyID, "cpc",
@@ -41,13 +42,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 				"default",
 				"yes",30,true);
 
-		ad = new com.cauly.android.ad.AdView(this.getContext());				
-	}
-		
-	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.		
-	public void query()
-	{
+		ad = new com.cauly.android.ad.AdView(this.getContext());
 		ad.setAdListener(new AdListener(){
 
 			@Override
@@ -58,7 +53,8 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 			@Override
 			public void onFailedToReceiveAd(boolean arg0) {
 
-				failed();
+				if(!bGotAd)
+					failed();
 			}
 
 			@Override
@@ -69,19 +65,27 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 				if(ad.isChargeableAd())
 				{
 					// 광고를 수신하였으면 이를 알려서 화면에 표시합니다.
+					bGotAd = true;
 					gotAd();					
 				}
 				else
 				{
-					failed();
+					if(!bGotAd)
+						failed();
 				}				
 			}
 			
 		});
 		
-		this.addView(ad);
+		this.addView(ad);		
+	}
 		
+	// 스케줄러에의해 자동으로 호출됩니다.
+	// 실제로 광고를 보여주기 위하여 요청합니다.		
+	public void query()
+	{
 		// 화면에 먼저 보여 광고가 있는지 확인합니다.
+		ad.startLoading();
 		gotAd();
 	}
 	
@@ -89,22 +93,33 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			ad.stopLoading();
-			ad.destroy();
-			ad = null;			
+			ad.stopLoading();			
 		}
 		
 		super.clearAdView();
 	}
-	
+	public void onDestroy()
+	{
+		if(ad != null)
+		{
+			ad.stopLoading();
+			ad.destroy();
+			ad = null;
+		}
+		super.onDestroy();
+	}	
 	public void onResume()
 	{
-		ad.startLoading();
+		if(ad != null)			
+			ad.startLoading();
+		
 		super.onResume();
 	}
 	public void onPause()
 	{
-		ad.stopLoading();
+		if(ad != null)
+			ad.stopLoading();
+		
 		super.onPause();
 	}	
 }

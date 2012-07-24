@@ -23,18 +23,11 @@ import android.util.DisplayMetrics;
 public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
 	protected com.sktelecom.tad.AdView ad;
-
+	protected boolean bGotAd = false;
+	
 	public SubAdlibAdViewTAD(Context context) {
 		this(context,null);
-	}	
-	
-	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
-		super(context, attrs);
 		
-	}
-		
-	public void query()
-	{
 		// T-AD ID 는 MANIFEST 파일에 입력해주세요. (T-AD SDK 문서 참조)
 		
 		// T-AD is only showing on below resolution.
@@ -58,7 +51,10 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			h = 36;
 		
 		if (h == 0)
+		{
+			failed();
 			return;
+		}
 		
 		ad = com.sktelecom.tad.AdView.createAdView(this.getContext());		
 		ad.setAdListener(new AdListener(){
@@ -66,26 +62,33 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			@Override
 			public void onFailedToReceiveAd(AdListenerResponse arg0) {
 				// 광고 수신에 실패했다. 바로 다음 플랫폼을 보인다.
-				failed();
+				if(!bGotAd)
+					failed();
 			}
 
 			@Override
 			public void onReceiveAd() {
-				gotAd();	
+				gotAd();
+				bGotAd = true;
 			}});
 		
-		this.addView(ad);
+		this.addView(ad);		
+	}
+	
+	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		
+	}
+		
+	public void query()
+	{
 		gotAd();	// 광고 수신 여부를 확인하기위해 광고뷰를 화면에 보입니다. 화면에 뷰가 보여야 콜백을 받을 수 있습니다.
 	}
-
 	
 	public void clearAdView()
 	{
-		ad = null;
-		
 		super.clearAdView();
-	}
-	
+	}	
 	public void onResume()
 	{
 		super.onResume();

@@ -23,35 +23,24 @@ import android.view.Gravity;
 public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	
 	protected com.google.ads.AdView ad;
-
-	public void onPause()
-	{
-		super.onPause();
-	}
-
+	protected boolean bGotAd = false;
 
 	public SubAdlibAdViewAdmob(Context context) {
 		this(context,null);
-	}
-	
+	}	
 	
 	public SubAdlibAdViewAdmob(Context context, AttributeSet attrs) {
 		
 		super(context, attrs);
 
 		// 여기에 ADMOB ID 를 입력하세요.
-		String admobID = "ADMOB";
+		String admobID = "ADMOB ID";
 
 		ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.BANNER, admobID);
 
 		// 광고 뷰의 위치 속성을 제어할 수 있습니다. 
 		this.setGravity(Gravity.CENTER);
-	}
-
-	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+		
 		ad.setAdListener( new com.google.ads.AdListener() {
 
 			@Override
@@ -62,7 +51,8 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 
 			@Override
 			public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
-				failed();				
+				if(!bGotAd)
+					failed();				
 			}
 
 			@Override
@@ -79,20 +69,28 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 
 			@Override
 			public void onReceiveAd(Ad arg0) {
-				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
-				gotAd();
 				
+				bGotAd = true;
+				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
+				gotAd();				
 			}
 
 		});
 
-		this.addView(ad);
-		
-		com.google.ads.AdRequest request = new com.google.ads.AdRequest();		
-		ad.loadAd(request);
+		this.addView(ad);		
 	}
+
+	// 스케줄러에의해 자동으로 호출됩니다.
+	// 실제로 광고를 보여주기 위하여 요청합니다.	
+	public void query()
+	{		
+		ad.loadAd(request);
+		if(bGotAd)
+			gotAd();
+	}
+	private com.google.ads.AdRequest request = new com.google.ads.AdRequest();
 	
-	public void clearAdView()
+	public void onDestroy()
 	{
 		if(ad != null)
 		{
@@ -100,12 +98,33 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 			ad = null;			
 		}
 		
+		super.onDestroy();
+	}
+	
+	public void clearAdView()
+	{
+		if(ad != null)
+		{
+			ad.stopLoading();						
+		}
+		
 		super.clearAdView();
 	}
 	
 	public void onResume()
 	{
+		if(ad != null)
+			ad.loadAd(request);
+		
 		super.onResume();
+	}
+	
+	public void onPause()
+	{
+		if(ad != null)
+			ad.stopLoading();
+		
+		super.onPause();
 	}
 	
 }
