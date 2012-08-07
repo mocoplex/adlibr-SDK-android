@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 1.4.7
+ * confirmed compatible with cauly SDK 1.5.0
  */
 
 package test.adlib.project.ads;
@@ -44,6 +44,14 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 
 		ad = new com.cauly.android.ad.AdView(this.getContext());
 		ad.setAdListener(new AdListener(){
+			
+			@Override
+			public void onCloseScreen() {
+			}
+
+			@Override
+			public void onShowScreen() {
+			}
 
 			@Override
 			public void onCloseInterstitialAd() {
