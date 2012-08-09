@@ -29,7 +29,13 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		ad = new com.zetacube.libzc.AdView(this.getContext());
+		this.addView(ad);
+	}
 		
+	// 스케줄러에의해 자동으로 호출됩니다.
+	// 실제로 광고를 보여주기 위하여 요청합니다.	
+	public void query()
+	{
 		ad.setOnAdViewListener(new com.zetacube.libzc.AdView.OnAdViewListener() {
 
 			public void receiveAdError(int errorCode, String 
@@ -45,15 +51,10 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 			}
 		});
 		
-		this.addView(ad);
-	}
-		
-	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{		
 		if(bGotAd)
-			gotAd();
+		{
+			ad.startAd();
+		}
 		else
 		{
 			// 여기에 ADCUBE ID 를 입력하세요.
