@@ -21,6 +21,12 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	protected com.zetacube.libzc.AdView ad;
 
+	private int dpToPx(int dp)
+	{
+	    float density = getContext().getResources().getDisplayMetrics().density;
+	    return Math.round((float)dp * density);
+	}
+	
 	public SubAdlibAdViewAdcube(Context context) {
 		this(context,null);
 	}	
@@ -30,6 +36,9 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 		
 		ad = new com.zetacube.libzc.AdView(this.getContext());
 		this.addView(ad);
+		
+		LayoutParams l = new LayoutParams(LayoutParams.FILL_PARENT,dpToPx(50));
+		ad.setLayoutParams(l);				
 	}
 		
 	// 스케줄러에의해 자동으로 호출됩니다.
@@ -41,7 +50,7 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 			public void receiveAdError(int errorCode, String 
 			description, 
 			String failingUrl) {
-				
+				failed();
 			}
 			
 			public void receiveAd(String url) {
@@ -51,27 +60,20 @@ public class SubAdlibAdViewAdcube extends SubAdlibAdViewCore  {
 			}
 		});
 		
-		if(bGotAd)
-		{
-			ad.startAd();
-		}
-		else
+		if(!bGotAd)
 		{
 			// 여기에 ADCUBE ID 를 입력하세요.
 			String adcubeID = "ADCUBE ID";
-			ad.loadAd(adcubeID, null, true);		
+			ad.loadAd(adcubeID, null, true);
 			ad.startAd();
 		}
+		
+		gotAd();
 	}
-	
+
 	// 광고뷰가 사라지는 경우 호출됩니다.
 	public void clearAdView()
 	{
-		if(ad != null)
-		{
-			ad.stopAd();
-		}		
-		
 		super.clearAdView();
 	}
 	public void onResume()
