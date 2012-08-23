@@ -52,8 +52,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 			@Override
 			public void onShowScreen() {
 			}
-
-			@Override
+			
 			public void onCloseInterstitialAd() {
 				
 			}
