@@ -129,7 +129,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			ad = null;			
 		}
 
 		super.clearAdView();
