@@ -34,7 +34,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		// 여기에 CAULY ID를 입력합니다.
-		String caulyID = "GLj5NkG3Q";
+		String caulyID = "CAULY ID";
 		
 		com.cauly.android.ad.AdInfo ai = new com.cauly.android.ad.AdInfo();
 		ai.initData(caulyID, "cpc",
