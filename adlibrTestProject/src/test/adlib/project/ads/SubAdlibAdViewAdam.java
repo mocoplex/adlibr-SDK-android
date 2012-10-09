@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.0.3
+ * confirmed compatible with ad@m SDK 2.0.4
  */
 
 package test.adlib.project.ads;
@@ -35,7 +35,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		ad = new net.daum.adam.publisher.AdView(context);
 		
 		// 여기에 ADAM ID 를 입력하세요.
-		String adamID = "TestClientId";
+		String adamID = "ADAM ID";
 		
 		// 할당 받은 clientId 설정
 		ad.setClientId(adamID);
@@ -65,8 +65,8 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	{
 		ad.resume();
 
-		// ad@m 화면에 보이는 상태에서 결과를 받아올 수 있습니다.		
-		this.gotAd();
+		if(bGotAd)		
+			this.gotAd();
 	}
 	
 	// 광고뷰가 사라지는 경우 호출됩니다. 
