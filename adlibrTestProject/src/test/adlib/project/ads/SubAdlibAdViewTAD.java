@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 2.45.43.5
+ * confirmed compatible with cauly SDK 2.54.0.6
  */
 
 package test.adlib.project.ads;
@@ -56,7 +56,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			return;
 		}
 		
-		ad = com.sktelecom.tad.AdView.createAdView(this.getContext());		
+		ad = com.sktelecom.tad.AdView.createAdView(this.getContext());
 		ad.setAdListener(new AdListener(){
 
 			@Override
@@ -82,7 +82,8 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		
 	public void query()
 	{
-		gotAd();	// 광고 수신 여부를 확인하기위해 광고뷰를 화면에 보입니다. 화면에 뷰가 보여야 콜백을 받을 수 있습니다.
+		if(bGotAd)
+			gotAd();
 	}
 	
 	public void clearAdView()
