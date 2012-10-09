@@ -34,7 +34,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		// 여기에 CAULY ID를 입력합니다.
-		String caulyID = "CAULY APP ID";
+		String caulyID = "GLj5NkG3Q";
 		
 		com.cauly.android.ad.AdInfo ai = new com.cauly.android.ad.AdInfo();
 		ai.initData(caulyID, "cpc",
@@ -99,9 +99,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		// SYNC query / gotAd
 		QFlag = 0;
 		
-		// 화면에 먼저 보여 광고가 있는지 확인합니다.
 		ad.startLoading();
-		gotAd();
+		if(bGotAd)
+			gotAd();
 	}
 	
 	public void clearAdView()
