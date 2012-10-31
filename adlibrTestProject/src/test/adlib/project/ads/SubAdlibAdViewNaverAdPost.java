@@ -28,7 +28,7 @@ import android.util.AttributeSet;
 public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	
 	protected MobileAdView ad;
-	protected boolean bGotAd = false;
+	protected static boolean bGotAd = false;
     	
 	public SubAdlibAdViewNaverAdPost(Context context) {
 		this(context,null);
