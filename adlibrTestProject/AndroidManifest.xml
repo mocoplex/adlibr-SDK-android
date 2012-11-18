@@ -6,25 +6,35 @@
 
     <uses-sdk android:minSdkVersion="7" />
 
-        <!-- adlibr 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
-      <uses-permission android:name="android.permission.INTERNET" />
-      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-      <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.GET_TASKS" />      <!-- 액티비티별 스케줄링을 위해 꼭 추가해주세요. -->
-      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-      <uses-permission android:name="android.permission.CALL_PHONE"/>
-      	<!-- adlibr 실행에 필요한 권한 -->
+	<!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.GET_TASKS" />      <!-- 액티비티별 스케줄링을 위해 꼭 추가해주세요. -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<!-- 여기까지 애드립 사용을 위한 필수 권한 -->
+	
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.CALL_PHONE"/>
+	<!-- 애드립 실행에 필요한 권한 -->
     
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >        
       
+        <!-- 애드립 대화상자 사용을 위해 꼭 추가해주세요. -->
+        <activity
+            android:name="com.mocoplex.adlib.AdlibDialogActivity"
+            android:theme="@android:style/Theme.Translucent"
+			android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <!-- 애드립 대화상자 사용을 위해 꼭 추가해주세요. -->        
+        
+        
 		<!-- 여기에 T-AD ID를 넣으세요. 자세한 사항은 T-AD SDK 문서 참조 -->
-		<!-- TAD -->
 		<meta-data android:name="Tad_AD_ID" android:value="T-AD-ID" />
 		
 		<activity android:configChanges="orientation|keyboard|keyboardHidden"
@@ -63,6 +73,7 @@
 		<meta-data
 			android:name="ShallWeAd_AppKey"
 			android:value="" />
+		<!-- 기본 권한 추가 끝 -->
         
         
         <activity
