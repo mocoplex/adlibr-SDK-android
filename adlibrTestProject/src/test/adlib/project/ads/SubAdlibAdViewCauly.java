@@ -6,13 +6,14 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 1.5.0
+ * confirmed compatible with cauly SDK 3.0
  */
 
 package test.adlib.project.ads;
 
-import com.cauly.android.ad.AdListener;
-import com.mocoplex.adlib.AdlibConfig;
+import com.fsn.cauly.CaulyAdInfo;
+import com.fsn.cauly.CaulyAdInfoBuilder;
+import com.fsn.cauly.CaulyAdView;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
@@ -21,94 +22,72 @@ import android.util.AttributeSet;
 // 자세한 세부 내용은 CAULY SDK 개발 문서를 참조해주세요.
 public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 	
-	protected com.cauly.android.ad.AdView ad;
+	protected CaulyAdView ad;
 	protected boolean bGotAd = false;
 	
-	protected int QFlag = 0;
-
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
-	}	
-
+	}
+    
 	public SubAdlibAdViewCauly(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
 		// 여기에 CAULY ID를 입력합니다.
 		String caulyID = "CAULY ID";
 		
-		com.cauly.android.ad.AdInfo ai = new com.cauly.android.ad.AdInfo();
-		ai.initData(caulyID, "cpc",
-				AdlibConfig.getInstance().getCaulyGender(),
-				AdlibConfig.getInstance().getCaulyAge(),
-				AdlibConfig.getInstance().getCaulyGPS(),
-				"default",
-				"yes",30,true);
-
-		ad = new com.cauly.android.ad.AdView(this.getContext());
-		ad.setAdListener(new AdListener(){
-			
+		CaulyAdInfo ai = new CaulyAdInfoBuilder(caulyID).effect("RightSlide").bannerHeight("Proportional").build();
+        
+		ad = new CaulyAdView(this.getContext());
+		ad.setAdInfo(ai);
+		ad.setAdViewListener(new com.fsn.cauly.CaulyAdViewListener() {
+            
 			@Override
-			public void onCloseScreen() {
-			}
-
-			@Override
-			public void onShowScreen() {
+			public void onReceiveAd(CaulyAdView adView, boolean isChargeableAd) {
+				if(isChargeableAd)
+				{
+					bGotAd = true;
+					gotAd();
+				}
+                
 			}
 			
-			public void onCloseInterstitialAd() {
+			@Override
+			public void onCloseLandingScreen(CaulyAdView arg0) {
+			}
+            
+			@Override
+			public void onFailedToReceiveAd(CaulyAdView arg0, int arg1,
+                                            String arg2) {
 				
-			}
-
-			@Override
-			public void onFailedToReceiveAd(boolean arg0) {
-
 				if(!bGotAd)
 					failed();
 			}
-
+            
 			@Override
-			public void onReceiveAd() {
-				
-				// 광고수신 성공				
-				// 유료광고일 경우만 보이게 CAULY SDK 문서 참조
-				if(ad.isChargeableAd())
-				{
-					// 광고를 수신하였으면 이를 알려서 화면에 표시합니다.
-					bGotAd = true;
-
-					// SYNC query / gotAd
-					if(++QFlag == 1)
-						gotAd();
-				}
-				else
-				{
-					if(!bGotAd)
-						failed();
-				}				
+			public void onShowLandingScreen(CaulyAdView arg0) {
 			}
-			
 		});
 		
-		this.addView(ad);		
+		this.addView(ad);
 	}
-		
+    
 	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.		
+	// 실제로 광고를 보여주기 위하여 요청합니다.
 	public void query()
 	{
-		// SYNC query / gotAd
-		QFlag = 0;
+		// background request 를 지원하지 않는 플랫폼입니다.
+		// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다.
+		this.gotAd();
 		
-		ad.startLoading();
-		if(bGotAd)
-			gotAd();
+		ad.reload();
 	}
 	
 	public void clearAdView()
 	{
 		if(ad != null)
 		{
-			ad.stopLoading();			
+			ad.destroy();
+			ad = null;
 		}
 		
 		super.clearAdView();
@@ -117,24 +96,23 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			ad.stopLoading();
 			ad.destroy();
 			ad = null;
 		}
 		super.onDestroy();
-	}	
+	}
 	public void onResume()
 	{
-		if(ad != null)			
-			ad.startLoading();
+		if(ad != null)
+			ad.resume();
 		
 		super.onResume();
 	}
 	public void onPause()
 	{
 		if(ad != null)
-			ad.stopLoading();
-		
+			ad.pause();
+        
 		super.onPause();
 	}	
 }
