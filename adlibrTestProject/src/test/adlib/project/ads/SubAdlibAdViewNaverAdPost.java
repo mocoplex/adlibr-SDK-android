@@ -42,6 +42,8 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		ad = new MobileAdView(context);
 		ad.setChannelID(naverAdPostKey);
+		
+		// 샘플 광고를 확인하기 위해서는 ad.setTest(true); 로 변경하여 적용해주세요.
 		ad.setTest(false);
 
 		this.addView(ad);
