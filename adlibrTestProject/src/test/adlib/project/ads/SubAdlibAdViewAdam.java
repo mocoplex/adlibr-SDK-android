@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.0.4
+ * confirmed compatible with ad@m SDK 2.1
  */
 
 package test.adlib.project.ads;
@@ -18,7 +18,9 @@ import net.daum.adam.publisher.impl.AdError;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
@@ -44,9 +46,9 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		
 		ad.setOnAdLoadedListener(new OnAdLoadedListener() {
 			@Override
-			public void OnAdLoaded() {
+			public void OnAdLoaded() {				
+				// query 당시 미리 배너를 화면에 보이게 합니다.
 				bGotAd = true;
-				gotAd();
 			} });
 		
 		ad.setOnAdFailedListener(new OnAdFailedListener() {
@@ -63,12 +65,21 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
-		ad.resume();
+		// background request 를 지원하지 않는 플랫폼입니다.
+		// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다. 		
+		bGotAd = false;		
+		gotAd();
 
-		if(bGotAd)		
-			this.gotAd();
+		// 화면에 보이고 바로 resume 을 하면 error 가 들어오는 부분을 방지 
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				ad.resume();
+			}
+		}, 300);
 	}
-	
+
 	// 광고뷰가 사라지는 경우 호출됩니다. 
 	public void clearAdView()
 	{
