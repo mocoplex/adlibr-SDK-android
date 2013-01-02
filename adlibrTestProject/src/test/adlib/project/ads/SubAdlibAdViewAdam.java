@@ -92,31 +92,31 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	}
 	
 	public void onResume()
-	{
-		super.onResume();
-		
+	{		
 		if(ad != null)
 		{
 			ad.resume();
 		}
+        
+        super.onResume();
 	}
 	public void onPause()
 	{
-		super.onPause();
-		
 		if(ad != null)
 		{
 			ad.pause();
-		}		
+		}
+        
+        super.onPause();
 	}
 	public void onDestroy()
 	{
-		super.onDestroy();
-		
 		if(ad != null)
 		{
 			ad.destroy();
 			ad = null;
-		}		
+		}
+        
+        super.onDestroy();
 	}	
 }
