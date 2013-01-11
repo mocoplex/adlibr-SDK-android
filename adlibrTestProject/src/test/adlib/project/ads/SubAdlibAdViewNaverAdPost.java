@@ -56,7 +56,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 			@Override
 			public void onReceive(int arg0) {
 				
-				if(arg0 == 0 || arg0 == 104 || arg0 == 101)
+				if(arg0 == 0 || arg0 == 104 || arg0 == 101 || arg0 == 102 || arg0 == 106)
 				{
 					// 광고 수신 성공인 경우나, 검수중인 경우만 화면에 보입니다.
 					bGotAd = true;
