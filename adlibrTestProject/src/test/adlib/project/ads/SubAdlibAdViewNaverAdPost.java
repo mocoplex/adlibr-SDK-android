@@ -60,7 +60,6 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 				{
 					// 광고 수신 성공인 경우나, 검수중인 경우만 화면에 보입니다.
 					bGotAd = true;
-					gotAd();
 				}
 				else
 				{
@@ -75,9 +74,11 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
+        // NaverADPost SDK 1.2 이후로 background request 를 지원하지 않습니다. 
 		ad.start();
-		if(bGotAd)
-			gotAd();
+        
+        // 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
+        gotAd();
 	}
 	
 	// 광고뷰가 사라지는 경우 호출됩니다. 
