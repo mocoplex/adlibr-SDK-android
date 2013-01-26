@@ -5,6 +5,10 @@
  * Licensed under the BSD open source license.
  */
 
+/*
+ * confirmed compatible with ShallWeAd SDK 2.4.2
+ */
+
 package test.adlib.project.ads;
 
 import com.jm.co.shallwead.sdk.ShallWeAdBanner;
@@ -21,6 +25,8 @@ import android.util.Log;
 		<activity
 			android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden" />
+		<receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver"
+            android:process=":remote" />
 		<meta-data
 			android:name="ShallWeAd_AppKey"
 			android:value="" />
@@ -44,10 +50,10 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 			public void onShowBannerResult(boolean pResult) {
 				Log.d("ShallWeAd_TestApp", "ShallWeAd_TestAppActivity_Java onShowBannerResult "+pResult);
 				if(pResult) {
-					gotAd();
 					bGotAd = true;
 				} else {
-					failed();
+					if(!bGotAd)
+						failed();
 				}
 			}
 		});
@@ -61,8 +67,9 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query() {
-		if(bGotAd)
-			gotAd();		
+		// background request 를 지원하지 않는 플랫폼입니다.
+		// 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
+		gotAd();
 	}
 
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
