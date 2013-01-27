@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with admob SDK 6.0.1
+ * confirmed compatible with admob SDK 6.2.1
  */
 
 package test.adlib.project.ads;

@@ -96,4 +96,15 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 		if(ad != null) {
 		}		
 	}
+    public void onDestroy()
+	{
+		super.onDestroy();
+		
+		if(ad != null)
+		{
+			this.removeView(ad);
+			ad.destroy();
+			ad = null;
+		}
+	}
 }

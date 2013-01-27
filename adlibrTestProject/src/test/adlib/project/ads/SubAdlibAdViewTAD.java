@@ -97,5 +97,14 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	public void onPause()
 	{
 		super.onPause();
-	}	
+	}
+	public void onDestroy()
+	{
+		super.onDestroy();
+		
+		if(ad != null)
+		{
+			this.removeView(ad);
+		}
+	}
 }
