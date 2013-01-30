@@ -46,8 +46,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 				if(isChargeableAd)
 				{
 					bGotAd = true;
-					gotAd();
 				}
+				else
+					failed();
 
 			}
 			
