@@ -29,11 +29,11 @@
         <activity
             android:name="com.mocoplex.adlib.AdlibDialogActivity"
             android:theme="@android:style/Theme.Translucent"
-			android:configChanges="orientation|keyboardHidden" >
-        </activity>
+			android:configChanges="orientation|keyboard|keyboardHidden" />
         
-        <activity android:name="com.mocoplex.adlib.AdlibWebBrowserActivity" />
-        <!-- 애드립 사용을 위해 꼭 추가해주세요. -->        
+        <activity android:name="com.mocoplex.adlib.AdlibWebBrowserActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         
         
 		<!-- 여기에 T-AD ID를 넣으세요. 자세한 사항은 T-AD SDK 문서 참조 -->
