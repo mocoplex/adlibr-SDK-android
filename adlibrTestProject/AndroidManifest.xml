@@ -12,10 +12,12 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<!-- 여기까지 애드립 사용을 위한 필수 권한 -->
-	
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+	<!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
+
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.CALL_PHONE"/>
