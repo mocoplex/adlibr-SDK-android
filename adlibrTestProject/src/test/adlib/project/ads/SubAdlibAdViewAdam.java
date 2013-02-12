@@ -75,7 +75,8 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				ad.resume();
+                if(ad != null)
+                    ad.resume();
 			}
 		}, 300);
 	}
