@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with Inmobi SDK 350
+ * confirmed compatible with Inmobi SDK 3.6.0
  */
 
 package test.adlib.project.ads;
@@ -32,7 +32,7 @@ import android.view.Gravity;
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
 
  <activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
- android:configChanges="keyboardHidden|orientation|keyboard" /> 
+ android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize" /> 
  */
 
 public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
