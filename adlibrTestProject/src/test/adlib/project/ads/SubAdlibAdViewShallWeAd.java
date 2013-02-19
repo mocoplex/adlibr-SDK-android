@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.4.2
+ * confirmed compatible with ShallWeAd SDK 2.4.3
  */
 
 package test.adlib.project.ads;
@@ -17,7 +17,6 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -48,7 +47,6 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 		ad.setBannerListener(new ShallWeAdBannerListener() {
 			@Override
 			public void onShowBannerResult(boolean pResult) {
-				Log.d("ShallWeAd_TestApp", "ShallWeAd_TestAppActivity_Java onShowBannerResult "+pResult);
 				if(pResult) {
 					bGotAd = true;
 				} else {

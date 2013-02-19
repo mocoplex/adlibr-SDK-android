@@ -6,82 +6,129 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 2.54.0.6
+ * confirmed compatible with T ad SDK 3.0.0.6
  */
 
 package test.adlib.project.ads;
 
-import com.sktelecom.tad.sdk.AdListener;
-import com.sktelecom.tad.sdk.AdListenerResponse;
-
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.skplanet.tad.AdListener;
+import com.skplanet.tad.AdView.AnimationType;
+import com.skplanet.tad.AdView.Slot;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
+import android.view.Gravity;
 
 public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
-	protected com.sktelecom.tad.AdView ad;
+	protected com.skplanet.tad.AdView ad;
 	protected boolean bGotAd = false;
 	
 	public SubAdlibAdViewTAD(Context context) {
 		this(context,null);
 		
-		// T-AD ID 는 MANIFEST 파일에 입력해주세요. (T-AD SDK 문서 참조)
+		// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
+		String tAdId = "T_AD_ID";
 		
-		// T-AD is only showing on below resolution.
-		int h = 0;
-		DisplayMetrics d = this.getResources().getDisplayMetrics();
-		if(d.widthPixels == 800 && d.heightPixels == 1280 || d.widthPixels == 1280 && d.heightPixels == 800)
-			h = 120;
-		else if(d.widthPixels == 720 && d.heightPixels == 1280 || d.widthPixels == 1280 && d.heightPixels == 720)
-			h = 108;
-		else if(d.widthPixels == 600 && d.heightPixels == 1024 || d.widthPixels == 1024 && d.heightPixels == 600)
-			h = 90;
-		else if(d.widthPixels == 540 && d.heightPixels == 960 || d.widthPixels == 960 && d.heightPixels == 540)
-			h = 81;
-		else if(d.widthPixels == 480 && d.heightPixels == 854 || d.widthPixels == 854 && d.heightPixels == 480)
-			h = 72;		
-		else if(d.widthPixels == 480 && d.heightPixels == 800 || d.widthPixels == 800 && d.heightPixels == 480)
-			h = 72;
-		else if(d.widthPixels == 320 && d.heightPixels == 480 || d.widthPixels == 480 && d.heightPixels == 320)
-			h = 48;
-		else if(d.widthPixels == 240 && d.heightPixels == 320 || d.widthPixels == 320 && d.heightPixels == 240)
-			h = 36;
+		// 광고 뷰의 위치 속성을 제어할 수 있습니다.
+		this.setGravity(Gravity.CENTER);
 		
-		if (h == 0)
-		{
-			failed();
-			return;
-		}
+		ad = new com.skplanet.tad.AdView(this.getContext());
+		ad.setClientId(tAdId);
+		ad.setSlotNo(Slot.RICHMEDIA_320X50_INLINE);
 		
-		ad = com.sktelecom.tad.AdView.createAdView(this.getContext());
-		ad.setAdListener(new AdListener(){
-
+		/*  새로운 받은 광고가 Display 되는 Animation 효과를 설정합니다.
+		 * NONE							효과없음
+		 * FADE     					Fade 효과
+		 * ￼￼ZOOM ￼ ￼ ￼ ￼ 					Zoom 효과
+		 * ROTATE						회전 효과
+		 * ￼￼SLIDE_FROM_RIGHT_TO_LEFT ￼ ￼ ￼ ￼ 오른쪽에서 왼쪽으로 나타남
+		 * SLIDE_FROM_LEFT_TO_RIGHT		왼쪽에서 오른쪽으로 나타남
+		 * ￼￼SLIDE_FROM_BOTTOM_TO_TOP ￼ ￼ ￼ ￼ 아래에서 위쪽으로 나타남
+		 * SLIDE_FROM_TOP_TO_BOTTOM		위쪽에서 아래쪽으로 나타남
+		 * FLIP_HORIZONTAL				가로로 접기 효과
+		 * FLIP_VERTICAL				세로로 접기 효과
+		 * ROTATE3D_180_HORIZONTAL		가로로 3D 회전 효과
+		 * ROTATE3D_180_VERTICAL		세로로 3D 회전 효과
+		 */
+		ad.setAnimationType(AnimationType.ROTATE3D_180_VERTICAL);
+		// 새로운 광고를 요청하는 주기를 입력합니다. 최소값은 15, 최대값은 60 입니다
+		ad.setRefreshInterval(20);
+		/* 광고 View 의 Background 의 사용 유무를 설정합니다.
+		 * useBackFill 속성을 true 로 설정하면 각 광고마다 광고주가 설정한 배경색이 그려지고 false 인 경우 투명(0x00000000)으로 나타납니다. */
+		ad.setUseBackFill(true);
+		// TestMode 를 정합니다. true 인경우 test 광고가 수신됩니다.
+		ad.setTestMode(false);
+		ad.setListener(new AdListener(){
+			
 			@Override
-			public void onFailedToReceiveAd(AdListenerResponse arg0) {
+			public void onAdReceived() {
+				gotAd();
+				bGotAd = true;
+			}
+			
+			@Override
+			public void onAdFailed(ErrorCode arg0) {
 				// 광고 수신에 실패했다. 바로 다음 플랫폼을 보인다.
 				if(!bGotAd)
 					failed();
 			}
-
+            
 			@Override
-			public void onReceiveAd() {
-				gotAd();
-				bGotAd = true;
-			}});
+			public void onAdClicked() {
+				
+			}
+            
+			@Override
+			public void onAdExpandClosed() {
+				
+			}
+            
+			@Override
+			public void onAdExpanded() {
+				
+			}
+            
+			@Override
+			public void onAdLoaded() {
+				
+			}
+            
+			@Override
+			public void onAdResizeClosed() {
+				
+			}
+            
+			@Override
+			public void onAdResized() {
+				
+			}
+            
+			@Override
+			public void onAdWillLoad() {
+				
+			}
+            
+			@Override
+			public void onAdWillReceive() {
+				
+			}
+			
+		});
 		
-		this.addView(ad);		
+		this.addView(ad);
 	}
 	
 	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
 	}
-		
+    
 	public void query()
 	{
+		ad.startAd();
+		
 		if(bGotAd)
 			gotAd();
 	}
@@ -89,7 +136,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	public void clearAdView()
 	{
 		super.clearAdView();
-	}	
+	}
 	public void onResume()
 	{
 		super.onResume();
@@ -104,7 +151,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
-			this.removeView(ad);
+			ad.destroyAd();
 		}
 	}
 }

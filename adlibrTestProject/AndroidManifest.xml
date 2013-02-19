@@ -39,21 +39,18 @@
         
         
 		<!-- 여기에 T-AD ID를 넣으세요. 자세한 사항은 T-AD SDK 문서 참조 -->
-		<meta-data android:name="Tad_AD_ID" android:value="T-AD-ID" />
-		
-		<activity android:configChanges="orientation|keyboard|keyboardHidden"
-			android:screenOrientation="user" android:label="AdPopupView"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			android:name="com.sktelecom.tad.sdk.AdPopupView" />
-
-		<activity android:configChanges="orientation|keyboard|keyboardHidden"
-			android:screenOrientation="user" android:label="AdPopupActivity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			android:name="com.sktelecom.tad.sdk.AdPopupActivity" />
-
-		<activity android:configChanges="orientation|keyboard|keyboardHidden"
-			android:label="IntroVideoActivity" android:screenOrientation="landscape"
-			android:name="com.sktelecom.tad.sdk.IntroVideoActivity" />
+		<activity
+			android:name="com.skplanet.tad.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+			android:label="Ad Activity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+		</activity>
+		<activity
+			android:name="com.skplanet.tad.AdVideoPlayer"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+			android:label="Ad Video Player"
+			android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
 		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
         
         
