@@ -44,8 +44,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	protected long lastGotAd = 0;     
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
-    // 마찬가지로 애드립의 스케줄 설정창에도 발급받은 키를 입력해주세요.
-    // 같은 키를 소스파일, 애드립 페이지 두 곳에 입력해야 리워드 포인트를 적립받을 수 있습니다.
 	String inmobiKey = "INMOBI APP ID";
 
 	private int getPixels(int dipValue) {
@@ -98,11 +96,9 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		mAdRequest = new IMAdRequest();
 		//mAdRequest.setTestMode(true);
 
-		// 애드립 리워드 포인트 적립을 위해 필요한 코드입니다. -- 삭제하지 마세요.
 		Map<String,String> reqParams = new HashMap<String,String>();
 		reqParams.put("tp","c_adlib");
-		mAdRequest.setRequestParams(reqParams);		
-		// 애드립 리워드 포인트 적립을 위해 필요한 코드입니다. -- 삭제하지 마세요.
+		mAdRequest.setRequestParams(reqParams);
 		
 		ad.setIMAdRequest(mAdRequest);
 
