@@ -27,12 +27,21 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
 	public SubAdlibAdViewTAD(Context context) {
 		this(context,null);
+        
+	}
+	
+	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
+		super(context, attrs);
 		
-		// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
-		String tAdId = "T_AD_ID";
-		
-		// 광고 뷰의 위치 속성을 제어할 수 있습니다.
+        ad = null;
+        // 광고 뷰의 위치 속성을 제어할 수 있습니다.
 		this.setGravity(Gravity.CENTER);
+	}
+    
+    public void initTadView()
+    {
+        // 여기에 T-AD 에서 발급받은 id 를 입력하세요.
+		String tAdId = "T_AD_ID";
 		
 		ad = new com.skplanet.tad.AdView(this.getContext());
 		ad.setClientId(tAdId);
@@ -52,8 +61,8 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		 * ROTATE3D_180_HORIZONTAL		가로로 3D 회전 효과
 		 * ROTATE3D_180_VERTICAL		세로로 3D 회전 효과
 		 */
-		ad.setAnimationType(AnimationType.ROTATE3D_180_VERTICAL);
-		// 새로운 광고를 요청하는 주기를 입력합니다. 최소값은 15, 최대값은 60 입니다
+		ad.setAnimationType(AnimationType.NONE);
+		// 새로운 광고를 요청하는 주기를 입력합니다. 최소값은 15, 최대값은 60 입니다.
 		ad.setRefreshInterval(20);
 		/* 광고 View 의 Background 의 사용 유무를 설정합니다.
 		 * useBackFill 속성을 true 로 설정하면 각 광고마다 광고주가 설정한 배경색이 그려지고 false 인 경우 투명(0x00000000)으로 나타납니다. */
@@ -64,7 +73,6 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			
 			@Override
 			public void onAdReceived() {
-				gotAd();
 				bGotAd = true;
 			}
 			
@@ -118,24 +126,32 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		});
 		
 		this.addView(ad);
-	}
-	
-	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		
-	}
+    }
     
 	public void query()
 	{
+        // T-ad SDK 3.0 이후로 화면에 보일 때마다 동적으로 뷰를 생성, 해제 합니다.
+        bGotAd = false;
+        // 먼저 광고뷰를 화면에 보이고 뷰를 생성한 후 수신여부를 확인합니다.
+        gotAd();
+        
+        if(ad == null)
+            initTadView();
+        
 		ad.startAd();
-		
-		if(bGotAd)
-			gotAd();
 	}
 	
 	public void clearAdView()
 	{
 		super.clearAdView();
+        
+        // T-ad SDK 3.0 이후로 화면에 광고뷰가 보이지 않을 때 반드시 destroy를 시켜야 합니다.
+        if(ad != null)
+        {
+            this.removeView(ad);
+            ad.destroyAd();
+            ad = null;
+        }
 	}
 	public void onResume()
 	{
@@ -152,6 +168,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			ad.destroyAd();
+            ad = null;
 		}
 	}
 }
