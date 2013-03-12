@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.1
+ * confirmed compatible with ad@m SDK 2.1.3
  */
 
 package test.adlib.project.ads;
@@ -70,15 +70,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		bGotAd = false;		
 		gotAd();
 
-		// 화면에 보이고 바로 resume 을 하면 error 가 들어오는 부분을 방지 
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-                if(ad != null)
-                    ad.resume();
-			}
-		}, 300);
+		ad.resume();
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
