@@ -44,7 +44,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	protected long lastGotAd = 0;     
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
-	String inmobiKey = "INMOBI APP ID";
+	String inmobiKey = "INMOBI_APP_ID";
 
 	private int getPixels(int dipValue) {
         Resources r = getResources();

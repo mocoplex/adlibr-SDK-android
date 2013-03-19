@@ -33,7 +33,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		// 여기에 CAULY ID를 입력합니다.
-		String caulyID = "CAULY ID";
+		String caulyID = "CAULY_ID";
 		
 		CaulyAdInfo ai = new CaulyAdInfoBuilder(caulyID).effect("RightSlide").bannerHeight("Proportional").build();
 

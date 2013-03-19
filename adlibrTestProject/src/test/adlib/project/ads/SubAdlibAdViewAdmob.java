@@ -35,7 +35,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		super(context, attrs);
         
 		// 여기에 ADMOB ID 를 입력하세요.
-		String admobID = "ADMOB ID";
+		String admobID = "ADMOB_ID";
         
 		ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.BANNER, admobID);
         

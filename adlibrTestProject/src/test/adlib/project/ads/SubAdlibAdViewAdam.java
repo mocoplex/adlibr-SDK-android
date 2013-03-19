@@ -37,7 +37,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		ad = new net.daum.adam.publisher.AdView(context);
 		
 		// 여기에 ADAM ID 를 입력하세요.
-		String adamID = "ADAM ID";
+		String adamID = "ADAM_ID";
 		
 		// 할당 받은 clientId 설정
 		ad.setClientId(adamID);

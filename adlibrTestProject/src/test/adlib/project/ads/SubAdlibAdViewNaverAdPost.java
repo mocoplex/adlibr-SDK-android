@@ -38,7 +38,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		super(context, attrs);
 	
 		// 여기에 네이버에서 발급받은 key 를 입력하세요.
-		String naverAdPostKey = "NAVER ID";		
+		String naverAdPostKey = "NAVER_ID";		
 		
 		ad = new MobileAdView(context);
 		ad.setChannelID(naverAdPostKey);
