@@ -79,8 +79,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			// background request 를 지원하지 않는 플랫폼입니다.
-			// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다. 
-			this.gotAd();
+			// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다.
+            bGotAd = false;	
+			gotAd();
 			
 			ad.reload();
 		}
