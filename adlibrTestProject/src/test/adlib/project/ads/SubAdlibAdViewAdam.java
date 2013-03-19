@@ -18,9 +18,7 @@ import net.daum.adam.publisher.impl.AdError;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
