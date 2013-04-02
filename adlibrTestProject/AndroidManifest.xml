@@ -38,7 +38,7 @@
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         
         
-		<!-- 여기에 T-AD ID를 넣으세요. 자세한 사항은 T-AD SDK 문서 참조 -->
+		<!-- T-AD - 광고 노출을 위해 필요한 선언입니다. -->
 		<activity
 			android:name="com.skplanet.tad.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
