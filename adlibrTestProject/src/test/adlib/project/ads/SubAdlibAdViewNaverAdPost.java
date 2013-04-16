@@ -37,22 +37,27 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewNaverAdPost(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	
-		// 여기에 네이버에서 발급받은 key 를 입력하세요.
-		String naverAdPostKey = "NAVER_ID";		
+		initAdpostView();
+	}
+    
+    public void initAdpostView()
+    {
+        // 여기에 네이버에서 발급받은 key 를 입력하세요.
+		String naverAdPostKey = "NAVER_ID";
 		
-		ad = new MobileAdView(context);
+		ad = new MobileAdView(getContext());
 		ad.setChannelID(naverAdPostKey);
 		
 		// 샘플 광고를 확인하기 위해서는 ad.setTest(true); 로 변경하여 적용해주세요.
 		ad.setTest(false);
-
+        
 		this.addView(ad);
 		
 		LayoutParams l = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT);
 		ad.setLayoutParams(l);
 		
 		ad.setListener(new MobileAdListener() {
-
+            
 			@Override
 			public void onReceive(int arg0) {
 				
@@ -68,7 +73,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 				}
 				
 			}});
-	}
+    }
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
@@ -99,6 +104,16 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
+            if(ad.isAdAvailable())
+			{
+				this.removeView(ad);
+				ad.stop();
+				ad.destroy();
+				ad = null;
+				
+				initAdpostView();
+			}
+            
 			ad.start();
 		}
 	}
