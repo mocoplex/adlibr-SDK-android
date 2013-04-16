@@ -104,7 +104,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
-            		if(ad.isAdAvailable())
+            if(ad.isAdAvailable())
 			{
 				this.removeView(ad);
 				ad.stop();
