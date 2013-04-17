@@ -29,14 +29,14 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	
 	protected MobileAdView ad;
 	protected static boolean bGotAd = false;
-    	
+    
 	public SubAdlibAdViewNaverAdPost(Context context) {
 		this(context,null);
-	}	
+	}
 	
 	public SubAdlibAdViewNaverAdPost(Context context, AttributeSet attrs) {
 		super(context, attrs);
-	
+        
 		initAdpostView();
 	}
     
@@ -76,7 +76,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
     }
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.	
+	// 실제로 광고를 보여주기 위하여 요청합니다.
 	public void query()
 	{
         // NaverADPost SDK 1.2 이후로 background request 를 지원하지 않습니다.
@@ -87,14 +87,14 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		ad.start();
 	}
 	
-	// 광고뷰가 사라지는 경우 호출됩니다. 
+	// 광고뷰가 사라지는 경우 호출됩니다.
 	public void clearAdView()
 	{
 		if(ad != null)
 		{
 			ad.stop();
 		}
-
+        
 		super.clearAdView();
 	}
 	
@@ -125,14 +125,14 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			ad.stop();
-		}		
-	}	
+		}
+	}
 	public void onDestroy()
 	{
 		super.onDestroy();
 		
 		if(ad != null)
-		{			
+		{
 			ad.stop();
 			ad.destroy();
 			ad = null;
