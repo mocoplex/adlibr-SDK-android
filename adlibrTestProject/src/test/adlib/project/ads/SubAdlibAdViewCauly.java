@@ -35,10 +35,10 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
         
 		initCaulyView();
 	}
-    
-    public void initCaulyView()
-    {
-        // 여기에 CAULY ID를 입력합니다.
+	
+	public void initCaulyView()
+	{
+		// 여기에 CAULY ID를 입력합니다.
 		String caulyID = "CAULY_ID";
         
 		CaulyAdInfo ai = new CaulyAdInfoBuilder(caulyID).effect("RightSlide").bannerHeight("Proportional").build();
@@ -79,7 +79,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore  {
 		});
         
 		this.addView(ad);
-    }
+	}
     
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
