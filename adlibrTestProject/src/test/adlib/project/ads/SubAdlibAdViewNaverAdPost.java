@@ -45,7 +45,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
         // 여기에 네이버에서 발급받은 key 를 입력하세요.
 		String naverAdPostKey = "NAVER_ID";
 		
-		ad = new MobileAdView(getContext());
+		ad = new MobileAdView(this.getContext());
 		ad.setChannelID(naverAdPostKey);
 		
 		// 샘플 광고를 확인하기 위해서는 ad.setTest(true); 로 변경하여 적용해주세요.
@@ -104,6 +104,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
+            // 리스너를 최초에 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 하얗게 보이는 현상을 방지합니다.
             if(!ad.isAdAvailable())
 			{
 				this.removeView(ad);
