@@ -104,7 +104,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
-            // 리스너를 최초에 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 하얗게 보이는 현상을 방지합니다.
+            // 최초 리스너 응답을 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 하얗게 보이는 현상을 방지합니다.
             if(!ad.isAdAvailable())
 			{
 				this.removeView(ad);
