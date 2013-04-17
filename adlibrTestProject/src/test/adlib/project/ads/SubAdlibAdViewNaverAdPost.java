@@ -29,20 +29,20 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	
 	protected MobileAdView ad;
 	protected static boolean bGotAd = false;
-    
+    	
 	public SubAdlibAdViewNaverAdPost(Context context) {
 		this(context,null);
-	}
+	}	
 	
 	public SubAdlibAdViewNaverAdPost(Context context, AttributeSet attrs) {
 		super(context, attrs);
-        
+	
 		initAdpostView();
 	}
-    
-    public void initAdpostView()
-    {
-        // 여기에 네이버에서 발급받은 key 를 입력하세요.
+	
+	public void initAdpostView()
+	{
+		// 여기에 네이버에서 발급받은 key 를 입력하세요.
 		String naverAdPostKey = "NAVER_ID";
 		
 		ad = new MobileAdView(this.getContext());
@@ -71,30 +71,30 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 					if(!bGotAd)
 						failed();
 				}
-				
-			}});
-    }
+			}
+		});
+	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
-	// 실제로 광고를 보여주기 위하여 요청합니다.
+	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
-        // NaverADPost SDK 1.2 이후로 background request 를 지원하지 않습니다.
-        // 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
-        bGotAd = false;
-        gotAd();
-        
+		// NaverADPost SDK 1.2 이후로 background request 를 지원하지 않습니다.
+		// 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
+		bGotAd = false;
+		gotAd();
+		
 		ad.start();
 	}
 	
-	// 광고뷰가 사라지는 경우 호출됩니다.
+	// 광고뷰가 사라지는 경우 호출됩니다. 
 	public void clearAdView()
 	{
 		if(ad != null)
 		{
 			ad.stop();
 		}
-        
+
 		super.clearAdView();
 	}
 	
@@ -104,8 +104,8 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		
 		if(ad != null)
 		{
-            // 최초 리스너 응답을 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 하얗게 보이는 현상을 방지합니다.
-            if(!ad.isAdAvailable())
+			// 최초 리스너 응답을 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 하얗게 보이는 현상을 방지합니다.
+			if(!ad.isAdAvailable())
 			{
 				this.removeView(ad);
 				ad.stop();
@@ -125,14 +125,14 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			ad.stop();
-		}
-	}
+		}		
+	}	
 	public void onDestroy()
 	{
 		super.onDestroy();
 		
 		if(ad != null)
-		{
+		{			
 			ad.stop();
 			ad.destroy();
 			ad = null;
