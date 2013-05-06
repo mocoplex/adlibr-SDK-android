@@ -16,6 +16,7 @@ import com.jm.co.shallwead.sdk.ShallWeAdBannerListener;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 
 /*
@@ -67,8 +68,24 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	public void query() {
 		// background request 를 지원하지 않는 플랫폼입니다.
 		// 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
-        bGotAd = false;
 		gotAd();
+		
+		if(!bGotAd)
+		{
+			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+			Handler adHandler = new Handler();
+			adHandler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					if(bGotAd)
+						return;
+					else
+						failed();
+				}
+				
+			}, 3000);
+		}
 	}
 
 	// 광고뷰를 삭제하는 경우 호출됩니다. 

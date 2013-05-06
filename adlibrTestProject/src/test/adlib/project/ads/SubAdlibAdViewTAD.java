@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.0.2.6
+ * confirmed compatible with T ad SDK 3.1.0.6
  */
 
 package test.adlib.project.ads;
@@ -17,6 +17,7 @@ import com.skplanet.tad.AdView.AnimationType;
 import com.skplanet.tad.AdView.Slot;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
@@ -131,7 +132,6 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	public void query()
 	{
         // T-ad SDK 3.0 이후로 화면에 보일 때마다 동적으로 뷰를 생성, 해제 합니다.
-        bGotAd = false;
         // 먼저 광고뷰를 화면에 보이고 뷰를 생성한 후 수신여부를 확인합니다.
         gotAd();
         
@@ -139,6 +139,23 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
             initTadView();
         
 		ad.startAd();
+		
+		if(!bGotAd)
+		{
+			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+			Handler adHandler = new Handler();
+			adHandler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					if(bGotAd)
+						return;
+					else
+						failed();
+				}
+				
+			}, 3000);
+		}
 	}
 	
 	public void clearAdView()
@@ -151,6 +168,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
             this.removeView(ad);
             ad.destroyAd();
             ad = null;
+            bGotAd = false;
         }
 	}
 	public void onResume()

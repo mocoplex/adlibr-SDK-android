@@ -18,6 +18,7 @@ import net.daum.adam.publisher.impl.AdError;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
@@ -65,10 +66,26 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	{
 		// background request 를 지원하지 않는 플랫폼입니다.
 		// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다. 		
-		bGotAd = false;		
 		gotAd();
 
 		ad.resume();
+		
+		if(!bGotAd)
+		{
+			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+			Handler adHandler = new Handler();
+			adHandler.postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					if(bGotAd)
+						return;
+					else
+						failed();
+				}
+				
+			}, 3000);
+		}
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
