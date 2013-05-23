@@ -105,46 +105,18 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	{
         super.clearAdView();
         
-        // 간헐적으로 발생하는 버그(모든 webview의 동작을 멈춤)방지를 위한 delay
-		// 참고: http://marblemice.blogspot.kr/2011/07/weirdest-admob-bug-ever.html
-		//    : https://groups.google.com/forum/#!msg/google-admob-ads-sdk/lSt-PD9dg3Q/Q8ThsVes7qwJ
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-                if(ad != null)
-                {
-                	ad.stopLoading();
-                }
-			}
-		}, 300);
 	}
 	
 	public void onResume()
 	{
         super.onResume();
         
-		if(ad != null)
-			ad.loadAd(request);
 	}
 	
 	public void onPause()
 	{
         super.onPause();
         
-        // 간헐적으로 발생하는 버그(모든 webview의 동작을 멈춤)방지를 위한 delay
-		// 참고: http://marblemice.blogspot.kr/2011/07/weirdest-admob-bug-ever.html
-		//    : https://groups.google.com/forum/#!msg/google-admob-ads-sdk/lSt-PD9dg3Q/Q8ThsVes7qwJ
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-                if(ad != null)
-                {
-                	ad.stopLoading();
-                }
-			}
-		}, 300);
 	}
 	
 }
