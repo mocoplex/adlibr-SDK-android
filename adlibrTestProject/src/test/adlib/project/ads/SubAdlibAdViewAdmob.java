@@ -17,7 +17,6 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
