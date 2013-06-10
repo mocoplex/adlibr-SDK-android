@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.1.3
+ * confirmed compatible with ad@m SDK 2.2.0
  */
 
 package test.adlib.project.ads;
@@ -20,6 +20,8 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.widget.LinearLayout;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
@@ -41,7 +43,11 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		// 할당 받은 clientId 설정
 		ad.setClientId(adamID);
 		// 광고 갱신 시간 : 기본 60초
-		ad.setRequestInterval(12);		
+		ad.setRequestInterval(12);
+        
+        int adHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) 48.0, getResources().getDisplayMetrics());
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, adHeight);
+		ad.setLayoutParams(params);
 		
 		ad.setOnAdLoadedListener(new OnAdLoadedListener() {
 			@Override
