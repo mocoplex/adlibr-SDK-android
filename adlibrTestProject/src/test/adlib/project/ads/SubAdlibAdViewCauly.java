@@ -116,7 +116,10 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 					if(bGotAd)
 						return;
 					else
+					{
+						ad.pause();
 						failed();
+					}
 				}
 				
 			}, 3000);

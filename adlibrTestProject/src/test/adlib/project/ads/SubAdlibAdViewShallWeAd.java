@@ -91,8 +91,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
 	public void clearAdView()
 	{
-		if(ad != null) {
-			ad = null;			
+		if(ad != null) {		
 		}
 
 		super.clearAdView();

@@ -87,7 +87,10 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 					if(bGotAd)
 						return;
 					else
+					{
+						ad.pause();
 						failed();
+					}
 				}
 				
 			}, 3000);

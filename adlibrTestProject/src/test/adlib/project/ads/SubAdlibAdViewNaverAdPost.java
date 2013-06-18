@@ -97,7 +97,10 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 					if(bGotAd)
 						return;
 					else
+					{
+						ad.stop();
 						failed();
+					}
 				}
 				
 			}, 3000);
