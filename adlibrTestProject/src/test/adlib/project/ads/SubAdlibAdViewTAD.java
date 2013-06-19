@@ -152,8 +152,11 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 						return;
 					else
 					{
-						ad.destroyAd();
-						ad = null;
+						if(ad != null)
+						{
+							ad.destroyAd();
+							ad = null;
+						}
 						failed();
 					}
 				}
