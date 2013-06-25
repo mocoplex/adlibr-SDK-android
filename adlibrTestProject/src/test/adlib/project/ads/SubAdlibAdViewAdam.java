@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.2.0
+ * confirmed compatible with ad@m SDK 2.2.1
  */
 
 package test.adlib.project.ads;
