@@ -51,6 +51,18 @@ public class AdlibTestProjectActivity4 extends Activity {
 		_amanager.bindAdsContainer(a);		
 	}
 	
+	// 전면광고 호출
+	public void loadInterstitialAd()
+	{
+		_amanager.loadInterstitialAd(this);
+	}
+			
+	// 전면광고 호출 (광고 수신 성공, 실패 여부를 받고 싶을 때 handler 이용)
+	public void loadInterstitialAd(Handler h)
+	{
+		_amanager.loadInterstitialAd(this, h);
+	}
+	
 	public void setVersionCheckingListner(AdlibVersionCheckingListener l)
 	{
 		_amanager.setVersionCheckingListner(l);		
