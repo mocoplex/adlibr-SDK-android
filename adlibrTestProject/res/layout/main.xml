@@ -48,4 +48,11 @@
         android:layout_height="wrap_content"        
         />
     
+    <Button 
+        android:id="@+id/btn5"
+        android:text="load interstitial ad"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        />
+    
 </LinearLayout>

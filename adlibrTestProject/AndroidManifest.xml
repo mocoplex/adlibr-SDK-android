@@ -76,6 +76,13 @@
 		<meta-data
 			android:name="ShallWeAd_AppKey"
 			android:value="발급받은 ShallWeAd 등록키" />
+        
+        <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="com.millennialmedia.android.MMActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
+		<activity android:name="com.millennialmedia.android.VideoPlayer"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
 		<!-- 기본 권한 추가 끝 -->
         
         
