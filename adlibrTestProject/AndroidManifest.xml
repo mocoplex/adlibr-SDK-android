@@ -72,11 +72,10 @@
 		<activity
 			android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden" />
-        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver"
-            android:process=":remote" />
+        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
 		<meta-data
 			android:name="ShallWeAd_AppKey"
-			android:value="" />
+			android:value="발급받은 ShallWeAd 등록키" />
 		<!-- 기본 권한 추가 끝 -->
         
         

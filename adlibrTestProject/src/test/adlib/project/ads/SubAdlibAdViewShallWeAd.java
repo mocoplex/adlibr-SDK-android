@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.4.4
+ * confirmed compatible with ShallWeAd SDK 2.4.5
  */
 
 package test.adlib.project.ads;
@@ -25,11 +25,10 @@ import android.util.AttributeSet;
 		<activity
 			android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden" />
-		<receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver"
-            android:process=":remote" />
+		<receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
 		<meta-data
 			android:name="ShallWeAd_AppKey"
-			android:value="" />
+			android:value="발급받은 ShallWeAd 등록키" />
  */
 
 public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
