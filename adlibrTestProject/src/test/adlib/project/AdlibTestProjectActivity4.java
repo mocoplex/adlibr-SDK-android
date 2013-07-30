@@ -5,6 +5,7 @@ import com.mocoplex.adlib.AdlibManager.AdlibVersionCheckingListener;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class AdlibTestProjectActivity4 extends Activity {
     
