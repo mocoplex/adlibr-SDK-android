@@ -27,6 +27,9 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	protected net.daum.adam.publisher.AdView ad;
 	protected boolean bGotAd = false;
+	
+	// 여기에 ADAM ID 를 입력하세요.
+	String adamID = "ADAM_ID";
 
 	public SubAdlibAdViewAdam(Context context) {
 		this(context,null);
@@ -34,11 +37,13 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	public SubAdlibAdViewAdam(Context context, AttributeSet attrs) {
 		super(context, attrs);
-				
-		ad = new net.daum.adam.publisher.AdView(context);
 		
-		// 여기에 ADAM ID 를 입력하세요.
-		String adamID = "ADAM_ID";
+		initAdamView();
+	}
+	
+	public void initAdamView()
+	{
+		ad = new net.daum.adam.publisher.AdView(this.getContext());
 		
 		// 할당 받은 clientId 설정
 		ad.setClientId(adamID);
@@ -51,16 +56,19 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		
 		ad.setOnAdLoadedListener(new OnAdLoadedListener() {
 			@Override
-			public void OnAdLoaded() {				
-				// query 당시 미리 배너를 화면에 보이게 합니다.
+			public void OnAdLoaded() {
+				
 				bGotAd = true;
+				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
+				gotAd();
 			} });
 		
 		ad.setOnAdFailedListener(new OnAdFailedListener() {
 			@Override
 			public void OnAdFailed(AdError arg0, String arg1) {
-				if(!bGotAd)
-					failed();
+				
+				bGotAd = true;
+				failed();
 			} });
 
 		this.addView(ad);
@@ -70,32 +78,32 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
-		// background request 를 지원하지 않는 플랫폼입니다.
-		// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다. 		
-		gotAd();
+		bGotAd = false;
+		
+		if(ad == null)
+			initAdamView();
+		
+		queryAd();
 
 		ad.resume();
 		
-		if(!bGotAd)
-		{
-			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
-			Handler adHandler = new Handler();
-			adHandler.postDelayed(new Runnable() {
+		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					if(bGotAd)
-						return;
-					else
-					{
-						if(ad != null)
-							ad.pause();
-						failed();
-					}
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+				{
+					if(ad != null)
+						ad.pause();
+					failed();
 				}
+			}
 				
-			}, 3000);
-		}
+		}, 3000);
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
@@ -103,7 +111,9 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			ad.pause();
+			this.removeView(ad);
+			ad.destroy();
+			ad = null;
 		}
 
 		super.clearAdView();

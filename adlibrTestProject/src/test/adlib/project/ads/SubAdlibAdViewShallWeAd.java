@@ -18,17 +18,18 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
 
-		<activity
-			android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
-			android:configChanges="orientation|keyboard|keyboardHidden" />
-		<receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
-		<meta-data
-			android:name="ShallWeAd_AppKey"
-			android:value="발급받은 ShallWeAd 등록키" />
+ <activity
+	android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
+	android:configChanges="orientation|keyboard|keyboardHidden" />
+ <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
+ <meta-data
+	android:name="ShallWeAd_AppKey"
+	android:value="발급받은 ShallWeAd 등록키" />
  */
 
 public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
@@ -47,50 +48,56 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 		ad.setBannerListener(new ShallWeAdBannerListener() {
 			@Override
 			public void onShowBannerResult(boolean pResult) {
+				
+				bGotAd = true;
 				if(pResult) {
-					bGotAd = true;
+					// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
+					ad.setVisibility(View.VISIBLE);
+					gotAd();
 				} else {
-					if(!bGotAd)
-						failed();
+					failed();
 				}
 			}
 		});
+		
+		ad.setVisibility(View.GONE);
 				
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		ad.setLayoutParams(params);
-
-		this.addView(ad);
 	}
 
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query() {
-		// background request 를 지원하지 않는 플랫폼입니다.
-		// 먼저 광고뷰를 화면에 보이고 수신여부를 확인합니다.
-		gotAd();
+	public void query()
+	{
+		bGotAd = false;
 		
-		if(!bGotAd)
-		{
-			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
-			Handler adHandler = new Handler();
-			adHandler.postDelayed(new Runnable() {
+		queryAd();
+		
+		this.addView(ad);
+		
+		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					if(bGotAd)
-						return;
-					else
-						failed();
-				}
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+					failed();
+			}
 				
-			}, 3000);
-		}
+		}, 3000);
 	}
 
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
 	public void clearAdView()
 	{
-		if(ad != null) {		
+		if(ad != null)
+		{
+			ad.setVisibility(View.GONE);
+			this.removeView(ad);
 		}
 
 		super.clearAdView();
@@ -99,26 +106,22 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	public void onResume()
 	{
 		super.onResume();
-		
-		if(ad != null) {
-		}
 	}
+	
 	public void onPause()
 	{
 		super.onPause();
-		
-		if(ad != null) {
-		}		
 	}
+	
     public void onDestroy()
 	{
-		super.onDestroy();
-		
 		if(ad != null)
 		{
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
 		}
+		
+		super.onDestroy();
 	}
 }

@@ -26,6 +26,9 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	protected com.skplanet.tad.AdView ad;
 	protected boolean bGotAd = false;
 	
+	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
+	String tAdId = "T_AD_ID";
+	
 	public SubAdlibAdViewTAD(Context context) {
 		this(context,null);
         
@@ -34,16 +37,11 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewTAD(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-        ad = null;
-        // 광고 뷰의 위치 속성을 제어할 수 있습니다.
-		this.setGravity(Gravity.CENTER);
+        initTadView();
 	}
     
     public void initTadView()
     {
-        // 여기에 T-AD 에서 발급받은 id 를 입력하세요.
-		String tAdId = "T_AD_ID";
-		
 		ad = new com.skplanet.tad.AdView(this.getContext());
 		ad.setClientId(tAdId);
 		ad.setSlotNo(Slot.RICHMEDIA_320X50_INLINE);
@@ -74,14 +72,18 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			
 			@Override
 			public void onAdReceived() {
+				
 				bGotAd = true;
+				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
+				gotAd();
 			}
 			
 			@Override
 			public void onAdFailed(ErrorCode arg0) {
-				// 광고 수신에 실패했다. 바로 다음 플랫폼을 보인다.
-				if(!bGotAd)
-					failed();
+				
+				bGotAd = true;
+				// 광고 수신에 실패하여 다음 플랫폼을 호출합니다.
+				failed();
 			}
             
 			@Override
@@ -126,74 +128,77 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			
 		});
 		
+		// 광고 뷰의 위치 속성을 제어할 수 있습니다.
+		this.setGravity(Gravity.CENTER);
+		
 		this.addView(ad);
     }
     
 	public void query()
 	{
-        // T-ad SDK 3.0 이후로 화면에 보일 때마다 동적으로 뷰를 생성, 해제 합니다.
-        // 먼저 광고뷰를 화면에 보이고 뷰를 생성한 후 수신여부를 확인합니다.
-        gotAd();
-        
-        if(ad == null)
+		bGotAd = false;
+		
+		if(ad == null)
             initTadView();
+        
+        queryAd();
         
 		ad.startAd();
 		
-		if(!bGotAd)
-		{
-			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
-			Handler adHandler = new Handler();
-			adHandler.postDelayed(new Runnable() {
+		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					if(bGotAd)
-						return;
-					else
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+				{
+					if(ad != null)
 					{
-						if(ad != null)
-						{
-							ad.destroyAd();
-							ad = null;
-						}
-						failed();
+						SubAdlibAdViewTAD.this.removeView(ad);
+						ad.destroyAd();
+						ad = null;
 					}
+					failed();
 				}
-				
-			}, 3000);
-		}
+			}
+			
+		}, 3000);
 	}
 	
 	public void clearAdView()
 	{
-		super.clearAdView();
-        
         // T-ad SDK 3.0 이후로 화면에 광고뷰가 보이지 않을 때 반드시 destroy를 시켜야 합니다.
         if(ad != null)
         {
             this.removeView(ad);
             ad.destroyAd();
             ad = null;
-            bGotAd = false;
         }
+        
+        super.clearAdView();
 	}
+	
 	public void onResume()
 	{
 		super.onResume();
 	}
+	
 	public void onPause()
 	{
 		super.onPause();
 	}
+	
 	public void onDestroy()
 	{
-		super.onDestroy();
-		
 		if(ad != null)
 		{
 			ad.destroyAd();
             ad = null;
 		}
+		
+		super.onDestroy();
 	}
 }

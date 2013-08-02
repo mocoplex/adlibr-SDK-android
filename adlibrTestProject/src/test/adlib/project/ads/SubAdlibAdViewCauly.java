@@ -19,6 +19,7 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.View;
 
 // 자세한 세부 내용은 CAULY SDK 개발 문서를 참조해주세요.
 public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.cauly.CaulyAdViewListener  {
@@ -26,6 +27,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	protected CaulyAdView ad;
 	protected boolean bGotAd = false;
 	protected boolean isAdAvailable = false;
+	
+	// 여기에 CAULY ID를 입력합니다.
+	String caulyID = "CAULY_ID";
 	
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -39,9 +43,6 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	
 	public void initCaulyView()
 	{
-		// 여기에 CAULY ID를 입력합니다.
-		String caulyID = "CAULY_ID";
-		
 		/* 애니메이션 effect
 		 * LeftSlide(기본) : 왼쪽에서 오른쪽으로 슬라이드 
 		 * RightSlide     : 오른쪽에서 왼쪽으로 슬라이드 
@@ -56,6 +57,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
         
 		ad = new CaulyAdView(this.getContext());
 		ad.setAdInfo(ai);
+		ad.setVisibility(View.GONE);
 		ad.setAdViewListener(this);
 
 		this.addView(ad);
@@ -65,12 +67,16 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	public void onReceiveAd(CaulyAdView adView, boolean isChargeableAd) {
 		
 		isAdAvailable = true;
+		bGotAd = true;
 		if(isChargeableAd)
 		{
-			bGotAd = true;
+			ad.setVisibility(View.VISIBLE);
+			// 유료광고를 받아왔으면 이를 알려 화면에 표시합니다.
+			gotAd();
 		}
 		else
 		{
+			// 무료광고는 보여주지 않습니다.
 			failed();
 		}
         
@@ -84,8 +90,8 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	public void onFailedToReceiveAd(CaulyAdView arg0, int arg1, 
 			String arg2) {
 		
-		if(!bGotAd)
-			failed();
+		bGotAd = true;
+		failed();
 	}
     
 	@Override
@@ -96,46 +102,45 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	// 실제로 광고를 보여주기 위하여 요청합니다.
 	public void query()
 	{
+		bGotAd = false;
+		
 		if(ad == null)
             initCaulyView();
 		
-		// background request 를 지원하지 않는 플랫폼입니다.
-		// 먼저 광고뷰가 화면에 보여진 상태에서만 응답을 받을 수 있습니다.
-		gotAd();
-
+		queryAd();
+		
 		ad.reload();
-			
-		if(!bGotAd)
-		{
-			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
-			Handler adHandler = new Handler();
-			adHandler.postDelayed(new Runnable() {
+		
+		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					if(bGotAd)
-						return;
-					else
-					{
-						if(ad != null)
-							ad.pause();
-						failed();
-					}
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+				{
+					if(ad != null)
+						ad.pause();
+					failed();
 				}
+			}
 				
-			}, 3000);
-		}
+		}, 3000);
 	}
 
+	// 광고뷰가 사라지는 경우 호출됩니다. 
 	public void clearAdView()
 	{
-        // 카울리 광고뷰가 특정 시간이상 보여지고 있지 않으면 갱신이 되지 않는 문제가 있어 뷰가 사라질때 destroy 시킵니다.
 		if(ad != null)
 		{
+			ad.setVisibility(View.GONE);
+			this.removeView(ad);
 			ad.destroy();
             ad = null;
-            bGotAd = false;
 		}
+		
 		super.clearAdView();
 	}
 
@@ -147,8 +152,10 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 			ad.destroy();
 			ad = null;
 		}
+		
 		super.onDestroy();
 	}
+	
 	public void onResume()
 	{
 		if(ad != null)
@@ -157,7 +164,6 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 			if(!isAdAvailable)
 			{
 				this.removeView(ad);
-				ad.pause();
 				ad.destroy();
 				ad = null;
 				
