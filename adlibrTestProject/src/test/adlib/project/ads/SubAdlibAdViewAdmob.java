@@ -76,7 +76,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 			
 		});
 		
-		this.addView(ad);
 	}
 	
 	private com.google.ads.AdRequest request = new com.google.ads.AdRequest();
@@ -87,10 +86,9 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	{
 		bGotAd = false;
 		
-		if(ad == null)
-			initAdmobView();
-		
 		queryAd();
+		
+		this.addView(ad);
 		
 		ad.loadAd(request);
 		
@@ -127,8 +125,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
         	this.removeView(ad);
-			ad.destroy();
-			ad = null;
 		}
 		
         super.clearAdView();
