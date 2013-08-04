@@ -52,8 +52,22 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 				bGotAd = true;
 				if(pResult) {
 					// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
-					ad.setVisibility(View.VISIBLE);
-					gotAd();
+
+					try
+					{
+						if(ad != null)
+						{
+							ad.setVisibility(View.VISIBLE);
+						}
+
+						// 유료광고를 받아왔으면 이를 알려 화면에 표시합니다.
+						gotAd();
+					}
+					catch(Exception e)
+					{
+						failed();
+					}
+
 				} else {
 					failed();
 				}
