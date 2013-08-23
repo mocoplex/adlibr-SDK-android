@@ -26,7 +26,8 @@
     
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >        
+        android:label="@string/app_name"
+        android:hardwareAccelerated="true" >
       
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         <activity
@@ -84,6 +85,13 @@
             android:configChanges="keyboardHidden|orientation|keyboard" />
 		<activity android:name="com.millennialmedia.android.VideoPlayer"
             android:configChanges="keyboardHidden|orientation|keyboard" />
+        
+        <!-- MOBCLIX - 광고 노출을 위해 필요한 선언입니다. -->
+		<meta-data android:name="com.mobclix.APPLICATION_ID"
+            android:value="insert-your-application-key" />
+		<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:hardwareAccelerated="true" />
 		<!-- 기본 권한 추가 끝 -->
         
         
