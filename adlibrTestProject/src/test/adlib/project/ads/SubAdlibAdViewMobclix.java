@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with MillennialMedia SDK 5.0.1
+ * confirmed compatible with mobclix SDK 4.1.0
  */
 
 package test.adlib.project.ads;
