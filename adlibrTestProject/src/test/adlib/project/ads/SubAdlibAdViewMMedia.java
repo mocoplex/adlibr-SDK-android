@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with MillennialMedia SDK 5.0.1
+ * confirmed compatible with MillennialMedia SDK 5.1.0
  */
 
 package test.adlib.project.ads;
@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
+ 
+ <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
  <activity android:name="com.millennialmedia.android.MMActivity"
 	 android:theme="@android:style/Theme.Translucent.NoTitleBar" 
@@ -68,6 +70,26 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 		ad.setListener(new RequestListener(){
 
 			@Override
+			public void MMAdOverlayClosed(MMAd mmAd) {
+				
+			}
+
+			@Override
+			public void MMAdOverlayLaunched(MMAd mmAd) {
+				
+			}
+
+			@Override
+			public void MMAdRequestIsCaching(MMAd mmAd) {
+				
+			}
+
+			@Override
+			public void onSingleTap(MMAd mmAd) {
+				
+			}
+
+			@Override
 			public void requestCompleted(MMAd mmAd) {
 				
 				bGotAd = true;
@@ -80,16 +102,6 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 				
 				bGotAd = true;
 				failed();
-			}
-			
-			@Override
-			public void MMAdOverlayLaunched(MMAd mmAd) {
-				
-			}
-
-			@Override
-			public void MMAdRequestIsCaching(MMAd mmAd) {
-				
 			}
 		});
 		
