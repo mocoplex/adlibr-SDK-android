@@ -17,7 +17,6 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
@@ -36,7 +35,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewAdmob(Context context, AttributeSet attrs) {
 		
 		super(context, attrs);
-        
+		
 		initAdmobView();
 	}
 	
@@ -48,35 +47,39 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		this.setGravity(Gravity.CENTER);
 		
 		ad.setAdListener( new com.google.ads.AdListener() {
-			
+
+			@Override
 			public void onDismissScreen(Ad arg0) {
 				
 			}
-			
+
+			@Override
 			public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
 				
 				bGotAd = true;
 				failed();
 			}
-			
+
+			@Override
 			public void onLeaveApplication(Ad arg0) {
 				
 			}
-			
+
+			@Override
 			public void onPresentScreen(Ad arg0) {
 				
 			}
-			
+
+			@Override
 			public void onReceiveAd(Ad arg0) {
 				
 				bGotAd = true;
+				queryAd();
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 			}
 			
 		});
-		
-		this.addView(ad);
 	}
 	
 	private com.google.ads.AdRequest request = new com.google.ads.AdRequest();
@@ -87,28 +90,9 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	{
 		bGotAd = false;
 		
-		if(ad == null)
-			initAdmobView();
-		
-		queryAd();
+		this.addView(ad);
 		
 		ad.loadAd(request);
-		
-		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
-		Handler adHandler = new Handler();
-		adHandler.postDelayed(new Runnable() {
-
-			@Override
-			public void run() {
-				if(bGotAd)
-					return;
-				else
-				{
-					failed();
-				}
-			}
-		
-		}, 3000);
 	}
 	
 	public void onDestroy()
@@ -127,8 +111,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
         	this.removeView(ad);
-        	ad.destroy();
-        	ad = null;
 		}
 		
         super.clearAdView();
@@ -143,5 +125,4 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	{
         super.onPause();
 	}
-	
 }
