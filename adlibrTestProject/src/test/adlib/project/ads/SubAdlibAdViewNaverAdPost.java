@@ -63,37 +63,44 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 				// 광고 수신 성공인 경우나, 검수중인 경우
 				if(arg0 == 0 || arg0 == 104 || arg0 == 101 || arg0 == 102 || arg0 == 106)
 				{
-					bGotAd = true;
+					if(!bGotAd)
+					{
+						bGotAd = true;
+						queryAd();
+						gotAd();
+					}
 				}
 				else
 				{
-					failed();
+					if(!bGotAd)
+						failed();
 				}
 
 			}
 		});
 		
-		this.addView(ad);
     }
 
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
-		if(ad == null)
-			initAdpostView();
+		this.removeView(ad);
+		this.addView(ad);
 		
-		queryAd();
-        gotAd();
-        
 		ad.start();
 		
-		if(!bGotAd)
+		if(bGotAd)
+		{
+			queryAd();
+			gotAd();
+		}
+		else
 		{
 			// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 			Handler adHandler = new Handler();
 			adHandler.postDelayed(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					if(bGotAd)
@@ -105,7 +112,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 						failed();
 					}
 				}
-				
+
 			}, 3000);
 		}
 	}
@@ -115,10 +122,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			this.removeView(ad);
 			ad.stop();
-			ad.destroy();
-			ad = null;
 		}
 
 		super.clearAdView();
@@ -135,7 +139,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 			ad = null;
 			
 			initAdpostView();
-			
+			this.addView(ad);
 			ad.start();
 		}
 		
