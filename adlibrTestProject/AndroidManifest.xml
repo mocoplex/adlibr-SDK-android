@@ -92,6 +92,11 @@
 		<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:hardwareAccelerated="true" />
+        
+        <!-- UPLUSAD - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:configChanges="keyboard|keyboardHidden|orientation"/>
 		<!-- 기본 권한 추가 끝 -->
         
         
