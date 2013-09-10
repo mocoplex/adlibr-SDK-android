@@ -106,6 +106,28 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 		queryAd();
 		
 		ad.execute();
+        
+        // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
+            
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+				{
+					if(ad != null)
+					{
+						SubAdlibAdViewUPlusAD.this.removeView(ad);
+						ad.destroy();
+						ad = null;
+					}
+					failed();
+				}
+			}
+            
+		}, 3000);
 	}
 	
 	// 광고뷰가 사라지는 경우 호출됩니다. 
