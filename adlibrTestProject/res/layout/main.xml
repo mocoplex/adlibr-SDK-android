@@ -13,7 +13,8 @@
     <com.mocoplex.adlib.AdlibAdViewContainer
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ads" />
+        android:id="@+id/ads"
+        isDefaultBanner="true" />
 
     <TextView
         android:layout_width="fill_parent"
