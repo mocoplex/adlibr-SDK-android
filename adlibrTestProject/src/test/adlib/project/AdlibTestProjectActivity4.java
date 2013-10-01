@@ -15,13 +15,13 @@ public class AdlibTestProjectActivity4 extends Activity {
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+
 		_amanager = new AdlibManager();
 		_amanager.onCreate(this);
-		
+
 		// 일반적인 연동은 추가적으로 구현필요
-        setContentView(R.layout.main2);
-        this.setAdsContainer(R.id.ads);   
+		setContentView(R.layout.main2);
+		this.setAdsContainer(R.id.ads);   
 	}
 
 	protected void onResume()
@@ -30,23 +30,25 @@ public class AdlibTestProjectActivity4 extends Activity {
 		super.onResume();
 	}
 	
-    protected void onPause()
-    {    	
-    	_amanager.onPause();
-    	super.onPause();
-    }
+	protected void onPause()
+	{    	
+		_amanager.onPause();
+		super.onPause();
+	}
     
-    protected void onDestroy()
-    {    	
-    	_amanager.onDestroy(this);
-    	super.onDestroy();
-    }
-    
+	protected void onDestroy()
+	{    	
+		_amanager.onDestroy(this);
+		super.onDestroy();
+	}
+
+	// xml 에 지정된 ID 값을 이용하여 BIND 하는 경우
 	public void setAdsContainer(int rid)
 	{
 		_amanager.setAdsContainer(rid);
 	}
 	
+	// 동적으로 Container 를 생성하여, 그 객체를 통하여 BIND 하는 경우
 	public void bindAdsContainer(AdlibAdViewContainer a)
 	{
 		_amanager.bindAdsContainer(a);		
@@ -69,6 +71,7 @@ public class AdlibTestProjectActivity4 extends Activity {
 		_amanager.setVersionCheckingListner(l);		
 	}
 	
+	// AD 영역을 동적으로 삭제할때 호출하는 메소드
 	public void destroyAdsContainer()
 	{
 		_amanager.destroyAdsContainer();
