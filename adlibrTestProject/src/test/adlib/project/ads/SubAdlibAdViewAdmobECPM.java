@@ -99,6 +99,7 @@ public class SubAdlibAdViewAdmobECPM extends SubAdlibAdViewCore  {
 	{
 		bGotAd = false;
 		
+        this.removeAllViews();
 		this.addView(ad);
 		
 		ad.loadAd(request);

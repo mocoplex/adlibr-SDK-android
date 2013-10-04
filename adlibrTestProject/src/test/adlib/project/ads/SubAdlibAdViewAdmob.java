@@ -90,6 +90,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	{
 		bGotAd = false;
 		
+        this.removeAllViews();
 		this.addView(ad);
 		
 		ad.loadAd(request);
