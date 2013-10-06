@@ -14,10 +14,15 @@ package test.adlib.project.ads;
 import com.fsn.cauly.CaulyAdInfo;
 import com.fsn.cauly.CaulyAdInfoBuilder;
 import com.fsn.cauly.CaulyAdView;
+import com.fsn.cauly.CaulyInterstitialAd;
+import com.fsn.cauly.CaulyInterstitialAdListener;
+import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 

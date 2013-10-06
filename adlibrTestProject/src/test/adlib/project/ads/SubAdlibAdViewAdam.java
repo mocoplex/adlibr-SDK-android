@@ -11,14 +11,19 @@
 
 package test.adlib.project.ads;
 
+import net.daum.adam.publisher.AdInterstitial;
+import net.daum.adam.publisher.AdView.OnAdClosedListener;
 import net.daum.adam.publisher.AdView.OnAdFailedListener;
 import net.daum.adam.publisher.AdView.OnAdLoadedListener;
 import net.daum.adam.publisher.impl.AdError;
 
+import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
@@ -158,7 +163,6 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
  			public void OnAdLoaded() {
 	 			try
 	 			{
-	 				Log.d("ADLIBr","adam loaded");
 	 				if(h != null)
 	 				{
 	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADAM"));
@@ -178,7 +182,6 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
  					
 	 			try
 	 			{
-	 				Log.d("ADLIBr","adam failed" + arg0);
 	 				if(h != null)
 	 				{
 	 	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADAM"));
