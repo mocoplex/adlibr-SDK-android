@@ -29,7 +29,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADAM ID 를 입력하세요.
-	String adamID = "ADAM_ID";
+	static String adamID = "ADAM_ID";
 
 	public SubAdlibAdViewAdam(Context context) {
 		this(context,null);
@@ -146,5 +146,70 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		}
         
         super.onDestroy();
-	}	
+	}
+	
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		AdInterstitial mAdInterstitial = new AdInterstitial((Activity)ctx);
+ 	    mAdInterstitial.setClientId(adamID);
+ 	    mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
+
+ 			@Override
+ 			public void OnAdLoaded() {
+	 			try
+	 			{
+	 				Log.d("ADLIBr","adam loaded");
+	 				if(h != null)
+	 				{
+	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADAM"));
+	 				}
+	 			}
+	 			catch(Exception e)
+	 			{
+	 					
+	 			}
+ 					
+ 			}
+ 	    });
+ 	    mAdInterstitial.setOnAdFailedListener(new OnAdFailedListener() {
+
+ 			@Override
+ 			public void OnAdFailed(AdError arg0, String arg1) {
+ 					
+	 			try
+	 			{
+	 				Log.d("ADLIBr","adam failed" + arg0);
+	 				if(h != null)
+	 				{
+	 	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADAM"));
+	 				}
+	 			}
+	 			catch(Exception e)
+	 			{
+	 					
+	 			}
+ 			}
+ 	    });
+ 	    mAdInterstitial.setOnAdClosedListener(new OnAdClosedListener() {
+
+ 			@Override
+ 			public void OnAdClosed() {
+ 					
+	 			try
+	 			{
+	 				if(h != null)
+	 				{
+	 					h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADAM"));
+	 				}
+	 			}
+	 			catch(Exception e)
+	 			{
+	 					
+	 			}
+ 				
+ 			}
+ 	    });
+ 	    	
+ 	    mAdInterstitial.loadAd();		
+	}
 }

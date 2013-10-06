@@ -29,7 +29,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	protected boolean isAdAvailable = false;
 	
 	// 여기에 CAULY ID를 입력합니다.
-	String caulyID = "CAULY_ID";
+	static String caulyID = "CAULY_ID";
 	
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -194,5 +194,71 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		}
 
 		super.onPause();
+	}
+	
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		// CaulyAdInfo 생성
+	    CaulyAdInfo adInfo = new CaulyAdInfoBuilder(caulyID).build();
+	    // 전면 광고 생성
+	    CaulyInterstitialAd interstial = new CaulyInterstitialAd();
+	    interstial.setAdInfo(adInfo);
+	    interstial.setInterstialAdListener(new CaulyInterstitialAdListener() {
+
+			@Override
+			public void onReceiveInterstitialAd(CaulyInterstitialAd ad, boolean arg1) {
+				
+ 				try
+ 				{
+ 	 				if(h != null)
+ 	 				{
+ 	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "CAULY"));
+ 	 				}
+ 				}
+ 				catch(Exception e)
+ 				{
+ 					
+ 				}
+				
+				ad.show();
+			}
+			
+			@Override
+			public void onFailedToReceiveInterstitialAd(CaulyInterstitialAd ad, int errCode, String errMsg) {
+				
+ 				try
+ 				{
+ 	 				if(h != null)
+ 	 				{
+ 	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "CAULY"));
+ 	 				}
+ 				}
+ 				catch(Exception e)
+ 				{
+ 					
+ 				}
+			}
+			
+			@Override
+			public void onClosedInterstitialAd(CaulyInterstitialAd ad) {
+				
+ 				try
+ 				{
+ 	 				// 전면광고 닫혔다.
+ 	 				if(h != null)
+ 	 				{
+ 	 					h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "CAULY"));
+ 	 				} 				   		 					
+ 				}
+ 				catch(Exception e)
+ 				{
+ 					
+ 				}					
+				
+			}
+	    	
+	    });
+	    // 광고 요청. 광고 노출은 CaulyInterstitialAdListener의 onReceiveInterstitialAd에서 처리한다.
+	    interstial.requestInterstitialAd((Activity)ctx); // 전면 광고 노출 플래그 활성화
 	}
 }

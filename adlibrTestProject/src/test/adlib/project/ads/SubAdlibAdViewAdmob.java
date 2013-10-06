@@ -26,7 +26,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADMOB ID 를 입력하세요.
-	String admobID = "ADMOB_ID";
+	static String admobID = "ADMOB_ID";
     
 	public SubAdlibAdViewAdmob(Context context) {
 		this(context,null);
@@ -125,5 +125,64 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	public void onPause()
 	{
         super.onPause();
+	}
+	
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		// Create the interstitial
+		final InterstitialAd interstitial = new InterstitialAd((Activity)ctx, admobID);
+
+	    // Create ad request
+	    AdRequest adRequest = new AdRequest();
+
+	    // Begin loading your interstitial
+	    interstitial.loadAd(adRequest);
+
+	    // Set Ad Listener to use the callbacks below
+	    interstitial.setAdListener(new AdListener() {
+
+			@Override
+			public void onDismissScreen(Ad arg0) {
+				
+				if(h != null)
+	 			{
+	 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADMOB"));
+	 			}
+			}
+
+			@Override
+			public void onFailedToReceiveAd(Ad ad, ErrorCode arg1) {
+				
+				if(h != null)
+	 			{
+	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADMOB"));
+	 			}
+			}
+
+			@Override
+			public void onLeaveApplication(Ad ad) {
+				
+			}
+
+			@Override
+			public void onPresentScreen(Ad ad) {
+				
+			}
+
+			@Override
+			public void onReceiveAd(Ad ad) {
+				
+				if(ad == interstitial)
+				{
+					if(h != null)
+		 			{
+		 				h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADMOB"));
+		 			}
+					
+					interstitial.show();
+				}
+			}
+	    	
+	    });
 	}
 }

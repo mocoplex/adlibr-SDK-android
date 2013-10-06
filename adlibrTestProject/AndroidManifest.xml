@@ -54,6 +54,10 @@
         </activity>
 		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
         
+        <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         
         <!-- ADMOB - 사용하기 위해 API level 13 이상 최신 SDK 가 필요합니다. -->
         <activity android:name="com.google.ads.AdActivity"
