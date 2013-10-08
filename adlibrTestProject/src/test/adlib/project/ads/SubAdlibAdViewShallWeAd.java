@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.4.5
+ * confirmed compatible with ShallWeAd SDK 2.4.6
  */
 
 package test.adlib.project.ads;
@@ -50,31 +50,13 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 			public void onShowBannerResult(boolean pResult) {
 				
 				bGotAd = true;
-				if(pResult) {
-					// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
-
-					try
-					{
-						if(ad != null)
-						{
-							ad.setVisibility(View.VISIBLE);
-						}
-
-						// 유료광고를 받아왔으면 이를 알려 화면에 표시합니다.
-						gotAd();
-					}
-					catch(Exception e)
-					{
-						failed();
-					}
-
-				} else {
+				if(!pResult) {
+                    
+					// 무료광고를 받아왔으면 다음 플랫폼으로 넘깁니다.
 					failed();
 				}
 			}
 		});
-		
-		ad.setVisibility(View.GONE);
 				
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		ad.setLayoutParams(params);
@@ -86,9 +68,11 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	{
 		bGotAd = false;
 		
-		queryAd();
-		
+		this.removeAllViews();
 		this.addView(ad);
+        
+        queryAd();
+        gotAd();
 		
 		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
@@ -110,7 +94,6 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
-			ad.setVisibility(View.GONE);
 			this.removeView(ad);
 		}
 
