@@ -94,9 +94,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	// 실제로 광고를 보여주기 위하여 요청합니다.
 	public void query()
 	{
-		bGotAd = false;
-        
-        if(ad == null)
+		if(ad == null)
 			initAdmobView();
 		
         this.removeAllViews();
@@ -117,6 +115,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 					failed();
 					SubAdlibAdViewAdmob.this.removeView(ad);
 					ad = null;
+                    bGotAd = false;
 				}
 			}
             
