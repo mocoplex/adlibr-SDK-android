@@ -95,11 +95,32 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	public void query()
 	{
 		bGotAd = false;
+        
+        if(ad == null)
+			initAdmobView();
 		
         this.removeAllViews();
 		this.addView(ad);
 		
 		ad.loadAd(request);
+        
+        // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		Handler adHandler = new Handler();
+		adHandler.postDelayed(new Runnable() {
+            
+			@Override
+			public void run() {
+				if(bGotAd)
+					return;
+				else
+				{
+					failed();
+					SubAdlibAdViewAdmob.this.removeView(ad);
+					ad = null;
+				}
+			}
+            
+		}, 3000);
 	}
 	
 	public void onDestroy()
