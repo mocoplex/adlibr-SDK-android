@@ -20,7 +20,6 @@
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.CALL_PHONE"/>
 	<!-- 애드립 실행에 필요한 권한 -->
     
     <application
