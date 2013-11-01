@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -58,6 +59,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	
 	public SubAdlibAdViewInmobi(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		
+		initInmobiView();
 	}
 	
 	public void initInmobiView()
@@ -104,6 +107,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 			public void onAdRequestCompleted(IMAdView adView) {
 				
 				bGotAd = true;
+				ad.setVisibility(View.VISIBLE);
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 			}
@@ -112,18 +116,18 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 			public void onLeaveApplication(IMAdView adView) {
 			}
 		});
-					
-		this.addView(ad);
 	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
-		bGotAd = false;
-		
 		if(ad == null)
 			initInmobiView();
+		
+		this.removeAllViews();
+		ad.setVisibility(View.GONE);
+		this.addView(ad);
 		
 		queryAd();
 		
@@ -140,6 +144,10 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 				else
 				{
 					failed();
+					SubAdlibAdViewInmobi.this.removeView(ad);
+					ad.destroy();
+					ad = null;
+                    bGotAd = false;
 				}
 			}
 		
@@ -152,8 +160,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			this.removeView(ad);
-			ad.destroy();
-			ad = null;
 		}
 		
 		super.clearAdView();
@@ -167,5 +173,17 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	public void onPause()
 	{
 		super.onPause();
+	}
+	
+	public void onDestroy()
+	{
+		if(ad != null)
+		{
+			this.removeView(ad);
+			ad.destroy();
+			ad = null;
+		}
+		
+		super.onDestroy();
 	}
 }
