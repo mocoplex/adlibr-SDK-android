@@ -99,6 +99,20 @@
 		<activity android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
             android:configChanges="keyboard|keyboardHidden|orientation"/>
+            
+        <!-- MEZZO MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
+        <meta-data android:name="MEZZO_WINDOW_ID" android:value="banner" />
+        <!-- MEZZO GPS 사용여부 0:사용안함 1:사용 -->
+        <meta-data android:name="GPS_USE" android:value="0" />
+        <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
+        <meta-data android:name="DEBUG_MODE" android:value="1" />
+        <activity
+            android:name="com.mapps.android.view.InterstitialView" />
+        <activity
+            android:name="com.mapps.android.view.MultimediaView" />
+        <activity
+            android:name="com.mapps.android.view.AlertNotiView"
+            android:theme="@android:style/Theme.Translucent"/>
 		<!-- 기본 권한 추가 끝 -->
         
         
