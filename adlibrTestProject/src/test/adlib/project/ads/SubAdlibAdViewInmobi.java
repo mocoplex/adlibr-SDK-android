@@ -144,9 +144,12 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 				else
 				{
 					failed();
-					SubAdlibAdViewInmobi.this.removeView(ad);
-					ad.destroy();
-					ad = null;
+                    if(ad != null)
+                    {
+                        SubAdlibAdViewInmobi.this.removeView(ad);
+                        ad.destroy();
+                        ad = null;
+                    }
                     bGotAd = false;
 				}
 			}

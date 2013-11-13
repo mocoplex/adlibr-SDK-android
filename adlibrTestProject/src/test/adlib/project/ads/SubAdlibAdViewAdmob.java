@@ -113,9 +113,12 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 				else
 				{
 					failed();
-					SubAdlibAdViewAdmob.this.removeView(ad);
-					ad.destroy();
-					ad = null;
+                    if(ad != null)
+                    {
+                        SubAdlibAdViewAdmob.this.removeView(ad);
+                        ad.destroy();
+                        ad = null;
+                    }
                     bGotAd = false;
 				}
 			}
