@@ -22,7 +22,7 @@ public class AdlibTestProjectActivity5 extends AdlibActivity {
         layout = (LinearLayout) findViewById(R.id.full_layout);
         
         // Full Banner 호출
-        loadFullBanner(new Handler() {
+        loadFullBanner(layout, new Handler() {
 			public void handleMessage(Message message) {
 	    		try
 	    		{
