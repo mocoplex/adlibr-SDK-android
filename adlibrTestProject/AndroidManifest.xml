@@ -113,6 +113,11 @@
         <activity
             android:name="com.mapps.android.view.AlertNotiView"
             android:theme="@android:style/Theme.Translucent"/>
+            
+        <!-- AMAZON - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity
+            android:name="com.amazon.device.ads.AdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 		<!-- 기본 권한 추가 끝 -->
         
         
