@@ -118,6 +118,11 @@
         <activity
             android:name="com.amazon.device.ads.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+            
+        <!-- ADHUB - 광고 노출을 위해 필요한 선언입니다. -->
+        ￼<activity
+        	android:name="com.sec.android.ad.AdActivity"
+        	android:configChanges="keyboardHidden|orientation|screenSize" />
 		<!-- 기본 권한 추가 끝 -->
         
         
