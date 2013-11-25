@@ -35,6 +35,10 @@
         
         <activity android:name="com.mocoplex.adlib.AdlibWebBrowserActivity"
             android:configChanges="orientation|keyboard|keyboardHidden" />
+            
+        <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         
         
