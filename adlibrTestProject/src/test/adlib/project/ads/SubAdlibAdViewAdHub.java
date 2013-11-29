@@ -38,9 +38,9 @@ public class SubAdlibAdViewAdHub extends SubAdlibAdViewCore  {
 	protected AdHubView ad;
 	protected boolean bGotAd = false;
 	
-	// 여기에 ADHUB ID 를 입력하세요. 아래는 테스트키 입니다.
-	static String adhubID = "xv0c00000001ak";
-	static String adhubInterstitialID = "xv0c00000001aw";
+	// 여기에 ADHUB ID 를 입력하세요.
+	static String adhubID = "ADHUB_ID";
+	static String adhubInterstitialID = "ADHUB_INTERSTITIAL_ID";
     
 	public SubAdlibAdViewAdHub(Context context) {
 		this(context,null);
