@@ -11,13 +11,12 @@
 
 package test.adlib.project.ads;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import com.inmobi.androidsdk.IMAdListener;
-import com.inmobi.androidsdk.IMAdRequest;
-import com.inmobi.androidsdk.IMAdRequest.ErrorCode;
-import com.inmobi.androidsdk.IMAdView;
+import com.inmobi.commons.InMobi;
+import com.inmobi.monetization.IMBanner;
+import com.inmobi.monetization.IMBannerListener;
+import com.inmobi.monetization.IMErrorCode;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.app.Activity;
@@ -27,7 +26,6 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -39,8 +37,7 @@ import android.view.View;
 
 public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	
-	protected IMAdView ad;
-	private IMAdRequest mAdRequest;
+	protected IMBanner ad;
 	protected boolean bGotAd = false;
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
@@ -60,78 +57,75 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewInmobi(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		initInmobiView();
+		// Insert your InMobi App Id here
+		InMobi.initialize((Activity) context, inmobiKey);
 	}
 	
 	public void initInmobiView()
 	{
 		// 원하는 크기의 배너 크기를 설정하세요.
-		ad = new IMAdView((Activity) this.getContext(), IMAdView.INMOBI_AD_UNIT_320X50, inmobiKey);
+		ad = new IMBanner((Activity) this.getContext(), inmobiKey, IMBanner.INMOBI_AD_UNIT_320X50);
 		ad.disableHardwareAcceleration();
 		LayoutParams params = new LayoutParams(getPixels(320),getPixels(50));
 		ad.setLayoutParams(params);
 
 		// 광고 뷰의 위치 속성을 제어할 수 있습니다. 
 		this.setGravity(Gravity.CENTER);
-		
-		mAdRequest = new IMAdRequest();
-		// set the test mode to true (Make sure you set the test mode to false when distributing to the users)
-		//mAdRequest.setTestMode(true);
-		
-		Map<String,String> reqParams = new HashMap<String,String>();
-		reqParams.put("tp","c_adlib");
-		mAdRequest.setRequestParams(reqParams);
-		
-		ad.setIMAdRequest(mAdRequest);
 
 		// set the listener if the app has to know ad status notifications
-		ad.setIMAdListener(new IMAdListener() {
-
+		ad.setIMBannerListener(new IMBannerListener() {
+			
 			@Override
-			public void onShowAdScreen(IMAdView adView) {
+			public void onBannerInteraction(IMBanner arg0, Map<String, String> arg1) {
 				
 			}
 
 			@Override
-			public void onDismissAdScreen(IMAdView adView) {
-			}
-
-			@Override
-			public void onAdRequestFailed(IMAdView adView, ErrorCode errorCode) {
+			public void onBannerRequestFailed(IMBanner arg0, IMErrorCode arg1) {
 				
 				bGotAd = true;
 				failed();
 			}
 
 			@Override
-			public void onAdRequestCompleted(IMAdView adView) {
+			public void onBannerRequestSucceeded(IMBanner arg0) {
 				
 				bGotAd = true;
-				ad.setVisibility(View.VISIBLE);
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 			}
-			
+
 			@Override
-			public void onLeaveApplication(IMAdView adView) {
+			public void onDismissBannerScreen(IMBanner arg0) {
+				
+			}
+
+			@Override
+			public void onLeaveApplication(IMBanner arg0) {
+				
+			}
+
+			@Override
+			public void onShowBannerScreen(IMBanner arg0) {
+				
 			}
 		});
+		
+		this.addView(ad);
 	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
+		bGotAd = false;
+		
 		if(ad == null)
 			initInmobiView();
 		
-		this.removeAllViews();
-		ad.setVisibility(View.GONE);
-		this.addView(ad);
-		
 		queryAd();
 		
-		ad.loadNewAd();
+		ad.loadBanner();
 		
 		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
@@ -163,9 +157,23 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		if(ad != null)
 		{
 			this.removeView(ad);
+			ad.destroy();
+			ad = null;
 		}
 		
 		super.clearAdView();
+	}
+	
+	public void onDestory()
+	{
+		if(ad != null)
+		{
+			this.removeView(ad);
+			ad.destroy();
+			ad = null;
+		}
+		
+		super.onDestroy();
 	}
 	
 	public void onResume()
@@ -176,17 +184,5 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	public void onPause()
 	{
 		super.onPause();
-	}
-	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
-			this.removeView(ad);
-			ad.destroy();
-			ad = null;
-		}
-		
-		super.onDestroy();
 	}
 }
