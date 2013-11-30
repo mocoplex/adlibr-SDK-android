@@ -35,6 +35,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	// 여기에 ADAM ID 를 입력하세요.
 	static String adamID = "ADAM_ID";
+    static String adamInterstitialID = "ADAM_INTERSTITIAL_ID";
 
 	public SubAdlibAdViewAdam(Context context) {
 		this(context,null);
@@ -156,7 +157,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
 		AdInterstitial mAdInterstitial = new AdInterstitial((Activity)ctx);
- 	    mAdInterstitial.setClientId(adamID);
+ 	    mAdInterstitial.setClientId(adamInterstitialID);
  	    mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
 
  			@Override
