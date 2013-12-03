@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with AdHub SDK 2.5.4
+ * confirmed compatible with AdHub SDK 3.0.0
  */
 
 package test.adlib.project.ads;
@@ -56,7 +56,7 @@ public class SubAdlibAdViewAdHub extends SubAdlibAdViewCore  {
 	public void initAdHubView()
 	{
 		ad = new AdHubView(getContext());
-		ad.init(getContext(), adhubID, AdSize.BANNER);
+		ad.init(getContext(), adhubID, AdSize.BANNER_320x50);
 		// 최소 15sec
 		ad.setRefreshRate(15*1000);
 		
