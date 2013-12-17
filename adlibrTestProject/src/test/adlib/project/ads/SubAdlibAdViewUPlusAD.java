@@ -16,6 +16,7 @@ import kr.co.uplusad.dmpcontrol.OnAdListener;
 
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -34,7 +35,9 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 UPLUS ID 를 입력하세요.
-	String uplusID = "UPLUS_ID";
+	static String uplusID = "UPLUS_ID";
+	static String uplusInterstitialID = "UPLUS_INTERSTITIAL_ID";
+	static final int REQUEST_CODE = 101;
     
 	public SubAdlibAdViewUPlusAD(Context context) {
 		this(context,null);
@@ -107,11 +110,11 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 		queryAd();
 		
 		ad.execute();
-        
-        // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		
+		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
 		adHandler.postDelayed(new Runnable() {
-            
+
 			@Override
 			public void run() {
 				if(bGotAd)
@@ -127,7 +130,7 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 					failed();
 				}
 			}
-            
+			
 		}, 3000);
 	}
 	
@@ -173,5 +176,21 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 		}
 		
 		super.onDestroy();
+	}
+	
+	/*  주의 : U+AD 전면광고는 광고 수신 성공, 실패에 대한 Listener가 존재하지 않으므로 스케줄링이 정상적으로 동작하지 않을 수 있습니다.
+	 *        광고가 닫혔을 때 이벤트 처리가 필요하신 경우, 전면광고를 호출하는 Activity에서 아래와 같이 별도 구현이 필요합니다.
+	 *        protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+	 *		  {
+	 *		      if(requestCode == REQUEST_CODE) 
+	 *            {
+	 *			      Toast.makeText(this, "Uplus Fullscreen Ad Result: adClose", Toast.LENGTH_SHORT).show();
+	 *			  }
+	 *		      super.onActivityResult(requestCode, resultCode, data);
+	 *        }
+	 */
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		LGUDMPAdView.fullscreenImage((Activity)ctx, REQUEST_CODE, uplusInterstitialID, false, null);
 	}
 }
