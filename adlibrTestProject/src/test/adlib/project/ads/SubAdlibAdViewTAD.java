@@ -198,21 +198,11 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
 	public void onResume()
 	{
-		if(ad != null)
-		{
-			ad.loadAd();
-		}
-		
 		super.onResume();
 	}
 	
 	public void onPause()
 	{
-		if(ad != null)
-		{
-			ad.stopAd();
-		}
-		
 		super.onPause();
 	}
 	
