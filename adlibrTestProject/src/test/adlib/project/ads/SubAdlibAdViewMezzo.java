@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with MezzoMediaMAN SDK 2.0
+ * confirmed compatible with MezzoMediaMAN SDK 3.6
  */
 
 package test.adlib.project.ads;
