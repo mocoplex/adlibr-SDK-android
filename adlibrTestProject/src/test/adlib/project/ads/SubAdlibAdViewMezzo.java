@@ -12,10 +12,12 @@
 package test.adlib.project.ads;
 
 import com.mapps.android.view.AdView;
+import com.mapps.android.view.ManAdListner;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -37,6 +39,7 @@ import android.util.AttributeSet;
 public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 	
 	protected AdView ad;
+	protected boolean bPassAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
 	String mezzoID = "MEZZO_ID";
@@ -49,19 +52,54 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 		super(context, attrs);
 		
 		ad = new AdView(context, mezzoID, 1, 0);
+		ad.setManAdListner(new ManAdListner() {
+
+			@Override
+			public void onChargeableBannerType(View v, boolean bcharge) {
+				
+				if(ad == v)
+				{
+					// 무료광고 일 경우 다음광고로 넘깁니다.
+					if(!bcharge)
+					{
+						bPassAd = true;
+						failed();
+					}
+				}
+			}
+
+			@Override
+			public void onFailedToReceive(View v, int errCode) {
+				
+				if(ad == v)
+				{
+					if(errCode == 0)
+					{
+						if(!bPassAd)
+						{
+							queryAd();
+							gotAd();
+						}
+					}
+					else
+					{
+						failed();
+					}
+				}
+			}
+		});
 	}
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
 	public void query()
 	{
+		bPassAd = false;
+		
 		this.removeAllViews();
 		this.addView(ad);
 		
 		ad.StartService();
-		
-		queryAd();
-		gotAd();
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
