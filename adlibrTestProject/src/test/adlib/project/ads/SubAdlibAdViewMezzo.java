@@ -73,6 +73,7 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 				
 				if(ad == v)
 				{
+					// 광고 수신 성공
 					if(errCode == 0)
 					{
 						if(!bPassAd)
@@ -81,6 +82,7 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 							gotAd();
 						}
 					}
+					// 광고 수신 실패
 					else
 					{
 						failed();
