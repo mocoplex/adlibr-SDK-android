@@ -149,21 +149,11 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	
 	public void onResume()
 	{
-		if(ad != null)
-		{
-			ad.execute();
-		}
-		
         super.onResume();
 	}
 	
 	public void onPause()
 	{
-		if(ad != null)
-		{
-			ad.destroy();
-		}
-		
         super.onPause();
 	}
 	
