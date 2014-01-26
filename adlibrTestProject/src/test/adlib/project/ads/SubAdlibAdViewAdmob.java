@@ -47,10 +47,10 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	
 	public void initAdmobView()
 	{
-        // 320x50 사이즈 배너
-        ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.BANNER, admobID);
         // 디바이스 width에 맞춘 사이즈의 배너
-		//ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.SMART_BANNER, admobID);
+		ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.SMART_BANNER, admobID);
+        // 320x50 사이즈 배너
+        //ad = new com.google.ads.AdView((Activity) this.getContext(), com.google.ads.AdSize.BANNER, admobID);
 		
 		// 광고 뷰의 위치 속성을 제어할 수 있습니다.
 		this.setGravity(Gravity.CENTER);
