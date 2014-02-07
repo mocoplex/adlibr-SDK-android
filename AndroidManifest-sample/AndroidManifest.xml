@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="test.adlib.unity"
+    android:theme="@android:style/Theme.NoTitleBar"
+    android:versionName="1.0"
+    android:versionCode="1"
+    android:installLocation="preferExternal">
+    <supports-screens android:smallScreens="true"
+    android:normalScreens="true"
+    android:largeScreens="true"
+    android:xlargeScreens="true"
+    android:anyDensity="true" />
+    <application android:icon="@drawable/app_icon" android:label="@string/app_name" android:debuggable="false">
+        <activity android:name="com.unity3d.player.UnityPlayerNativeActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTask" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+            <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
+        </activity>
+        
+        <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
+        <activity
+            android:name="com.mocoplex.adlib.AdlibDialogActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        
+        <activity android:name="com.mocoplex.adlib.AdlibWebBrowserActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+            
+        <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
+        
+        
+        <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
+        android:configChanges="orientation|screenSize"
+        android:screenOrientation="portrait" />
+        
+        <!-- ADMOB - 사용하기 위해 API level 13 이상 최신 SDK 가 필요합니다. -->
+        <activity android:name="com.google.ads.AdActivity"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <!-- ADMOB - 사용하지 않는다면 여기까지 삭제 -->
+        
+        <!-- INMOBI - 광고 노출을 위해 필요한 선언입니다. -->
+		<!-- Mandatory activity declaration to show the Ad in the embedded browser -->
+		<activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
+        android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
+        android:hardwareAccelerated="true" />
+        
+        <!-- NAVER - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
+        
+        <!-- T-AD - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity
+			android:name="com.skplanet.tad.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+			android:label="Ad Activity"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+		</activity>
+		<activity
+			android:name="com.skplanet.tad.AdVideoPlayer"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+			android:label="Ad Video Player"
+			android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
+        
+        <!-- SHALLWEAD - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity
+            android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
+		<meta-data
+            android:name="ShallWeAd_AppKey"
+            android:value="발급받은 ShallWeAd 등록키" />
+        
+        <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="com.millennialmedia.android.MMActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
+		<activity android:name="com.millennialmedia.android.VideoPlayer"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
+        
+        <!-- MOBCLIX - 광고 노출을 위해 필요한 선언입니다. -->
+		<meta-data android:name="com.mobclix.APPLICATION_ID"
+            android:value="insert-your-application-key" />
+		<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:hardwareAccelerated="true" />
+        
+        <!-- UPLUSAD - 광고 노출을 위해 필요한 선언입니다. -->
+		<activity android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:configChanges="keyboard|keyboardHidden|orientation"/>
+        
+        <!-- MEZZO MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
+        <meta-data android:name="MEZZO_WINDOW_ID" android:value="banner" />
+        <!-- MEZZO GPS 사용여부 0:사용안함 1:사용 -->
+        <meta-data android:name="GPS_USE" android:value="0" />
+        <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
+        <meta-data android:name="DEBUG_MODE" android:value="1" />
+        <activity
+            android:name="com.mapps.android.view.InterstitialView" />
+        <activity
+            android:name="com.mapps.android.view.MultimediaView" />
+        <activity
+            android:name="com.mapps.android.view.AlertNotiView"
+            android:theme="@android:style/Theme.Translucent"/>
+        
+        <!-- AMAZON - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity
+            android:name="com.amazon.device.ads.AdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        
+        <!-- ADHUB - 광고 노출을 위해 필요한 선언입니다. -->
+        ￼<activity
+            android:name="com.sec.android.ad.AdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+		<!-- 기본 권한 추가 끝 -->
+    </application>
+    <uses-sdk android:minSdkVersion="8" />
+    <uses-feature android:glEsVersion="0x00020000" />
+    <!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.GET_TASKS" />      <!-- 액티비티별 스케줄링을 위해 꼭 추가해주세요. -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<!-- 여기까지 애드립 사용을 위한 필수 권한 -->
+    
+	<!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
+    
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>
