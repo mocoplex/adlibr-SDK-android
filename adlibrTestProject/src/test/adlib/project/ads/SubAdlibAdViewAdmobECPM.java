@@ -109,6 +109,7 @@ public class SubAdlibAdViewAdmobECPM extends SubAdlibAdViewCore  {
 	{
 		if(ad != null)
 		{
+            this.removeView(ad);
 			ad.destroy();
 			ad = null;
 		}
