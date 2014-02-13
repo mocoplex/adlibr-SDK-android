@@ -54,7 +54,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		// 할당 받은 clientId 설정
 		ad.setClientId(adamID);
 		// 광고 갱신 시간 : 기본 60초
-		ad.setRequestInterval(12);
+		ad.setRequestInterval(15);
         
         int adHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) 48.0, getResources().getDisplayMetrics());
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, adHeight);
