@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.4.6
+ * confirmed compatible with ShallWeAd SDK 2.4.7
  */
 
 package test.adlib.project.ads;
@@ -18,7 +18,6 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -26,7 +25,15 @@ import android.view.View;
  <activity
 	android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
 	android:configChanges="orientation|keyboard|keyboardHidden" />
- <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
+ <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" >
+ 	<intent-filter>
+		<action android:name="android.intent.action.USER_PRESENT" />
+	</intent-filter>
+	<intent-filter>
+		<action android:name="android.intent.action.PACKAGE_ADDED" />
+		<data android:scheme="package" />
+	</intent-filter>
+ </receiver>
  <meta-data
 	android:name="ShallWeAd_AppKey"
 	android:value="발급받은 ShallWeAd 등록키" />

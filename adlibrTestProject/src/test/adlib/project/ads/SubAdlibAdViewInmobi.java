@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with Inmobi SDK 4.0.4
+ * confirmed compatible with Inmobi SDK 4.1.1
  */
 
 package test.adlib.project.ads;

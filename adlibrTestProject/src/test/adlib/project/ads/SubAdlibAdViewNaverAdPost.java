@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with NaverAdPost SDK 1.2.2
+ * confirmed compatible with NaverAdPost SDK 1.3.0
  */
 
 package test.adlib.project.ads;
