@@ -105,7 +105,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		
 		ad.loadAd(request);
         
-        // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+        // 5초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
 		adHandler.postDelayed(new Runnable() {
             
@@ -126,7 +126,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 				}
 			}
             
-		}, 3000);
+		}, 5000);
 	}
 	
 	public void onDestroy()
