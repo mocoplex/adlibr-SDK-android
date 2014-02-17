@@ -11,13 +11,17 @@
 
 package test.adlib.project.ads;
 
+import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.skplanet.tad.AdInterstitial;
+import com.skplanet.tad.AdInterstitialListener;
 import com.skplanet.tad.AdListener;
 import com.skplanet.tad.AdView.AnimationType;
 import com.skplanet.tad.AdView.Slot;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
@@ -28,6 +32,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
 	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
 	String tAdId = "T_AD_ID";
+	String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
     // 스케줄 설정에서 T-AD만 사용하신다면 반드시 아래 ad.setRefreshInterval(0); refresh interval을 0이 아닌 다른 값으로 변경해 주세요.
 	
 	public SubAdlibAdViewTAD(Context context) {
@@ -216,5 +221,78 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		}
 		
 		super.onDestroy();
+	}
+	
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		final AdInterstitial adInterstitial = new AdInterstitial(ctx);
+	    adInterstitial.setClientId(tAdInterstitialId);
+	    adInterstitial.setSlotNo(Slot.INTERSTITIAL);
+	    // TestMode 를 정합니다. true 인 경우 test 광고가 수신됩니다.
+	    adInterstitial.setTestMode(false);
+	    // 광고가 노출된 후 5 초 동안 사용자의 반응이 없을 경우 광고 창을 자동으로 닫을 것인지를 설정합니다.
+	    adInterstitial.setAutoCloseWhenNoInteraction(false);
+	    // 광고가 노출된 후 랜딩 액션에 인해 다른 App 으로 전환 시 광고 창을 자동으로 닫을 것인지를 설정합니다.
+	    adInterstitial.setAutoCloseAfterLeaveApplication(false);
+	    
+	    adInterstitial.loadAd();
+	    
+	    adInterstitial.setListener(new AdInterstitialListener() {
+
+			@Override
+			public void onAdDismissScreen() {
+				
+				if(h != null)
+	 			{
+	 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "TAD"));
+	 			}
+			}
+
+			@Override
+			public void onAdFailed(ErrorCode arg0) {
+				
+				if(h != null)
+	 			{
+	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "TAD"));
+	 			}
+			}
+
+			@Override
+			public void onAdLeaveApplication() {
+				
+			}
+
+			@Override
+			public void onAdLoaded() {
+				
+				if(h != null)
+		 		{
+		 			h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "TAD"));
+		 		}
+					
+				adInterstitial.showAd();
+			}
+
+			@Override
+			public void onAdPresentScreen() {
+				
+			}
+
+			@Override
+			public void onAdReceived() {
+				
+			}
+
+			@Override
+			public void onAdWillLoad() {
+				
+			}
+
+			@Override
+			public void onAdWillReceive() {
+				
+			}
+	    	
+	    });
 	}
 }

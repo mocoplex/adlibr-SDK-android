@@ -17,12 +17,16 @@ import com.inmobi.commons.InMobi;
 import com.inmobi.monetization.IMBanner;
 import com.inmobi.monetization.IMBannerListener;
 import com.inmobi.monetization.IMErrorCode;
+import com.inmobi.monetization.IMInterstitial;
+import com.inmobi.monetization.IMInterstitialListener;
+import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -41,7 +45,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
-	String inmobiKey = "INMOBI_APP_ID";
+	static String inmobiKey = "INMOBI_APP_ID";
+	static String inmobiInterstitialKey = "INMOBI_INTERSTITIAL_ID";
 
 	private int getPixels(int dipValue) {
         Resources r = getResources();
@@ -184,5 +189,85 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	public void onPause()
 	{
 		super.onPause();
+	}
+	
+	static Handler intersHandler = null;
+	static IMInterstitialListener intersListener = new IMInterstitialListener() {
+
+		@Override
+		public void onDismissInterstitialScreen(IMInterstitial arg0) {
+
+			try
+			{
+	 			// 전면광고 닫혔다.
+	 			if(intersHandler != null)
+	 			{
+	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "INMOBI"));
+	 			} 				   		 					
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
+
+		@Override
+		public void onInterstitialFailed(IMInterstitial arg0, IMErrorCode arg1) {
+			
+			try
+			{
+	 			if(intersHandler != null)
+	 			{
+	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "INMOBI"));
+	 			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
+
+		@Override
+		public void onInterstitialInteraction(IMInterstitial arg0,
+				Map<String, String> arg1) {
+			
+		}
+
+		@Override
+		public void onInterstitialLoaded(IMInterstitial ad) {
+			
+			try
+			{
+	 			if(intersHandler != null)
+	 			{
+	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "INMOBI"));
+	 			}
+			}
+			catch(Exception e)
+			{
+				
+			}
+			ad.show();
+		}
+
+		@Override
+		public void onLeaveApplication(IMInterstitial arg0) {
+			
+		}
+
+		@Override
+		public void onShowInterstitialScreen(IMInterstitial arg0) {
+			
+		}
+    };
+    
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		InMobi.initialize((Activity) ctx, inmobiInterstitialKey);
+		
+		final IMInterstitial interstitial = new IMInterstitial((Activity) ctx, inmobiInterstitialKey);
+		interstitial.loadInterstitial();
+		intersHandler = h;
+		interstitial.setIMInterstitialListener(intersListener);
 	}
 }
