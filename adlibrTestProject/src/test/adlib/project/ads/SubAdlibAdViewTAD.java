@@ -31,8 +31,8 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
-	String tAdId = "T_AD_ID";
-	String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
+	static String tAdId = "T_AD_ID";
+	static String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
     // 스케줄 설정에서 T-AD만 사용하신다면 반드시 아래 ad.setRefreshInterval(0); refresh interval을 0이 아닌 다른 값으로 변경해 주세요.
 	
 	public SubAdlibAdViewTAD(Context context) {
