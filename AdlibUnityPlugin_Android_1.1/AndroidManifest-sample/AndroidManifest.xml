@@ -73,15 +73,7 @@
 		<activity
             android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
             android:configChanges="orientation|keyboard|keyboardHidden" />
-        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" >
-            <intent-filter>
-				<action android:name="android.intent.action.USER_PRESENT" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.PACKAGE_ADDED" />
-				<data android:scheme="package" />
-			</intent-filter>
-		</receiver>
+        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
 		<meta-data
             android:name="ShallWeAd_AppKey"
             android:value="발급받은 ShallWeAd 등록키" />
