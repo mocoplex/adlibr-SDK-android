@@ -1,4 +1,4 @@
-<<Google Play Service library를 이용하여 앱을 만드는 경우>>
+<<Google Play Services library를 이용하여 앱을 만드는 경우>>
 
 admob, admob 네트워크를 이용하실 때,
 admob SDK는 삭제하시고, admob SubAdView 는 현재 이 폴더의 파일로 교체 하십시오.
