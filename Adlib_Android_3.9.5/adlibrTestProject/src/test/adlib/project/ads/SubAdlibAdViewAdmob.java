@@ -33,6 +33,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	
 	// 여기에 ADMOB ID 를 입력하세요.
 	static String admobID = "ADMOB_ID";
+    static String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
     
 	public SubAdlibAdViewAdmob(Context context) {
 		this(context,null);
@@ -164,7 +165,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
 		// Create the interstitial
-		final InterstitialAd interstitial = new InterstitialAd((Activity)ctx, admobID);
+		final InterstitialAd interstitial = new InterstitialAd((Activity)ctx, admobInterstitialID);
 
 	    // Create ad request
 	    AdRequest adRequest = new AdRequest();
