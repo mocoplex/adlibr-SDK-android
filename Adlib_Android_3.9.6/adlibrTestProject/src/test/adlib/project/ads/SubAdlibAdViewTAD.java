@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.3.6.6
+ * confirmed compatible with T ad SDK 3.4.3.6
  */
 
 package test.adlib.project.ads;
@@ -77,7 +77,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		ad.setListener(new AdListener(){
 			
 			@Override
-			public void onAdReceived() {
+			public void onAdLoaded() {
 				
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
@@ -108,11 +108,6 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			}
             
 			@Override
-			public void onAdLoaded() {
-				
-			}
-            
-			@Override
 			public void onAdResizeClosed() {
 				
 			}
@@ -124,11 +119,6 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
             
 			@Override
 			public void onAdWillLoad() {
-				
-			}
-            
-			@Override
-			public void onAdWillReceive() {
 				
 			}
 			
@@ -279,17 +269,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			}
 
 			@Override
-			public void onAdReceived() {
-				
-			}
-
-			@Override
 			public void onAdWillLoad() {
-				
-			}
-
-			@Override
-			public void onAdWillReceive() {
 				
 			}
 	    	
