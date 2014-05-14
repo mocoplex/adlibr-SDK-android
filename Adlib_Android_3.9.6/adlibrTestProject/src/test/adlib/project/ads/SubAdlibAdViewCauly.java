@@ -35,6 +35,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	
 	// 여기에 CAULY ID를 입력합니다.
 	static String caulyID = "CAULY_ID";
+	static String caulyInterstitialID = "CAULY_INTERSTITIAL_ID";
 	
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -261,7 +262,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
 		// CaulyAdInfo 생성
-	    CaulyAdInfo adInfo = new CaulyAdInfoBuilder(caulyID).build();
+	    CaulyAdInfo adInfo = new CaulyAdInfoBuilder(caulyInterstitialID).build();
 	    // 전면 광고 생성
 	    CaulyInterstitialAd interstial = new CaulyInterstitialAd();
 	    interstial.setAdInfo(adInfo);
