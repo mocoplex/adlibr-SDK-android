@@ -81,7 +81,6 @@ public class AdlibTestScript : MonoBehaviour {
 		ads.Add(new JsonStringValue("ADPOST","insert_your_naverAdPost_id"));
 		ads.Add(new JsonStringValue("INMOBI","insert_your_inmobi_id"));
 		ads.Add(new JsonStringValue("INMOBI_INTERSTITIAL","insert_your_inmobi_interstitial_id"));
-		ads.Add(new JsonStringValue("ADMOB_MEDIATION","insert_your_admob_mediation_id"));
 		ads.Add(new JsonStringValue("UPLUS","insert_your_uplus_id"));
 		ads.Add(new JsonStringValue("UPLUS_INTERSTITIAL","insert_your_uplus_interstitial_id"));
 		ads.Add(new JsonStringValue("TAD","insert_your_tad_id"));
