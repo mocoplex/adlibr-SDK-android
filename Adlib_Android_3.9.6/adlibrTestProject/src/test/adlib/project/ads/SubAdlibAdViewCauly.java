@@ -188,7 +188,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 				initCaulyView();
 			}
             
-			ad.reload();
+			ad.resume();
 		}
 
 		super.onResume();
