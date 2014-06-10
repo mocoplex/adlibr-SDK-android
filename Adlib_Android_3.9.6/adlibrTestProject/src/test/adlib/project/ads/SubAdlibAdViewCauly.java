@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 3.0
+ * confirmed compatible with cauly SDK 3.2.4
  */
 
 package test.adlib.project.ads;
@@ -256,7 +256,12 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 					
 				}					
 			
-		}    	
+		}
+		
+		@Override
+		public void onLeaveInterstitialAd(CaulyInterstitialAd ad) {
+			
+		}
     };
 	
 	public static void loadInterstitial(Context ctx, final Handler h)
