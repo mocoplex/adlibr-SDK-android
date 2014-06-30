@@ -173,14 +173,14 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 				ad = null;
 			}
 		}
-        else
-        {
-            if(ad != null)
+		else
+		{
+			if(ad != null)
 			{
 				ad.start();
 				ad = null;
-			}
-        }
+				}
+		}
 		
 		super.onDestroy();
 	}
