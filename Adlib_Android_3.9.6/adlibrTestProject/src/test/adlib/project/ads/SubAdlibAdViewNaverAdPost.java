@@ -46,6 +46,9 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
     
     public void initAdpostView()
     {
+    	// 처음 Context 정보를 저장합니다.
+    	if(StaticValue.firstContext == null) StaticValue.firstContext = this.getContext().toString();
+    	
 		ad = new MobileAdView(this.getContext());
 		ad.setChannelID(naverAdPostKey);
 
@@ -158,13 +161,36 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 	
 	public void onDestroy()
 	{
-		if(ad != null)
-		{			
-			ad.stop();
-			ad.destroy();
-			ad = null;
+		// 광고 뷰를 완전 종료해야 하는 지 체크합니다.
+		if(StaticValue.firstContext != null && StaticValue.firstContext.equals(this.getContext().toString()))
+		{
+			StaticValue.firstContext = null;
+			
+			if(ad != null)
+			{
+				ad.stop();
+				ad.destroy();
+				ad = null;
+			}
 		}
+        else
+        {
+            if(ad != null)
+			{
+				ad.start();
+				ad = null;
+			}
+        }
 		
 		super.onDestroy();
+	}
+	
+	/* NaverAdPost가 Static 으로 구성되어 있습니다.
+	 * 별도로 Activity 페이지를 2개 이상 구현시 문제가 되어 아래와 같이 추가해야 합니다.
+	 * 초기에 initAdpostView() 부분에 firstContext 값을 넣어주고,
+	 * 종료시 onDestroy() 부분에 현재 context 값을 비교하여 종료 처리합니다.
+	 */
+	public static class StaticValue {
+		public static String firstContext = null;
 	}
 }
