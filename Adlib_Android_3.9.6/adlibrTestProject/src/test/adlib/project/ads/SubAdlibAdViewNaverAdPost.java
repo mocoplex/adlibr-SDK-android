@@ -179,7 +179,7 @@ public class SubAdlibAdViewNaverAdPost extends SubAdlibAdViewCore  {
 			{
 				ad.start();
 				ad = null;
-				}
+			}
 		}
 		
 		super.onDestroy();
