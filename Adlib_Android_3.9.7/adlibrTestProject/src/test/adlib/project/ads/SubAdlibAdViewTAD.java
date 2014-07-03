@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.4.3.6
+ * confirmed compatible with T ad SDK 3.5.3.6
  */
 
 package test.adlib.project.ads;
@@ -16,9 +16,11 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import com.skplanet.tad.AdInterstitial;
 import com.skplanet.tad.AdInterstitialListener;
 import com.skplanet.tad.AdListener;
+import com.skplanet.tad.AdRequest.ErrorCode;
 import com.skplanet.tad.AdView.AnimationType;
-import com.skplanet.tad.AdView.Slot;
+import com.skplanet.tad.AdSlot;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -48,9 +50,9 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
     
     public void initTadView()
     {
-		ad = new com.skplanet.tad.AdView(this.getContext());
+		ad = new com.skplanet.tad.AdView((Activity) this.getContext());
 		ad.setClientId(tAdId);
-		ad.setSlotNo(Slot.BANNER);
+		ad.setSlotNo(AdSlot.BANNER);
 		
 		/*  새로운 받은 광고가 Display 되는 Animation 효과를 설정합니다.
 		 * NONE							효과없음
@@ -154,9 +156,13 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
         
         queryAd();
         
-		ad.loadAd();
-		
-		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+        try {
+        	ad.loadAd();
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
 		adHandler.postDelayed(new Runnable() {
 
@@ -215,9 +221,9 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
-		final AdInterstitial adInterstitial = new AdInterstitial(ctx);
+		final AdInterstitial adInterstitial = new AdInterstitial((Activity) ctx);
 	    adInterstitial.setClientId(tAdInterstitialId);
-	    adInterstitial.setSlotNo(Slot.INTERSTITIAL);
+	    adInterstitial.setSlotNo(AdSlot.INTERSTITIAL);
 	    // TestMode 를 정합니다. true 인 경우 test 광고가 수신됩니다.
 	    adInterstitial.setTestMode(false);
 	    // 광고가 노출된 후 5 초 동안 사용자의 반응이 없을 경우 광고 창을 자동으로 닫을 것인지를 설정합니다.
@@ -225,7 +231,11 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 	    // 광고가 노출된 후 랜딩 액션에 인해 다른 App 으로 전환 시 광고 창을 자동으로 닫을 것인지를 설정합니다.
 	    adInterstitial.setAutoCloseAfterLeaveApplication(false);
 	    
-	    adInterstitial.loadAd();
+	    try {
+	    	adInterstitial.loadAd();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	    
 	    adInterstitial.setListener(new AdInterstitialListener() {
 
@@ -259,8 +269,15 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		 		{
 		 			h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "TAD"));
 		 		}
-					
-				adInterstitial.showAd();
+				
+				// 수신한 광고가 있는지 확인합니다. 
+				if (adInterstitial.isReady()) {
+					// 광고 수신 후 광고를 노출합니다.
+					try {
+						adInterstitial.showAd();
+					} catch (Exception e) {
+					}
+				}
 			}
 
 			@Override
