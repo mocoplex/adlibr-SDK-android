@@ -11,6 +11,7 @@
 
 package test.adlib.project.ads;
 
+import com.amazon.device.ads.Ad;
 import com.amazon.device.ads.AdError;
 import com.amazon.device.ads.AdLayout;
 import com.amazon.device.ads.AdListener;
@@ -60,27 +61,32 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore  {
         AdRegistration.enableTesting(false);
         
 		ad = new AdLayout((Activity) this.getContext(), AdSize.SIZE_320x50);
-        ad.setListener(new AdListener() {
+		ad.setListener(new AdListener() {
 
 			@Override
-			public void onAdCollapsed(AdLayout arg0) {
+			public void onAdCollapsed(Ad arg0) {
 				
 			}
 
 			@Override
-			public void onAdExpanded(AdLayout arg0) {
+			public void onAdDismissed(Ad arg0) {
 				
 			}
 
 			@Override
-			public void onAdFailedToLoad(AdLayout arg0, AdError arg1) {
+			public void onAdExpanded(Ad arg0) {
+				
+			}
+
+			@Override
+			public void onAdFailedToLoad(Ad arg0, AdError arg1) {
 				
 				bGotAd = true;
 				failed();
 			}
 
 			@Override
-			public void onAdLoaded(AdLayout arg0, AdProperties arg1) {
+			public void onAdLoaded(Ad arg0, AdProperties arg1) {
 				
 				bGotAd = true;
 				queryAd();
