@@ -26,7 +26,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.widget.LinearLayout;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
@@ -62,8 +61,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		// 광고 갱신 시간 : 기본 60초
 		ad.setRequestInterval(15);
         
-        int adHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) 48.0, getResources().getDisplayMetrics());
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, adHeight);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		ad.setLayoutParams(params);
 		
 		ad.setOnAdLoadedListener(new OnAdLoadedListener() {
