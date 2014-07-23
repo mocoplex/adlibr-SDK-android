@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.4.7
+ * confirmed compatible with ShallWeAd SDK 2.5.0
  */
 
 package test.adlib.project.ads;
