@@ -32,6 +32,10 @@
         <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
             android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="orientation|keyboard|keyboardHidden" />
+        
+        <!-- 광고ID 사용을 위해 꼭 추가해주세요. -->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
       
         <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
@@ -39,9 +43,7 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
       
-        <!-- ADMOB - 사용하기 위해 API level 17 이상 SDK 가 필요합니다. -->
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <!-- ADMOB - 사용을 위해 필요한 선언입니다. -->
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
         <!-- ADMOB - 사용하지 않는다면 여기까지 삭제 -->
@@ -128,7 +130,6 @@
     <uses-feature android:glEsVersion="0x00020000" />
     <!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />      <!-- 액티비티별 스케줄링을 위해 꼭 추가해주세요. -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -137,7 +138,4 @@
     <!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 위치정보를 활용한 보다 최적화된 광고 송출을 위해 필요한 권한입니다. -->
-  
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
