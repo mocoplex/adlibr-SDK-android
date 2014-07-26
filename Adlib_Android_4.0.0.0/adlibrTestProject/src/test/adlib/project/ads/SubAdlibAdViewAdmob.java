@@ -37,7 +37,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	protected AdView ad;
 	protected boolean bGotAd = false;
 	
-	// 여기에 ADMOB ID 를 입력하세요.
+	// 여기에 ADMOB ID 를 입력하세요. (여기서 ADMOB ID는 AD_UNIT_ID, 광고 단위 ID를 지칭합니다.)
 	static String admobID = "ADMOB_ID";
     static String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
     
