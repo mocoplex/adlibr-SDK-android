@@ -139,6 +139,22 @@ public class AdlibPlugin : MonoBehaviour {
 	public static void ShowBanner(BannerSize size, bool useHouseBanner, bool positionAtTop, int padding, BannerAlign align) {
 		adlibPluginClass.CallStatic("ShowBanner", size.ToString(), useHouseBanner, positionAtTop, padding, align.ToString());
 	}
+
+	public static void ShowBannerWithPixel(BannerSize size, bool useHouseBanner, bool positionAtTop) {
+		adlibPluginClass.CallStatic("ShowBannerWithPixel", size.ToString(), useHouseBanner, positionAtTop, 0);
+	}
+	
+	public static void ShowBannerWithPixel(BannerSize size, bool useHouseBanner, bool positionAtTop, int padding) {
+		adlibPluginClass.CallStatic("ShowBannerWithPixel", size.ToString(), useHouseBanner, positionAtTop, padding);
+	}
+	
+	public static void ShowBannerWithPixel(BannerSize size, bool useHouseBanner, bool positionAtTop, BannerAlign align) {
+		adlibPluginClass.CallStatic("ShowBannerWithPixel", size.ToString(), useHouseBanner, positionAtTop, 0, align.ToString());
+	}
+	
+	public static void ShowBannerWithPixel(BannerSize size, bool useHouseBanner, bool positionAtTop, int padding, BannerAlign align) {
+		adlibPluginClass.CallStatic("ShowBannerWithPixel", size.ToString(), useHouseBanner, positionAtTop, padding, align.ToString());
+	}
 	
 	public static void HideBanner() {
 		adlibPluginClass.CallStatic("HideBanner");
@@ -158,6 +174,10 @@ public class AdlibPlugin : MonoBehaviour {
 
 	public static void ShowRewardLink(string linkId, RewardLinkAlign linkAlign, int x, int y) {
 		adlibPluginClass.CallStatic("ShowRewardLink", linkId, linkAlign.ToString(), x, y);
+	}
+
+	public static void ShowRewardLinkWithPixel(string linkId, RewardLinkAlign linkAlign, int x, int y) {
+		adlibPluginClass.CallStatic("ShowRewardLinkWithPixel", linkId, linkAlign.ToString(), x, y);
 	}
 
 	public static void HideRewardLink() {
