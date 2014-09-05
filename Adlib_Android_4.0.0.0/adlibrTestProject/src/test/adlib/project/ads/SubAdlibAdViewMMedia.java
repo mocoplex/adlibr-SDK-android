@@ -6,24 +6,30 @@
  */
 
 /*
- * confirmed compatible with MillennialMedia SDK 5.1.0
+ * confirmed compatible with MillennialMedia SDK 5.3.0
  */
 
 package test.adlib.project.ads;
 
-import com.millennialmedia.android.MMAd;
-import com.millennialmedia.android.MMAdView;
-import com.millennialmedia.android.MMException;
-import com.millennialmedia.android.MMSDK;
-import com.millennialmedia.android.RequestListener;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
+
+import com.millennialmedia.android.MMAd;
+import com.millennialmedia.android.MMAdView;
+import com.millennialmedia.android.MMException;
+import com.millennialmedia.android.MMInterstitial;
+import com.millennialmedia.android.MMRequest;
+import com.millennialmedia.android.MMSDK;
+import com.millennialmedia.android.RequestListener;
+import com.millennialmedia.android.RequestListener.RequestListenerImpl;
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -31,10 +37,9 @@ import android.widget.LinearLayout;
  <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
  <activity android:name="com.millennialmedia.android.MMActivity"
-	 android:theme="@android:style/Theme.Translucent.NoTitleBar" 
-	 android:configChanges="keyboardHidden|orientation|keyboard" />
- <activity android:name="com.millennialmedia.android.VideoPlayer"
-	 android:configChanges="keyboardHidden|orientation|keyboard" /> 
+	android:theme="@android:style/Theme.Translucent.NoTitleBar"
+	android:configChanges="keyboardHidden|orientation|keyboard" >
+ </activity>
  */
 
 public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
@@ -43,7 +48,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
-	String mMediaID = "MILLENNIALMEDIA_ID";
+	static String mMediaID = "MILLENNIALMEDIA_ID";
+	static String mMediaInterstitialID = "MILLENNIALMEDIA_INTERSTITIAL_ID";
 
 	public SubAdlibAdViewMMedia(Context context) {
 		this(context,null);
@@ -52,6 +58,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewMMedia(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
+		MMSDK.initialize((Activity) context);
 		initMmediaView();
 	}
 	
@@ -172,5 +179,66 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 		}
         
         super.onDestroy();
+	}
+	
+	static Handler intersHandler = null;
+	public static void loadInterstitial(Context ctx, final Handler h)
+	{
+		final MMInterstitial interstitial = new MMInterstitial((Activity)ctx);
+		MMRequest request = new MMRequest();
+		interstitial.setMMRequest(request);
+		interstitial.setApid(mMediaInterstitialID);
+		
+		intersHandler = h;
+		interstitial.setListener(
+			new RequestListenerImpl() {
+				
+				@Override
+				public void MMAdOverlayClosed(MMAd mmAd) {
+					try
+					{
+						if(intersHandler != null){
+		 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "MMEDIA"));
+		 				}
+					}
+					catch(Exception e)
+					{
+					}
+				}
+				
+				@Override
+				public void requestCompleted(MMAd mmAd) {
+					try
+					{
+						if(interstitial.isAdAvailable()){
+							
+							if(intersHandler != null){
+			 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "MMEDIA"));
+			 				}
+							
+							interstitial.display();
+						}
+					}
+					catch(Exception e)
+					{
+					}
+				}
+
+				@Override
+				public void requestFailed(MMAd mmAd, MMException exception) {
+					try
+					{
+						if(intersHandler != null){
+		 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "MMEDIA"));
+		 				}
+					}
+					catch(Exception e)
+					{
+					}
+				}
+			}
+		);
+
+		interstitial.fetch();
 	}
 }
