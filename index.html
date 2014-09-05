@@ -88,7 +88,26 @@
 <pre><code>v4.0.0.1 (2014.09.05)
 Millennial Media SubView Update - 최신 SDK(v5.3.0)를 지원합니다.
 Millennial Media 전면광고를 지원합니다.
+</code></pre>
 
+<script>
+function changeDisplay(){
+
+	var history = document.getElementById('history');
+	
+	if (history.style.display == "none") {
+		history.style.display="block";
+	} else {
+		history.style.display="none";
+	}
+}
+</script>
+
+<h3>과거 변경 내용</h3>
+<pre><code><a href="javascript:changeDisplay()">자세한 내역을 보고자 한다면 여기를 클릭하세요.</a></code></pre>
+
+<div id="history" style="display:none">
+<pre><code>
 v4.0.0.0 (2014.07.25)
 Google Advertising ID 적용에 따른 영구적인 기기식별자를 수집하지 않습니다.
 영구적인 기기식별자 : WIFI MAC, ANDROID_ID, IMEI 등
@@ -316,6 +335,7 @@ v2.1 (2012.06.27)
 v2.0
 제휴 플랫폼 추가 / INMOBI (<a href="http://korea.inmobi.com" target="_blank">http://korea.inmobi.com</a>)
 reward 프로그램 적용</code></pre>
+</div>
 
 
 <h3>현재 애드립에서 지원중인 광고 플랫폼 정보</h3>
