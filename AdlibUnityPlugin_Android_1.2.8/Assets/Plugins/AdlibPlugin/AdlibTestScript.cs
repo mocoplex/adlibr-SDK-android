@@ -90,6 +90,7 @@ public class AdlibTestScript : MonoBehaviour {
 		ads.Add(new JsonStringValue("AMAZON","insert_your_amazon_id"));
 		ads.Add(new JsonStringValue("MEZZO","insert_your_mezzoMan_id"));
 		ads.Add(new JsonStringValue("MILLENNIAL_MEDIA","insert_your_millennialMedia_id"));
+		ads.Add(new JsonStringValue("MILLENNIAL_MEDIA_INTERSTITIAL","insert_your_millennialMedia_interstitial_id"));
 
 		AdlibPlugin.InitializeAdlib(ads.ToString());
 		

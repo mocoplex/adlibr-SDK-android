@@ -85,8 +85,6 @@
         <activity android:name="com.millennialmedia.android.MMActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|keyboard" />
-        <activity android:name="com.millennialmedia.android.VideoPlayer"
-            android:configChanges="keyboardHidden|orientation|keyboard" />
       
         <!-- MOBCLIX - 광고 노출을 위해 필요한 선언입니다. -->
         <meta-data android:name="com.mobclix.APPLICATION_ID"
