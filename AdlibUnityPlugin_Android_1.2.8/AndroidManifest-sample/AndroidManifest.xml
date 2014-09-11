@@ -121,6 +121,9 @@
         ￼<activity
             android:name="com.sec.android.ad.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+            
+        <!-- MEDIBA AD - 사용을 위해 필요한 선언입니다. -->
+        <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
         <!-- 기본 권한 추가 끝 -->
     
     </application>
