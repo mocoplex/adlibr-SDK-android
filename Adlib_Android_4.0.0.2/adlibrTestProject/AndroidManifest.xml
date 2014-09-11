@@ -131,6 +131,10 @@
         ￼<activity
         	android:name="com.sec.android.ad.AdActivity"
         	android:configChanges="keyboardHidden|orientation|screenSize" />
+        
+        <!-- mediba ad - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
+        
 		<!-- 기본 권한 추가 끝 -->
         
         
