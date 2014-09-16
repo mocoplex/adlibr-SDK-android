@@ -49,7 +49,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	public void initAdamView()
 	{
-		ad = new net.daum.adam.publisher.AdView(this.getContext());
+		ad = new net.daum.adam.publisher.AdView(getContext());
 		// 킷캣 디바이스에서 렌더링에 생기는 문제로 인한 예외처리.
 		// 에러표시가 생기면 disalbe check하시고 무시하셔도 무방합니다.
 		if (Build.VERSION.SDK_INT == 19) {

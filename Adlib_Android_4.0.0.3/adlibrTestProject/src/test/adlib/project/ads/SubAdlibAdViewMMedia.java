@@ -11,7 +11,6 @@
 
 package test.adlib.project.ads;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -58,7 +57,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	public SubAdlibAdViewMMedia(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		MMSDK.initialize((Activity) context);
+		MMSDK.initialize(context);
 		initMmediaView();
 	}
 	
@@ -184,7 +183,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	static Handler intersHandler = null;
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
-		final MMInterstitial interstitial = new MMInterstitial((Activity)ctx);
+		final MMInterstitial interstitial = new MMInterstitial(ctx);
 		MMRequest request = new MMRequest();
 		interstitial.setMMRequest(request);
 		interstitial.setApid(mMediaInterstitialID);

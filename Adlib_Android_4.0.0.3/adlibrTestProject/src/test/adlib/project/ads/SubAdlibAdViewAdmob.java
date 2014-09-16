@@ -54,7 +54,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	
 	public void initAdmobView()
 	{
-		ad = new AdView((Activity)getContext());
+		ad = new AdView(getContext());
 		ad.setAdUnitId(admobID);
 		ad.setAdSize(AdSize.SMART_BANNER);
 		
@@ -155,7 +155,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
 		// Create the interstitial
-		final InterstitialAd interstitial = new InterstitialAd((Activity)ctx);
+		final InterstitialAd interstitial = new InterstitialAd(ctx);
 		interstitial.setAdUnitId(admobInterstitialID);
 
 	    // Create ad request

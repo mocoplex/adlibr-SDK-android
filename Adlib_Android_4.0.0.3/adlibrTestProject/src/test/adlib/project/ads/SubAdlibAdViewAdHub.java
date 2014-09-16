@@ -170,7 +170,7 @@ public class SubAdlibAdViewAdHub extends SubAdlibAdViewCore  {
 	
 	public static void loadInterstitial(Context ctx, final Handler h)
 	{
-		final AdHubInterstitial interstitial = new AdHubInterstitial((Activity)ctx, adhubInterstitialID);
+		final AdHubInterstitial interstitial = new AdHubInterstitial(ctx, adhubInterstitialID);
 
 	    interstitial.setListener(new AdInterstitialListener() {
 
