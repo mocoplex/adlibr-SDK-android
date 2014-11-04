@@ -44,8 +44,6 @@
       <p><font color="red">** 애드립 SDK v4 부터 Google Advertising ID를 사용합니다. 
           (<a href="https://play.google.com/about/developer-content-policy.html">Google Play Policy</a>) **</font></p>
       <p><font color="red">** 2014년 8월 1일 이후 신규 및 업데이트의 경우 (4.0.0.0 이상) 최신 SDK를 쓰시기 바랍니다. **</font></p>
-      <p><font color="#1abf3a">**기존 AdMob SDK 서비스가 2014년 8월 31일자로 종료됩니다.** <br /> 
-          (기존 AdMob SDK는 8월 1일부터 Google Play 스토어 등록 제한됩니다.)</font></p>
 <h3>애드립 SDK 소개</h3>
 
 <p>애드립 SDK 는 특정 플랫폼에 의존적이지 않으며,<br>
@@ -54,8 +52,8 @@
 
 <h3>애드립 Unity Plugin</h3>
 
-<p>Unity에 애드립을 손쉽게 적용할 수 있는 플러그인 입니다.</p>
-<p><font color="red">(N) v1.3.0.0</font>&nbsp;(2014.10.13)&nbsp;&nbsp;<a href="https://github.com/mocoplex/adlibr-SDK-android/archive/unity.zip">Unity Plugin - download here</a></p>
+<p>Unity에 애드립을 손쉽게 적용할 수 있는 플러그인 입니다. (4.0.1.0 이상의 애드립 최신 SDK를 사용하시기 바랍니다.)</p>
+<p><font color="red">(New)</font>&nbsp;&nbsp;&nbsp;<a href="https://sec.adlibr.com/download/android-unity.pdf">Unity Plugin Guide - download here</a></p>
 
 <h3>SDK 다운로드 링크</h3>
 <pre><code><a target="_blank" href="http://mobile.biz.daum.net/top/intro.do">download</a> | ad@m
@@ -72,6 +70,8 @@
 <a target="_blank" href="http://www.samsungadhub.com/help/sdk.do">download</a> | SamsungAdHub
 <a target="_blank" href="http://www.uplusad.co.kr">download</a> | U+AD
 <a target="_blank" href="http://medibaad.com/developer/sdk/">download</a> | mediba ad
+<a target="_blank" href="https://github.com/mobfox/MobFox-Android-SDK">download</a> | mobfox
+<a target="_blank" href="https://github.com/mopub/mopub-android-sdk/wiki/Getting-Started">download</a> | mopub
 </code></pre>
 
 <br>
@@ -81,13 +81,17 @@
 
 <br>
 <pre><code>Proguard 를 사용중이시라면 아래 링크에서 config 을 확인하여 실제 프로젝트에도 꼭 반영해주세요.
-<a target="_blank" href="https://github.com/mocoplex/adlibr-SDK-android/blob/master/Adlib_Android_4.0.0.3/adlibrTestProject/proguard.cfg">[ 설정보기 ]</a>
+<a target="_blank" href="https://github.com/mocoplex/adlibr-SDK-android/blob/master/Adlib_Android_4.0.1.0/adlibrTestProject/proguard.cfg">[ 설정보기 ]</a>
 </code></pre>
 
 <h3>최근 변경 내용</h3>
 
-<pre><code>v4.0.0.3 (2014.09.15)
-앱 종료시 애드립외 플랫폼의 전면배너 표출 안되는 현상 수정
+<pre><code>v4.0.1.0 (2014.11.04)
+애드립 전면배너 프리로드 기능 추가
+유니티 관련 프로젝트를 샘플 프로젝트에 통합 (유니티 가이드 참고)
+일반 플랫폼 추가 / Mobfox, Mopub
+리포팅 기능 추가 (Subview Update) / Admob, Inmobi, Millennial Media, Mobfox, Mopub
+
 </code></pre>
 
 <script>
@@ -108,6 +112,9 @@ function changeDisplay(){
 
 <div id="history" style="display:none">
 <pre><code>
+v4.0.0.3 (2014.09.15)
+앱 종료시 애드립외 플랫폼의 전면배너 표출 안되는 현상 수정
+
 v4.0.0.2 (2014.09.11)
 일반 플랫폼 추가 / Mediba Ad
 기타 버그 수정
@@ -364,7 +371,9 @@ reward 프로그램 적용</code></pre>
  * confirmed compatible with AmazonMobileAds SDK 5.4.78
  * confirmed compatible with SamsungAdHub SDK 3.0.0
  * confirmed compatible with U+AD SDK 3.0.2
- * confirmed compatible with MedibaAd SDK 2.0.7</code></pre>
+ * confirmed compatible with MedibaAd SDK 2.0.7
+ * confirmed compatible with Mobfox SDK 6.0.0
+ * confirmed compatible with Mopub SDK 3.2.2</code></pre>
 
 <p>사용자의 편의에 의해 각 플랫폼 사이트에서 SDK 를 별도로 다운로드 받아 연동할 수 있으며, 정상적인 동작이 확인된 SDK 버전은 위와 같습니다.</p>
 <p>실제로 각 플랫폼의 마이너 버전 업데이트가 일어나더라도 애드립 구현부의 변경없이 업데이트 된 SDK 만 새롭게 적용하면 그대로 사용가능하며, 최소한의 구현부 수정으로 큰 수정없이 적용할 수 있도록 구성되었습니다.</p>
