@@ -13,8 +13,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.mocoplex.adlib.AdlibConfig.Type;
 
 import android.app.Activity;
 import android.content.Context;
@@ -77,6 +79,13 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 				queryAd();
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
+				
+				AdlibConfig.getInstance().imp(Type.BANNER, "ADMOB");
+			}
+			
+			@Override
+			public void onAdOpened() {
+				AdlibConfig.getInstance().clk(Type.BANNER, "ADMOB");
 			}
 			
 		});
@@ -197,7 +206,14 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		 			}
 					
 					interstitial.show();
+					
+					AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "ADMOB");
 				}
+			}
+			
+			@Override
+			public void onAdOpened() {
+				AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "ADMOB");
 			}
 	    	
 	    });

@@ -44,9 +44,12 @@
         <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
             android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="orientation|keyboard|keyboardHidden" />
+        
+        <activity android:name="com.mocoplex.adlib.AdlibInterstitialActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
-        
-        
+
 		<!-- T-AD - 광고 노출을 위해 필요한 선언입니다. -->
 		<activity
 			android:name="com.skplanet.tad.AdActivity"
@@ -132,8 +135,25 @@
         	android:name="com.sec.android.ad.AdActivity"
         	android:configChanges="keyboardHidden|orientation|screenSize" />
         
-        <!-- mediba ad - 광고 노출을 위해 필요한 선언입니다. -->
+        <!-- MEDIBA AD - 광고 노출을 위해 필요한 선언입니다. -->
         <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
+        
+        <!-- MOBFOX - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity android:name="com.adsdk.sdk.banner.InAppWebView"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity android:name="com.adsdk.sdk.video.RichMediaActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:hardwareAccelerated="false" />
+        <activity android:name="com.adsdk.sdk.mraid.MraidBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        
+        <!-- MOPUB - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation"/>
+		<activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
         
 		<!-- 기본 권한 추가 끝 -->
         

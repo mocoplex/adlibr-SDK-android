@@ -27,8 +27,10 @@ import com.millennialmedia.android.MMRequest;
 import com.millennialmedia.android.MMSDK;
 import com.millennialmedia.android.RequestListener;
 import com.millennialmedia.android.RequestListener.RequestListenerImpl;
+import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.mocoplex.adlib.AdlibConfig.Type;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -92,7 +94,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 
 			@Override
 			public void onSingleTap(MMAd mmAd) {
-				
+				AdlibConfig.getInstance().clk(Type.BANNER, "MMEDIA");
 			}
 
 			@Override
@@ -101,6 +103,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
+				
+				AdlibConfig.getInstance().imp(Type.BANNER, "MMEDIA");
 			}
 
 			@Override
@@ -216,6 +220,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 			 				}
 							
 							interstitial.display();
+							
+							AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "MMEDIA");
 						}
 					}
 					catch(Exception e)
@@ -234,6 +240,11 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 					catch(Exception e)
 					{
 					}
+				}
+				
+				@Override
+				public void onSingleTap(MMAd mmAd) {
+					AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "MMEDIA");
 				}
 			}
 		);

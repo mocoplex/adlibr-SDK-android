@@ -19,8 +19,10 @@ import com.inmobi.monetization.IMBannerListener;
 import com.inmobi.monetization.IMErrorCode;
 import com.inmobi.monetization.IMInterstitial;
 import com.inmobi.monetization.IMInterstitialListener;
+import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.mocoplex.adlib.AdlibConfig.Type;
 
 import android.app.Activity;
 import android.content.Context;
@@ -82,7 +84,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 			
 			@Override
 			public void onBannerInteraction(IMBanner arg0, Map<String, String> arg1) {
-				
+				AdlibConfig.getInstance().clk(Type.BANNER, "INMOBI");
 			}
 
 			@Override
@@ -98,6 +100,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
+				
+				AdlibConfig.getInstance().imp(Type.BANNER, "INMOBI");
 			}
 
 			@Override
@@ -230,7 +234,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 		@Override
 		public void onInterstitialInteraction(IMInterstitial arg0,
 				Map<String, String> arg1) {
-			
+			AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "INMOBI");
 		}
 
 		@Override
@@ -242,6 +246,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore  {
 	 			{
 	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "INMOBI"));
 	 			}
+	 			
+	 			AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "INMOBI");
 			}
 			catch(Exception e)
 			{
