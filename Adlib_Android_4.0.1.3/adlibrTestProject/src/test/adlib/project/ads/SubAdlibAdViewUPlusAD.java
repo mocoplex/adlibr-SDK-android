@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with U+AD SDK 3.0.2
+ * confirmed compatible with U+AD SDK 3.0.5
  */
 
 package test.adlib.project.ads;

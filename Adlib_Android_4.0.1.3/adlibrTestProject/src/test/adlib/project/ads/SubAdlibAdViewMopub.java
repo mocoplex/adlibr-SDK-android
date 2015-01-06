@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with mopub SDK 3.2.2
+ * confirmed compatible with mopub SDK 3.3.0
 */
 
 package test.adlib.project.ads;
