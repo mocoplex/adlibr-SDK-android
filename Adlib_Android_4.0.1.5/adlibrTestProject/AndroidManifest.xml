@@ -29,7 +29,7 @@
         android:label="@string/app_name" >
         
         <!-- 구글 광고 ID 사용을 위해 꼭 추가해주세요. -->
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
       
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         <activity
@@ -130,7 +130,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"/>
             
         <!-- ADHUB - 광고 노출을 위해 필요한 선언입니다. -->
-        ￼<activity
+       	<activity
         	android:name="com.sec.android.ad.AdActivity"
         	android:configChanges="keyboardHidden|orientation|screenSize" />
         
@@ -154,6 +154,11 @@
 		<activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
         
+		<!-- ADMIXER - 광고 노출을 위해 필요한 선언입니다. -->
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<activity android:name="com.google.android.gms.ads.AdActivity” 
+		    android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+		
 		<!-- 기본 권한 추가 끝 -->
         
         
