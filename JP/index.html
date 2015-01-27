@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="adlibr-sdk-android : adlibr integration library for android" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>adlibr-sdk-android</title>
+  </head>
+
+  <body>
+
+<style>
+	#project_title
+	{
+			background:url('http://adlibr.com/images/anicon.png') no-repeat left center;
+			padding-left:50px;
+	}
+</style>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mocoplex/adlibr-SDK-android">View on GitHub</a>
+
+          <h1 id="project_title">adlibr-sdk-android</h1>
+          <h2 id="project_tagline">adlibr integration library for android</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mocoplex/adlibr-SDK-android/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mocoplex/adlibr-SDK-android/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      <p><font color="#000">**AndroidManifest.xml에 변경/추가된 (Activity 선언) 내용을 꼭 확인해주세요.**</font></p>
+      <p><font color="#000">**애드립 구 버전에서 업데이트 시 모든 SubView 업데이트가 필수입니다.**</font></p>
+      <p><font color="#000">** 애드립 SDK v4 부터 Google Advertising ID를 사용합니다. 
+       (<a href="https://play.google.com/about/developer-content-policy.html">Google Play Policy</a>) **</font></p>
+<h3>애드립 SDK 소개</h3>
+
+<p>애드립 SDK 는 특정 플랫폼에 의존적이지 않으며,<br>
+원하는대로 자신의 앱에 최적화하여 다양한 광고 플랫폼을 손쉽게 적용할 수 있도록 제작되었습니다.</p>
+<p>애드립을 이용한 테스트 프로젝트를 다운로드 하시려면 위의 링크를 클릭해주세요.</p>
+
+<h3>애드립 Unity Plugin</h3>
+
+<p>Unity에 애드립을 손쉽게 적용할 수 있는 플러그인 입니다. <br />
+	(4.0.1.2 이상의 애드립 최신 SDK를 사용하시기 바랍니다.)</p>
+<p><font color="red">(New)</font>&nbsp;&nbsp;&nbsp;<a href="https://sec.adlibr.com/download/android-unity.pdf">Unity Plugin Guide - download here</a></p>
+
+<h3>SDK 다운로드 링크</h3>
+<pre><code><a target="_blank" href="http://mobile.biz.daum.net/top/intro.do">download</a> | ad@m
+<a target="_blank" href="https://developers.google.com/mobile-ads-sdk/download">download</a> | admob
+<a target="_blank" href="http://www.cauly.net/w/guide_dev/labrary">download</a> | cauly
+<a target="_blank" href="http://www.t-ad.co.kr/publisher/guide_sdk">download</a> | t-ad
+<a target="_blank" href="http://adpost.naver.com/main.nhn">download</a> | naverAdPost
+<a target="_blank" href="http://www.shallwead.com/addev_intro">download</a> | shallWeAd
+<a target="_blank" href="http://www.inmobi.com/products/sdk/">download</a> | inmobi
+<a target="_blank" href="http://docs.millennialmedia.com/android-SDK/index.html">download</a> | millennialMedia
+<a target="_blank" href="http://axonix.com">download</a> | mobclix
+<a target="_blank" href="http://man.appvista.com">download</a> | mezzoMedia
+<a target="_blank" href="https://developer.amazon.com/sdk/mobileads.html">download</a> | AmazonMobileAds
+<a target="_blank" href="http://www.samsungadhub.com/help/sdk.do">download</a> | SamsungAdHub
+<a target="_blank" href="http://www.uplusad.co.kr">download</a> | U+AD
+<a target="_blank" href="http://medibaad.com/developer/sdk/">download</a> | mediba ad
+<a target="_blank" href="https://github.com/mobfox/MobFox-Android-SDK">download</a> | mobfox
+<a target="_blank" href="https://github.com/mopub/mopub-android-sdk/wiki/Getting-Started">download</a> | mopub
+<a target="_blank" href="http://www.admixer.co.kr/guide">download</a> | Admixer
+</code></pre>
+
+<br>
+<pre><code>각 플랫폼의 SDK 버전은 API call 방식이 변경되지 않는한
+기존의 애드립 SubView를 통해 상위, 하위 호환이 가능합니다. 
+</code></pre>
+
+<br>
+<pre><code>Proguard 를 사용중이시라면 아래 링크에서 config 을 확인하여 실제 프로젝트에도 꼭 반영해주세요.
+<a target="_blank" href="https://github.com/mocoplex/adlibr-SDK-android/blob/master/Adlib_Android_4.0.1.5/adlibrTestProject/proguard.cfg">[ 설정보기 ]</a>
+</code></pre>
+
+<h3>최근 변경 내용</h3>
+
+<pre><code>(2015.01.16)
+proguard 버전 변경 적용
+
+</code></pre>
+
+<script>
+function changeDisplay(){
+
+	var history = document.getElementById('history');
+	
+	if (history.style.display == "none") {
+		history.style.display="block";
+	} else {
+		history.style.display="none";
+	}
+}
+</script>
+
+<h3>과거 변경 내용</h3>
+<pre><code><a href="javascript:changeDisplay()">자세한 내역을 보고자 한다면 여기를 클릭하세요.</a></code></pre>
+
+<div id="history" style="display:none">
+<pre><code>
+v4.0.1.5 (2015.01.13)
+광고 플랫폼/SubView 추가 (Admixer)
+
+v4.0.1.4 (2015.01.06)
+Cauly, inmobi, AmazonMobileAds, U+AD, Mopub의
+SubView Update로 최신 SDK를 지원합니다.
+
+v4.0.1.3 (2014.12.03)
+T-ad SubView Update - 최신 SDK(v3.8.1)를 지원합니다.
+
+v4.0.1.3 (2014.11.17)
+유니티 전면배너 프리로드 실패에 대한 처리
+
+v4.0.1.2 (2014.11.10)
+4.0.1.1 버그 수정 (유니티에서 타플랫폼의 광고 표출이 안되는 오류 수정)
+
+v4.0.1.1 (2014.11.06)
+4.0.1.0 버그 수정 (일부 앱의 광고 클릭시 ANR 발생 현상에 대한 해결)
+
+v4.0.1.0 (2014.11.04)
+애드립 전면배너 프리로드 기능 추가
+유니티 관련 프로젝트를 샘플 프로젝트에 통합 (유니티 가이드 참고)
+일반 플랫폼 추가 / Mobfox, Mopub
+리포팅 기능 추가 (Subview Update) / Admob, Inmobi, Millennial Media, Mobfox, Mopub	
+
+v4.0.0.3 (2014.09.15)
+앱 종료시 애드립외 플랫폼의 전면배너 표출 안되는 현상 수정
+
+v4.0.0.2 (2014.09.11)
+일반 플랫폼 추가 / Mediba Ad
+기타 버그 수정
+
+v4.0.0.1 (2014.09.05)
+Millennial Media SubView Update - 최신 SDK(v5.3.0)를 지원합니다.
+Millennial Media 전면광고를 지원합니다.
+
+v4.0.0.0 (2014.07.25)
+Google Advertising ID 적용에 따른 영구적인 기기식별자를 수집하지 않습니다.
+영구적인 기기식별자 : WIFI MAC, ANDROID_ID, IMEI 등
+
+버전의 자릿수를 늘렸습니다. (3자리 -> 4자리)
+불필요한 퍼미션을 제거하였습니다.
+
+v3.9.8 (2014.07.25)
+Google Advertising ID 를 적용하였습니다. (Google Play Services SDK 사용)
+
+(2014.07.23)
+ad@m SubView Update - 최신 SDK(v2.3.0)를 지원합니다.
+Amazon SubView Update - 최신 SDK(v5.4.78)를 지원합니다.
+
+(2014.07.03)
+T-ad SubView Update - 최신 SDK(v3.5.3.6)를 지원합니다.
+
+v3.9.7 (2014.06.30)
+리워드 배너 관련 기능이 개선되었습니다.
+(슬라이더 관련 배너 사용시 동작이 가능해졌습니다.)
+
+NaverAdPost SubView Update
+광고 뷰로 2개 이상의 Activity 사용 중 전환 과정에서 발생하는 
+자동 업데이트 멈춤 현상을 수정하였습니다. (네이버 플랫폼)
+
+(2014.06.10)
+Cauly SubView Update - 최신 SDK(v3.2.4)를 지원합니다.
+
+(2014.05.26)
+Cauly SubView Update - Cauly만 설정하여 사용시, 
+        onResume에 광고가 갱신이 되지 않는 문제를 해결하였습니다.
+
+(2014.05.14)
+T-ad SubView Update - 최신 SDK(v3.4.3.6)를 지원합니다.
+
+v3.9.6 (2014.05.06)
+NullPointer Exception 관련 예외처리가 추가되었습니다.
+
+(2014.02.18)
+UnityPlugin Update - t-ad, inmobi 전면배너를 지원합니다.
+
+v3.9.5 (2014.02.17)
+일부 OS에서 팝배너 이미지로딩 오류가 있어 수정하였습니다.
+
+v3.9.4 (2014.02.10)
+팝 배너에서 발생하는 비트맵 관련 오류를 수정하였습니다.
+
+v3.9.3 (2014.02.07)
+유니티 플러그인 지원을 위해 jar에 포함된 리소스를 제거 하였습니다.
+
+v3.9.2 (2014.01.03)
+애드립 팝 배너가 close 될 때 특정 디바이스에서 앱이 죽는 에러를 수정 하였습니다.
+
+v3.9.1 (2014.01.02)
+애드립 팝 배너 관련 오류가 수정 되었습니다.
+
+v3.9 (2013.12.26)
+애드립 팝 서비스를 지원합니다. (관련 서비스 내용은 공지 참고)
+Full Size의 애드립 전면광고를 지원합니다.
+
+(2013.12.23)
+T-ad SubView Update - 최신 SDK(v3.3.3.6)를 지원합니다.
+
+v3.8.1 (2013.12.13)
+NullPointer Exception 관련 예외처리가 추가되었습니다.
+
+(2013.12.03)
+SamsungAdHub SubView Update - 최신 SDK(v3.0.0)를 지원합니다.
+
+v3.8 (2013.11.26)
+리치미디어 광고를 지원합니다.
+비디오 광고를 지원합니다. - AndroidManifest.xml에 Activity 추가 필요합니다.
+
+(2013.11.23)
+SubView 추가 / Samsung AdHub
+
+v3.7.1 (2013.11.14)
+일반 플랫폼 추가 / Amazon Mobile Ads
+Amazon SubView 추가
+
+(2013.11.13)
+cauly SubView Update - 일부 전면광고에 대해 리스너를 받아오지 못하는 문제를 수정하였습니다.
+
+(2013.11.06)
+일반 플랫폼 추가 / MezzoMedia MAN
+Mezzo SubView 추가
+
+v3.7.a (2013.10.28)
+NullPointer Exception 관련 예외처리가 추가되었습니다.
+
+v3.7 (2013.10.07)
+전면광고 스케줄링 기능이 추가 되었습니다.
+(현재 adam, admob, cauly 지원 - 관련 subview update 필요)
+shallwead SubView Update
+
+v3.6.3 (2013.09.15)
+광고 초기 로딩전의 하우스배너 노출 여부를 설정할 수 있게 되었습니다.
+(자세한 설명은 애드립 매뉴얼 9번째, 11번째 슬라이드 참고)
+
+(2013.09.11)
+일반 플랫폼 추가 / U+AD
+U+AD SubView 추가
+
+(2013.09.04)
+adpost SubView Update
+ 첫 로딩 때 지구모양 배너가 보이지 않게 수정하였습니다.
+
+(2013.08.31)
+SubView 추가 / admob-eCPM floor (v3.6.2 부터 사용 가능합니다.)
+
+v3.6.2 (2013.08.29)
+광고 초기 로딩속도가 개선되었습니다.
+리워드링크 노출 방식이 보다 최적화 되었습니다.
+admob-ecpm floor 네트워크가 추가 되었습니다. (SubView 업데이트 예정)
+admob SubView Update
+
+(2013.08.24)
+일반 플랫폼 추가 / mobclix (v3.6 부터 사용 가능합니다.)
+
+v3.6 (2013.08.02)
+background request를 지원하지 않는 플랫폼도 광고 스위칭이 매끄러워졌습니다.
+리워드 배너의 노출이 최적화 되었습니다.
+다양한 글로벌 네트워크들이 추가 되었습니다.(SubView 업데이트 예정)
+모든 SubView Update - 반드시 모든 SubView를 업데이트 하셔야 합니다.
+
+v3.5.6 (2013.07.30)
+일부 디바이스에서 WebView의 JavascriptInterface method를 찾지 못하는 에러를 수정하였습니다.
+
+v3.5.5 (2013.07.19)
+전면광고 관련 API를 제공합니다.
+일반 플랫폼 추가 / MillenialMedia
+
+v3.5 (2013.06.24)
+리워드 링크 관련 오류를 수정하였습니다.
+전면광고를 지원합니다. (곧 오픈 예정)
+
+(2013.06.18)
+모든 SubView Update
+ 리스너 응답 지연으로 플랫폼 전환시 광고 호출을 pause 시킵니다.
+
+v3.4 (2013.06.14)
+리워드 배너 개선 및 내부적인 성능 향상으로 스케줄링이 최적화 되었습니다.
+SMART* dialog의 백버튼 종료를 막아 미처 보지 못하고 닫아버리는 문제를 방지 하였습니다.
+
+(2013.06.07)
+cauly SubView Update
+ : 광고뷰가 특정시간 이상 노출되어있지 않으면 갱신이 되지않아 뷰가 사라질때 destroy를 시킵니다.
+
+v3.3.a (2013.05.24)
+리워드 링크의 NullPointer Exception 관련 예외처리가 추가되었습니다.
+
+(2013.05.23)
+admob SubView Update
+ : ad.stopLoading() 이 간헐적으로 모든 WebView를 멈추는 문제가 있어 제거하였습니다.
+
+v3.3 (2013.05.22)
+리워드 링크 서비스를 지원합니다. (관련 서비스 내용은 공지 예정)
+고해상도 디바이스에서 SMART* dialog의 사이즈 오류를 수정하였습니다.
+
+(2013.05.06)
+모든 SubView Update 
+ 리스너 응답이 지연될 경우 빠르게 다음 플랫폼으로 전환합니다.
+
+v3.2.2 (2013.04.01)
+내부 브라우저가 최적화 되었습니다.
+SMART* dialog의 노출횟수를 daily 단위로 설정할 수 있게 되었습니다.
+
+v3.2.1 (2013.03.05)
+NullPointer Exception 관련 예외처리가 추가되었습니다.
+
+v3.2 (2013.02.09)
+리워드 배너 서비스를 지원합니다. (관련 서비스 내용 공지 예정)
+
+v3.1.2 (2013.01.28)
+Activity의 생명주기에 따라 생성했던 모든 SubView의 status method를 호출합니다.
+on background : WebViewCoreThread cpu 문제 관련 방어코드 추가
+
+v3.1.1 (2013.01.21)
+내부 브라우저 탑재로 광고 클릭시 빠른 전환이 가능해졌습니다.
+사용자 배너의 기존 애드립 로고의 크기 및 모양이 변경되었습니다.
+(Manifest.xml 을 참조하여 변경내용을 꼭 반영해주세요. - Activity 추가)
+
+v3.1 (2013.01.09)
+수익 극대화를 위해 설정한 CPC 단가 이상의 제휴사 광고가 우선 노출될 수 있도록 기능이 추가되었습니다.
+사용자 광고를 포함한 caching 동작이 최적화 되었습니다.
+플랫폼별 스위칭 알고리즘이 개선되어 보다 효율적인 노출이 가능해졌습니다.
+시작시 사용자 전면 광고 및 Dialog 노출이 보다 쾌적해졌습니다.
+
+v3.0.1 (2012.12.14)
+SMART* mediation / dialog 동작이 최적화되었습니다.
+각 플랫폼의 SubView 동작이 최적화되었습니다.
+
+v3.0 (2012.11.18)
+SMART* dialog / SMART* AD 업데이트
+
+v2.5.0.a (2012.09.25)
+추가 리포트 기능을 지원합니다.
+(누적 사용자, 활성 사용자수, 일별 사용자수)
+
+v2.5.0 (2012.09.19)
+Earning Maximizer 기능 지원
+제휴 플랫폼의 스케줄을 자동으로 최적화하여 수익을 극대화시킵니다.
+
+v2.3.5 (2012.08.23)
+광고효과 리포트 통계가 보다 정확해졌습니다.
+액티비티별 스케줄링 문제 패치
+
+v2.3.0 (2012.08.12)
+여러개의 사용자 배너 스케줄링 지원
+
+v2.2.2 (2012.08.09)
+동적 AdlibManager 생성/해제 최적화
+
+v2.2.1 (2012.08.05)
+ShallWeAd 지원
+사용자배너 일부 버그 수정
+
+v2.2 (2012.07.24)
+일부 ICS 단말기 OPENGL 관련 오류 수정
+내부 광고 스위칭 알고리즘 개선 (모든 SubView 업데이트 필요)
+
+v2.1 (2012.06.27)
+일반 플랫폼 추가 / NaverAdPost
+
+v2.0
+제휴 플랫폼 추가 / INMOBI (<a href="http://korea.inmobi.com" target="_blank">http://korea.inmobi.com</a>)
+reward 프로그램 적용</code></pre>
+</div>
+
+
+<h3>현재 애드립에서 지원중인 광고 플랫폼 정보</h3>
+
+<p>애드립에서 사용가능한 플랫폼은 아래와 같습니다.</p>
+
+<div style="font-style:italic;padding-top:10px;">일반 플랫폼</div>
+<pre><code> * confirmed compatible with ad@m SDK 2.3.4
+ * confirmed compatible with admob Google Play 4.4
+ * confirmed compatible with cauly SDK 3.3.13
+ * confirmed compatible with t-ad SDK 3.8.1
+ * confirmed compatible with naverAdPost SDK 1.3.0
+ * confirmed compatible with shallWeAd SDK 2.5.0
+ * confirmed compatible with inmobi SDK 4.5.2
+ * confirmed compatible with millennialMedia SDK 5.3.0
+ * confirmed compatible with mobclix SDK 4.1.0
+ * confirmed compatible with MezzoMediaMAN SDK 3.6
+ * confirmed compatible with AmazonMobileAds SDK 5.4.235
+ * confirmed compatible with SamsungAdHub SDK 3.0.0
+ * confirmed compatible with U+AD SDK 3.0.5
+ * confirmed compatible with MedibaAd SDK 2.0.7
+ * confirmed compatible with Mobfox SDK 5.0.0
+ * confirmed compatible with Mopub SDK 3.3.0
+ * confirmed compatible with Admixer SDK 1.2.12</code></pre>
+
+<p>사용자의 편의에 의해 각 플랫폼 사이트에서 SDK 를 별도로 다운로드 받아 연동할 수 있으며, 정상적인 동작이 확인된 SDK 버전은 위와 같습니다.</p>
+<p>실제로 각 플랫폼의 마이너 버전 업데이트가 일어나더라도 애드립 구현부의 변경없이 업데이트 된 SDK 만 새롭게 적용하면 그대로 사용가능하며, 최소한의 구현부 수정으로 큰 수정없이 적용할 수 있도록 구성되었습니다.</p>
+
+<h3>애드립 적용에 대한 자세한 매뉴얼</h3>
+
+<p>샘플 프로젝트 설명 및 애드립 연동에 필요한 자세한 매뉴얼은 아래 링크에서 다운로드 할 수 있습니다.</p>
+
+<a href="https://sec.adlibr.com/download/adlibr-android.pdf" class="user-mention">매뉴얼 다운로드</a>
+
+<h3>애드립을 발전시켜주세요</h3>
+
+<p>애드립은 열린 플랫폼으로 각 광고 플랫폼 구현부를 손쉽게 커스터마이징 할 수 있도록 제작되었습니다.<br>
+애드립 구현부는 github 를 통해 자유롭게 공유가 가능합니다. 애드립을 더 쓸모있는 플랫폼으로 만들기 위해 여러분의 참여를  기다립니다.</p>
+
+<h3>개발자 지원</h3>
+
+<p>애드립 적용에 어려움이 있으신가요?<br>
+  아래 개발자 지원메뉴를 통하여 실시간으로 개발지원을 받을 수 있습니다.</p>
+  <a href="https://groups.google.com/forum/?hl=ko&fromgroups#!forum/adlib-network" class="user-mention">개발자 지원 바로가기</a>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">adlibr-sdk-android maintained by <a href="https://github.com/mocoplex">mocoplex</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>
