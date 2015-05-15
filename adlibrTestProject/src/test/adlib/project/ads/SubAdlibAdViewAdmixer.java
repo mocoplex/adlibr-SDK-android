@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with AdMixer SDK 1.2.12
+ * confirmed compatible with AdMixer SDK 1.3.4
  */
 
 package test.adlib.project.ads;
@@ -34,7 +34,7 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	
 	// 여기에 AdMixer ID 를 입력하세요.
 	static String admixerID = "AdMixer_ID";
-    static String admixerInterstitialID = "AdMixer_ID";
+    static String admixerInterstitialID = "AdMixer_Interstitial_ID";
 
 	public SubAdlibAdViewAdmixer(Context context) {
 		this(context,null);
@@ -214,6 +214,21 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	 			{
 	 					
 	 			}
+			}
+
+			@Override
+			public void onInterstitialAdShown(String arg0, InterstitialAd arg1) {
+				
+			}
+
+			@Override
+			public void onLeftClicked(String arg0, InterstitialAd arg1) {
+				
+			}
+
+			@Override
+			public void onRightClicked(String arg0, InterstitialAd arg1) {
+				
 			}
 		});
 		interstitialAd.startInterstitial();

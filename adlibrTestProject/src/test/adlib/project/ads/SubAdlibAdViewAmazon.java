@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with amazon mobile ads SDK 5.4.235
+ * confirmed compatible with amazon mobile ads SDK 5.5.149
  */
 
 package test.adlib.project.ads;

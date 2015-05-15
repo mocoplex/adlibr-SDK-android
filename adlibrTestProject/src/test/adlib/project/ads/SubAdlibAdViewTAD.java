@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.8.1
+ * confirmed compatible with T ad SDK 3.10.1
  */
 
 package test.adlib.project.ads;

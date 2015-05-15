@@ -8,22 +8,21 @@
 
 package test.adlib.project.ads;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.view.Gravity;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.mocoplex.adlib.AdlibConfig;
+import com.mocoplex.adlib.AdlibConfig.Type;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.mocoplex.adlib.AdlibConfig.Type;
-
-import android.app.Activity;
-import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.AttributeSet;
-import android.view.Gravity;
 
 /*
 AndroidManifest.xml 에 아래 내용을 추가해주세요.

@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 3.3.13
+ * confirmed compatible with cauly SDK 3.3.21
  */
 
 package test.adlib.project.ads;
