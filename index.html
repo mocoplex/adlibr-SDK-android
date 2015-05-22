@@ -40,6 +40,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 	  <p><font color="#f00">**3D 광고와 동영상 광고를 통해 보다 효율적인 수익을 올릴 수 있습니다. (애드립 SDK v4.2 이상) **</font></p>
+	  <p><font color="#000">**(64비트 단말에서는 현재 3D광고가 지원되지 않으니, 참고하시기 바랍니다.) **</font></p>
       <p><font color="#000">**AndroidManifest.xml에 변경/추가된 (Activity 선언) 내용을 꼭 확인해주세요.**</font></p>
       <p><font color="#000">**애드립 구 버전에서 업데이트 시 모든 SubView 업데이트가 필수입니다.**</font></p>
       <p><font color="#000">** 애드립 SDK v4 부터 Google Advertising ID를 사용합니다. 
@@ -91,10 +92,8 @@
 
 <h3>최근 변경 내용</h3>
 
-<pre><code>v4.2.0.1 (2015.05.20)
-비디오 띠배너에서 영상이 오버레이되는 현상 수정
-3D 광고 전면배너에서 간혈적으로 깜박임 발생 관련 수정
-Wifi 상태 체크 관련 기능 추가 (비디오, 3D 광고)
+<pre><code>v4.2.0.2 (2015.05.22)
+3D 광고 관련 NullPointerException 예외상황 수정
 </code></pre>
 
 <script>
@@ -114,7 +113,12 @@ function changeDisplay(){
 <pre><code><a href="javascript:changeDisplay()">자세한 내역을 보고자 한다면 여기를 클릭하세요.</a></code></pre>
 
 <div id="history" style="display:none">
-<pre><code>v4.2.0.0 (2015.05.15)
+<pre><code>v4.2.0.1 (2015.05.20)
+비디오 띠배너에서 영상이 오버레이되는 현상 수정
+3D 광고 전면배너에서 간혈적으로 깜박임 발생 관련 수정
+Wifi 상태 체크 관련 기능 추가 (비디오, 3D 광고)
+
+v4.2.0.0 (2015.05.15)
 # 3D 광고상품 출시 (전면광고)
 # 광고 플랫폼의 라이브러리 업데이트
  * Cauly (3.3.21) 
