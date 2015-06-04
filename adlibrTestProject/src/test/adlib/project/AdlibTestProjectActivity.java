@@ -89,6 +89,17 @@ public class AdlibTestProjectActivity extends AdlibActivity {
         {
 			@Override
 			public void onClick(View v) {
+				// 프리로드 전면광고 요청
+				requestInterstitial();
+			}
+        	
+        };
+        this.findViewById(R.id.btn5).setOnClickListener(cl);
+        
+        cl = new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v) {
 				// 프리로드한 전면배너를 표출합니다.
 				// 실패한 경우는 노출 되지 않습니다.
 				// 성공을 한 광고의 경우에도 인터넷이 연결되지 않았거나 
@@ -131,7 +142,7 @@ public class AdlibTestProjectActivity extends AdlibActivity {
 			}
         	
         };
-        this.findViewById(R.id.btn5).setOnClickListener(cl);
+        this.findViewById(R.id.btn6).setOnClickListener(cl);
         
         /*
         this.setAdsHandler(new Handler() {
