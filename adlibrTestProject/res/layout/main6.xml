@@ -5,19 +5,16 @@
     android:id="@+id/maincontainer"
     android:orientation="vertical" >
 
-    
     <Button 
         android:id="@+id/btn1"
-        android:text="add adview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"        
         />
     
     <Button 
         android:id="@+id/btn2"
-        android:text="remove adview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"        
-        />    
+        />
     
 </LinearLayout>

@@ -1,10 +1,14 @@
 package test.adlib.project;
-import com.mocoplex.adlib.AdlibActivity;
-
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+
+import com.mocoplex.adlib.AdlibActivity;
+import com.mocoplex.adlib.AdlibManager;
 
 public class AdlibTestProjectActivity3 extends AdlibActivity {
 	
@@ -22,6 +26,26 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
         setAdlibTestMode(true);
         
+        this.setAdsHandler(new Handler() {
+			public void handleMessage(Message message) {
+	    		try
+	    		{
+	    			switch (message.what) {
+	                    case AdlibManager.DID_SUCCEED:
+	                        Log.d("ADLIBr", "[Banner] onReceiveAd " + (String)message.obj);
+	                        break;
+	                    case AdlibManager.DID_ERROR:
+	                        Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String)message.obj);
+	                        break;
+		    		}
+	    		}
+	    		catch(Exception e)
+	    		{
+	    			
+	    		}
+	    	}
+		});
+        
         View.OnClickListener cl;
         
         cl = new View.OnClickListener()
@@ -38,7 +62,7 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
 				
 		        // 동적으로 adview 를 생성합니다.
 		        avc = new com.mocoplex.adlib.AdlibAdViewContainer(AdlibTestProjectActivity3.this);        
-                LayoutParams p = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
+                LayoutParams p = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
                 avc.setLayoutParams(p);
 		        
 		        ViewGroup vg = (ViewGroup)findViewById(R.id.maincontainer);

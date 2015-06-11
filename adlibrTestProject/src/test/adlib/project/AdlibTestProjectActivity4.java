@@ -1,11 +1,13 @@
 package test.adlib.project;
-import com.mocoplex.adlib.AdlibAdViewContainer;
-import com.mocoplex.adlib.AdlibManager;
-import com.mocoplex.adlib.AdlibManager.AdlibVersionCheckingListener;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+
+import com.mocoplex.adlib.AdlibAdViewContainer;
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.AdlibManager.AdlibVersionCheckingListener;
 
 public class AdlibTestProjectActivity4 extends Activity {
     
@@ -24,9 +26,29 @@ public class AdlibTestProjectActivity4 extends Activity {
 		_amanager.onCreate(this);
 		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
 		_amanager.setAdlibTestMode(true);
+		
+		_amanager.setAdsHandler(new Handler() {
+			public void handleMessage(Message message) {
+	    		try
+	    		{
+	    			switch (message.what) {
+	                    case AdlibManager.DID_SUCCEED:
+	                        Log.d("ADLIBr", "[Banner] onReceiveAd " + (String)message.obj);
+	                        break;
+	                    case AdlibManager.DID_ERROR:
+	                        Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String)message.obj);
+	                        break;
+		    		}
+	    		}
+	    		catch(Exception e)
+	    		{
+	    			
+	    		}
+	    	}
+		});
 
 		// 일반적인 연동은 추가적으로 구현필요
-		setContentView(R.layout.main2);
+		setContentView(R.layout.main4);
 		this.setAdsContainer(R.id.ads);
 	}
 
@@ -70,6 +92,24 @@ public class AdlibTestProjectActivity4 extends Activity {
 	public void loadFullInterstitialAd(Handler h)
 	{
 		_amanager.loadFullInterstitialAd(this, h);
+	}
+	
+	// 전면광고 프리로드 요청
+	public void requestInterstitial()
+	{
+		_amanager.requestInterstitial();
+	}
+	
+	// 전면광고 프리로드 표출
+	public void showInterstitial()
+	{
+		_amanager.showInterstitial();
+	}
+		
+	// 전면광고 프리로드 표출 (광고 수신 성공, 실패 여부를 받고 싶을 때 handler 이용)
+	public void showInterstitial(Handler h)
+	{
+		_amanager.showInterstitial();
 	}
 	
 	public void setVersionCheckingListner(AdlibVersionCheckingListener l)

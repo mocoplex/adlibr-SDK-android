@@ -1,13 +1,17 @@
 package test.adlib.project;
-import com.mocoplex.adlib.AdlibActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+
+import com.mocoplex.adlib.AdlibActivity;
+import com.mocoplex.adlib.AdlibManager;
 
 public class AdlibTestProjectActivity2 extends AdlibActivity {
 	
 	// 애드립 광고를 테스트 하기 위한 키 입니다.
 	private String ADLIB_API_KEY = "53858972e4b0ef94c0636d85";
 	
-    /** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +22,26 @@ public class AdlibTestProjectActivity2 extends AdlibActivity {
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
         setAdlibTestMode(true);
         
-        setAdsContainer(R.id.ads);   
-    }    
+        this.setAdsHandler(new Handler() {
+			public void handleMessage(Message message) {
+	    		try
+	    		{
+	    			switch (message.what) {
+	                    case AdlibManager.DID_SUCCEED:
+	                        Log.d("ADLIBr", "[Banner] onReceiveAd " + (String)message.obj);
+	                        break;
+	                    case AdlibManager.DID_ERROR:
+	                        Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String)message.obj);
+	                        break;
+		    		}
+	    		}
+	    		catch(Exception e)
+	    		{
+	    			
+	    		}
+	    	}
+		});
+        
+        setAdsContainer(R.id.ads);
+    }
 }

@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="9" />
+    <uses-sdk android:minSdkVersion="11" />
 
 	<!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -119,11 +119,6 @@
         <activity
             android:name="com.amazon.device.ads.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
-            
-        <!-- ADHUB - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity
-        	android:name="com.sec.android.ad.AdActivity"
-        	android:configChanges="keyboardHidden|orientation|screenSize" />
         
         <!-- MEDIBA AD - 광고 노출을 위해 필요한 선언입니다. -->
         <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
@@ -148,7 +143,7 @@
 		<!-- 기본 권한 추가 끝 -->
         
         
-        <activity
+       <activity
             android:name=".AdlibTestProjectActivity"
             android:configChanges="orientation"
             android:label="@string/app_name" >
@@ -175,6 +170,16 @@
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity5"
+            android:configChanges="orientation"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity6"
+            android:configChanges="orientation"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity7"
             android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
