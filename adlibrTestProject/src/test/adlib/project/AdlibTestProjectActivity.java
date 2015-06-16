@@ -15,9 +15,6 @@ import com.mocoplex.adlib.AdlibManager;
 
 public class AdlibTestProjectActivity extends ListActivity {
 	
-	// 애드립 광고를 테스트 하기 위한 키 입니다.
-	private String ADLIB_API_KEY = "53858972e4b0ef94c0636d85";
-	
 	// 일반 Activity 에서의 adlib 연동	
 	private AdlibManager _amanager;
 	
@@ -110,10 +107,10 @@ public class AdlibTestProjectActivity extends ListActivity {
         // ADLIB - API - KEY 설정
         
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
- 		_amanager = new AdlibManager(ADLIB_API_KEY);
+ 		_amanager = new AdlibManager(AdlibTestProjectConstans.ADLIB_API_KEY);
  		_amanager.onCreate(this);
  		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
- 		_amanager.setAdlibTestMode(true);
+ 		_amanager.setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
     }
     
     protected void onResume() {		
