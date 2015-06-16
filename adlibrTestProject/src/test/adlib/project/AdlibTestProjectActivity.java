@@ -111,6 +111,7 @@ public class AdlibTestProjectActivity extends ListActivity {
  		_amanager.onCreate(this);
  		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
  		_amanager.setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
+ 		
     }
     
     protected void onResume() {		
