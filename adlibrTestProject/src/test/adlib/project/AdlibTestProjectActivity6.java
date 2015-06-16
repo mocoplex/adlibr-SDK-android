@@ -18,9 +18,9 @@ public class AdlibTestProjectActivity6 extends AdlibActivity {
         setContentView(R.layout.main6);
         
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
-        setAdlibKey(ADLIB_API_KEY);
+        setAdlibKey(AdlibTestProjectConstans.ADLIB_API_KEY);
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
-        setAdlibTestMode(true);
+        setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
         
         Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setText("requestInterstitial");

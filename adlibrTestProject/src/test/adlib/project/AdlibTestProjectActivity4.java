@@ -14,18 +14,15 @@ public class AdlibTestProjectActivity4 extends Activity {
 	// 일반 Activity 에서의 adlib 연동	
 	private AdlibManager _amanager;
 	
-	// 애드립 광고를 테스트 하기 위한 키 입니다.
-	private String ADLIB_API_KEY = "53858972e4b0ef94c0636d85";
-
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 
 		// 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
-		_amanager = new AdlibManager(ADLIB_API_KEY);
+		_amanager = new AdlibManager(AdlibTestProjectConstans.ADLIB_API_KEY);
 		_amanager.onCreate(this);
 		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
-		_amanager.setAdlibTestMode(true);
+		_amanager.setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
 		
 		_amanager.setAdsHandler(new Handler() {
 			public void handleMessage(Message message) {
@@ -109,7 +106,7 @@ public class AdlibTestProjectActivity4 extends Activity {
 	// 전면광고 프리로드 표출 (광고 수신 성공, 실패 여부를 받고 싶을 때 handler 이용)
 	public void showInterstitial(Handler h)
 	{
-		_amanager.showInterstitial();
+		_amanager.showInterstitial(h);
 	}
 	
 	public void setVersionCheckingListner(AdlibVersionCheckingListener l)
