@@ -27,13 +27,13 @@ import android.view.Gravity;
  <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
  */
 
-public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore {
 	
 	protected MasAdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 mediba ad ID 를 입력하세요.
-	String medibaAdID = "MEDIBA_AD_ID";
+	protected String medibaAdID = "MEDIBA_AD_ID";
 
 	public SubAdlibAdViewMedibaAd(Context context) {
 		this(context,null);
@@ -45,8 +45,7 @@ public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
 		initMedibaAdView();
 	}
 	
-	public void initMedibaAdView()
-	{
+	public void initMedibaAdView() {
 		ad = new MasAdView(this.getContext());
 		ad.setSid(medibaAdID);
 		ad.setAdListener(new MasAdListener() {
@@ -96,8 +95,7 @@ public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -113,10 +111,9 @@ public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					if(ad != null)
 						ad.stop();
 					failed();
@@ -127,10 +124,8 @@ public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -139,30 +134,24 @@ public class SubAdlibAdViewMedibaAd extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{
-		if(ad != null)
-		{
+	public void onResume() {
+		if(ad != null){
 			ad.start();
 		}
 		
         super.onResume();
 	}
 	
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	public void onPause() {
+		if(ad != null){
 			ad.stop();
 		}
 		
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			ad.destroy();
 			ad = null;
 		}

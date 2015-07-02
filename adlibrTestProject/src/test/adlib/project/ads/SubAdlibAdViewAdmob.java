@@ -33,14 +33,16 @@ AndroidManifest.xml 에 아래 내용을 추가해주세요.
 	android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 */
 
-public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 	
 	protected AdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADMOB ID 를 입력하세요. (여기서 ADMOB ID는 AD_UNIT_ID, 광고 단위 ID를 지칭합니다.)
-	static String admobID = "ADMOB_ID";
-    static String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
+	protected String admobID = "ADMOB_ID";
+	protected String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
+    
+    private AdRequest request = new AdRequest.Builder().build();
     
 	public SubAdlibAdViewAdmob(Context context) {
 		this(context,null);
@@ -53,8 +55,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		initAdmobView();
 	}
 	
-	public void initAdmobView()
-	{
+	public void initAdmobView() {
 		ad = new AdView(getContext());
 		ad.setAdUnitId(admobID);
 		ad.setAdSize(AdSize.SMART_BANNER);
@@ -79,23 +80,22 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 				
-				AdlibConfig.getInstance().imp(Type.BANNER, "ADMOB");
+				// 미디에이션 통계 정보
+				AdlibConfig.getInstance().imp(SubAdlibAdViewAdmob.this, Type.BANNER);
 			}
 			
 			@Override
 			public void onAdOpened() {
-				AdlibConfig.getInstance().clk(Type.BANNER, "ADMOB");
+				// 미디에이션 통계 정보
+				AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.BANNER);
 			}
 			
 		});
 	}
 	
-	private AdRequest request = new AdRequest.Builder().build();
-    
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
-	public void query()
-	{
+	public void query() {
 		if(ad == null)
 			initAdmobView();
 		
@@ -110,13 +110,11 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
             
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					failed();
-					if(ad != null)
-					{
+					if(ad != null) {
                     	SubAdlibAdViewAdmob.this.removeView(ad);
                     	ad.destroy();
                     	ad = null;
@@ -128,10 +126,8 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		}, 5000);
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -140,28 +136,23 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 		super.onDestroy();
 	}
 	
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
         	this.removeView(ad);
 		}
 		
         super.clearAdView();
 	}
 	
-	public void onResume()
-	{
+	public void onResume() {
         super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause() {
         super.onPause();
 	}
 	
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		// Create the interstitial
 		final InterstitialAd interstitial = new InterstitialAd(ctx);
 		interstitial.setAdUnitId(admobInterstitialID);
@@ -175,44 +166,50 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore  {
 	    // Set Ad Listener to use the callbacks below
 	    interstitial.setAdListener(new AdListener() {
 	    	
-
 			@Override
 			public void onAdClosed() {
-				
-				if(h != null)
-	 			{
-	 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADMOB"));
-	 			}
+				try{
+					if(h != null){
+		 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADMOB"));
+		 			}
+				}catch(Exception e){
+				}
 			}
 
 			@Override
 			public void onAdFailedToLoad(int errorCode) {
-				
-				if(h != null)
-	 			{
-	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADMOB"));
-	 			}
+				try{
+					if(h != null){
+		 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADMOB"));
+		 			}
+				}catch(Exception e){
+				}
 			}
 
 			@Override
 			public void onAdLoaded() {
-				
-				if(interstitial.isLoaded())
-				{
-					if(h != null)
-		 			{
-		 				h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADMOB"));
-		 			}
-					
-					interstitial.show();
-					
-					AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "ADMOB");
+				try{
+					if(interstitial.isLoaded()){
+						if(h != null){
+			 				h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADMOB"));
+			 			}
+						
+						// 미디에이션 통계 정보
+						AdlibConfig.getInstance().imp(SubAdlibAdViewAdmob.this, Type.INTERSTITIAL);
+						
+						interstitial.show();
+					}
+				}catch(Exception e){
 				}
 			}
 			
 			@Override
 			public void onAdOpened() {
-				AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "ADMOB");
+				try{
+					// 미디에이션 통계 정보
+					AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.INTERSTITIAL);
+				}catch(Exception e){
+				}
 			}
 	    	
 	    });

@@ -27,14 +27,14 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	
 	protected com.skplanet.tad.AdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
-	static String tAdId = "T_AD_ID";
-	static String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
+	protected String tAdId = "T_AD_ID";
+	protected String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
     // 스케줄 설정에서 T-AD만 사용하신다면 반드시 아래 ad.setRefreshInterval(0); refresh interval을 0이 아닌 다른 값으로 변경해 주세요.
 	
 	public SubAdlibAdViewTAD(Context context) {
@@ -48,8 +48,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
         initTadView();
 	}
     
-    public void initTadView()
-    {
+    public void initTadView() {
 		ad = new com.skplanet.tad.AdView((Activity) this.getContext());
 		ad.setClientId(tAdId);
 		ad.setSlotNo(AdSlot.BANNER);
@@ -147,8 +146,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		this.addView(ad);
     }
     
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -168,12 +166,10 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
-					if(ad != null)
-					{
+				}else{
+					if(ad != null){
 						SubAdlibAdViewTAD.this.removeView(ad);
 						ad.destroyAd();
 						ad = null;
@@ -185,11 +181,9 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		}, 3000);
 	}
 	
-	public void clearAdView()
-	{
+	public void clearAdView() {
         // T-ad SDK 3.0 이후로 화면에 광고뷰가 보이지 않을 때 반드시 destroy를 시켜야 합니다.
-        if(ad != null)
-        {
+        if(ad != null){
             this.removeView(ad);
             ad.destroyAd();
             ad = null;
@@ -198,20 +192,16 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
         super.clearAdView();
 	}
 	
-	public void onResume()
-	{
+	public void onResume() {
 		super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause() {
 		super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			ad.destroyAd();
             ad = null;
 		}
@@ -219,8 +209,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 		super.onDestroy();
 	}
 	
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		final AdInterstitial adInterstitial = new AdInterstitial((Activity) ctx);
 	    adInterstitial.setClientId(tAdInterstitialId);
 	    adInterstitial.setSlotNo(AdSlot.INTERSTITIAL);
@@ -242,19 +231,23 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			@Override
 			public void onAdDismissScreen() {
 				
-				if(h != null)
-	 			{
-	 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "TAD"));
-	 			}
+				try{
+					if(h != null){
+		 				h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "TAD"));
+		 			}
+				}catch(Exception e){
+				}
 			}
 
 			@Override
 			public void onAdFailed(ErrorCode arg0) {
 				
-				if(h != null)
-	 			{
-	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "TAD"));
-	 			}
+				try{
+					if(h != null){
+		 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "TAD"));
+		 			}
+				}catch(Exception e){
+				}
 			}
 
 			@Override
@@ -265,18 +258,17 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore  {
 			@Override
 			public void onAdLoaded() {
 				
-				if(h != null)
-		 		{
-		 			h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "TAD"));
-		 		}
-				
-				// 수신한 광고가 있는지 확인합니다. 
-				if (adInterstitial.isReady()) {
-					// 광고 수신 후 광고를 노출합니다.
-					try {
+				try{
+					if(h != null){
+			 			h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "TAD"));
+			 		}
+					
+					// 수신한 광고가 있는지 확인합니다. 
+					if (adInterstitial.isReady()){
+						// 광고 수신 후 광고를 노출합니다.
 						adInterstitial.showAd();
-					} catch (Exception e) {
 					}
+				}catch(Exception e){
 				}
 			}
 

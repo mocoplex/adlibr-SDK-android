@@ -14,8 +14,7 @@ public class AdlibTestProjectActivity4 extends Activity {
 	// 일반 Activity 에서의 adlib 연동	
 	private AdlibManager _amanager;
 	
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
@@ -49,74 +48,62 @@ public class AdlibTestProjectActivity4 extends Activity {
 		this.setAdsContainer(R.id.ads);
 	}
 
-	protected void onResume()
-	{		
+	protected void onResume() {		
 		_amanager.onResume(this);
 		super.onResume();
 	}
 	
-	protected void onPause()
-	{    	
+	protected void onPause() {    	
 		_amanager.onPause(this);
 		super.onPause();
 	}
     
-	protected void onDestroy()
-	{    	
+	protected void onDestroy() {    	
 		_amanager.onDestroy(this);
 		super.onDestroy();
 	}
 
 	// xml 에 지정된 ID 값을 이용하여 BIND 하는 경우
-	public void setAdsContainer(int rid)
-	{
+	public void setAdsContainer(int rid) {
 		_amanager.setAdsContainer(rid);
 	}
 	
 	// 동적으로 Container 를 생성하여, 그 객체를 통하여 BIND 하는 경우
-	public void bindAdsContainer(AdlibAdViewContainer a)
-	{
+	public void bindAdsContainer(AdlibAdViewContainer a) {
 		_amanager.bindAdsContainer(a);		
 	}
 	
 	// 전면광고 호출
-	public void loadFullInterstitialAd()
-	{
+	public void loadFullInterstitialAd() {
 		_amanager.loadFullInterstitialAd(this);
 	}
 		
 	// 전면광고 호출 (광고 수신 성공, 실패 여부를 받고 싶을 때 handler 이용)
-	public void loadFullInterstitialAd(Handler h)
-	{
+	public void loadFullInterstitialAd(Handler h) {
 		_amanager.loadFullInterstitialAd(this, h);
 	}
 	
 	// 전면광고 프리로드 요청
-	public void requestInterstitial()
-	{
+	public void requestInterstitial() {
 		_amanager.requestInterstitial();
 	}
 	
 	// 전면광고 프리로드 표출
-	public void showInterstitial()
-	{
+	public void showInterstitial() {
 		_amanager.showInterstitial();
 	}
 		
 	// 전면광고 프리로드 표출 (광고 수신 성공, 실패 여부를 받고 싶을 때 handler 이용)
-	public void showInterstitial(Handler h)
-	{
+	public void showInterstitial(Handler h) {
 		_amanager.showInterstitial(h);
 	}
 	
-	public void setVersionCheckingListner(AdlibVersionCheckingListener l)
-	{
+	public void setVersionCheckingListner(AdlibVersionCheckingListener l) {
 		_amanager.setVersionCheckingListner(l);		
 	}
 	
 	// AD 영역을 동적으로 삭제할때 호출하는 메소드
-	public void destroyAdsContainer()
-	{
+	public void destroyAdsContainer() {
 		_amanager.destroyAdsContainer();
 	}
 	// 애드립 연동에 필요한 구현부 끝    

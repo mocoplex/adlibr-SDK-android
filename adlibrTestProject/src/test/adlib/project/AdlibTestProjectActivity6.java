@@ -9,9 +9,6 @@ import com.mocoplex.adlib.AdlibActivity;
 
 public class AdlibTestProjectActivity6 extends AdlibActivity {
 	
-	// 애드립 광고를 테스트 하기 위한 키 입니다.
-	private String ADLIB_API_KEY = "53858972e4b0ef94c0636d85";
-	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

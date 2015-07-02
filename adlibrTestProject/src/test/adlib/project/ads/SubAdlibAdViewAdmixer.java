@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with AdMixer SDK 1.3.4
+ * confirmed compatible with AdMixer SDK 1.3.5
  */
 
 package test.adlib.project.ads;
@@ -33,8 +33,8 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	protected boolean bGotAd = false;
 	
 	// 여기에 AdMixer ID 를 입력하세요.
-	static String admixerID = "AdMixer_ID";
-    static String admixerInterstitialID = "AdMixer_Interstitial_ID";
+	protected String admixerID = "AdMixer_ID";
+	protected String admixerInterstitialID = "AdMixer_Interstitial_ID";
 
 	public SubAdlibAdViewAdmixer(Context context) {
 		this(context,null);
@@ -45,11 +45,9 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 		initAdmixerView();
 	}
 	
-	public void initAdmixerView()
-	{
+	public void initAdmixerView() {
 		AdInfo adInfo = new AdInfo(admixerID); // AxKey 값 설정
 		//adInfo.setTestMode(true); // 테스트 모드 설정
-		adInfo.setRTBVerticalAlign(com.admixer.AdInfo$RTBVerticalAlign.Center); // 고수익 배너 상/하 배치 옵션(Top, Center, Bottom)
 		adInfo.setDefaultAdTime(0);    // 최소 디폴트 광고 표시 시간(milliseconds)
 		adInfo.setMaxRetryCountInSlot(-1);  // 리로드 시간 내에 전체 AdNetwork 반복 최대 횟수(-1 : 무한, 0 : 반복 없음, n : n번 반복)
 		
@@ -86,8 +84,7 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -103,10 +100,9 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					if(ad != null)
 						ad.pause();
 					failed();
@@ -117,10 +113,8 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 			//ad.destroy();
 			ad = null;
@@ -129,28 +123,24 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{		
-		if(ad != null)
-		{
+	public void onResume() {		
+		if(ad != null){
 			ad.resume();
 		}
         
         super.onResume();
 	}
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	
+	public void onPause() {
+		if(ad != null){
 			ad.pause();
 		}
         
         super.onPause();
 	}
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	
+	public void onDestroy() {
+		if(ad != null){
 			//ad.destroy();
 			ad = null;
 		}
@@ -158,8 +148,7 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
         super.onDestroy();
 	}
 	
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		AdInfo adInfo = new AdInfo(admixerInterstitialID); // AxKey 값 설정
 		adInfo.setInterstitialTimeout(0);   // 초단위로 전면 광고 타이아웃 설정(기본값 : 0, 0 이면 서버 지정 시간으로 처리됨)
 		adInfo.setMaxRetryCountInSlot(-1);  // 리로드 시간 내에 전체 AdNetwork 반복 최대 횟수(-1 : 무한, 0 : 반복 없음, n : n번 반복)
@@ -171,48 +160,33 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 			@Override
 			public void onInterstitialAdClosed(InterstitialAd arg0) {
 				
-				try
-	 			{
-	 				if(h != null)
-	 				{
+				try{
+	 				if(h != null){
 	 					h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADMIXER"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
 			}
 
 			@Override
 			public void onInterstitialAdFailedToReceive(int arg0, String arg1, InterstitialAd arg2) {
 				
-				try
-	 			{
-	 				if(h != null)
-	 				{
+				try{
+	 				if(h != null){
 	 	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADMIXER"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
 			}
 
 			@Override
 			public void onInterstitialAdReceived(String arg0, InterstitialAd arg1) {
 				
-				try
-	 			{
-	 				if(h != null)
-	 				{
+				try{
+	 				if(h != null){
 	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADMIXER"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
 			}
 

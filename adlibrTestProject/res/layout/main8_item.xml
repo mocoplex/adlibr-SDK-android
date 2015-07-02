@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/feed_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/feed_item_margin"
+        android:layout_marginRight="@dimen/feed_item_margin"
+        android:layout_marginTop="@dimen/feed_item_margin"
+        android:background="@drawable/bg_rounded_corner"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+        android:paddingTop="@dimen/feed_item_padding_top_bottom" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_padding_left_right"
+            android:paddingRight="@dimen/feed_item_padding_left_right" >
+
+            <!-- 아이콘 영역 -->
+			<com.mocoplex.adlib.nativead.view.Icon 
+			    android:layout_width="@dimen/feed_item_profile_pic"
+			    android:layout_height="@dimen/feed_item_profile_pic"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" >
+
+                <!-- 제목 영역 -->
+				<com.mocoplex.adlib.nativead.view.Title		    
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:ellipsize="end"
+				    android:maxLines="1"
+				    android:textStyle="bold"
+				    android:textSize="@dimen/feed_item_profile_name" />
+				
+				<!-- 부제목 영역 -->
+				<com.mocoplex.adlib.nativead.view.Subtitle		    
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:ellipsize="end"
+				    android:maxLines="1"
+                    android:textColor="@color/timestamp"
+                    android:textSize="@dimen/feed_item_timestamp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 설명 영역 -->
+        <com.mocoplex.adlib.nativead.view.Description
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        <!-- 메인 이미지 또는 비디오 영역 (비디오 광고를 표출할 경우 필수로 들어가야 합니다.) -->
+        <com.mocoplex.adlib.nativead.view.Banner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:visibility="visible" />
+        
+    </LinearLayout>
+</LinearLayout>

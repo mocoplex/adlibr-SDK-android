@@ -39,7 +39,7 @@ import android.util.AttributeSet;
 	android:value="발급받은 ShallWeAd 등록키" />
  */
 
-public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	
 	protected ShallWeAdBanner ad;
 	protected boolean bGotAd = false;
@@ -71,8 +71,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		this.removeAllViews();
@@ -87,40 +86,35 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
+				}else{
 					failed();
+				}
 			}
 				
 		}, 3000);
 	}
 
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 		}
 
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{
+	public void onResume() {
 		super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause() {
 		super.onPause();
 	}
 	
-    public void onDestroy()
-	{
-		if(ad != null)
-		{
+    public void onDestroy() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;

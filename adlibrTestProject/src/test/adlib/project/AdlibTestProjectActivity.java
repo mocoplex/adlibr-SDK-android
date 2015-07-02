@@ -75,8 +75,7 @@ public class AdlibTestProjectActivity extends ListActivity {
 	}
 	
 	// AndroidManifest.xml에 권한과 activity를 추가하여야 합니다.     
-    protected void initAds()
-    {
+    protected void initAds() {
     	// AdlibActivity 를 상속받은 액티비티이거나,
     	// 일반 Activity 에서는 AdlibManager 를 동적으로 생성한 후 아래 코드가 실행되어야 합니다. (AdlibTestProjectActivity4.java)
 

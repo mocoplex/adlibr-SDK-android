@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with amazon mobile ads SDK 5.5.149
+ * confirmed compatible with amazon mobile ads SDK 5.6.20
  */
 
 package test.adlib.project.ads;
@@ -34,13 +34,13 @@ import android.view.Gravity;
 	android:name="com.amazon.device.ads.AdActivity"
 	android:configChanges="keyboardHidden|orientation|screenSize"/>
  */
-public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 	
 	protected AdLayout ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 AMAZON ID 를 입력하세요.
-	String amazonID = "AMAZON_ID";
+	protected String amazonID = "AMAZON_ID";
     
 	public SubAdlibAdViewAmazon(Context context) {
 		this(context,null);

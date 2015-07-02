@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with mopub SDK 3.3.0
+ * confirmed compatible with mopub SDK 3.8.0
 */
 
 package test.adlib.project.ads;
@@ -43,11 +43,12 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 	protected MoPubView ad;
 	
 	// 여기에 MOPUB ID 를 입력하세요.
-	static String mopubID = "MOPUB_ID";
-	static String mopubInterstitialID = "MOPUB_INTERSTITIAL_ID";
+	protected String mopubID = "MOPUB_ID";
+	protected String mopubInterstitialID = "MOPUB_INTERSTITIAL_ID";
 	
-	protected void initMobpubView()
-	{
+	protected Handler intersHandler = null;
+	
+	protected void initMobpubView() {
 		ad = new MoPubView(getContext());
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		ad.setLayoutParams(params);
@@ -66,7 +67,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 				
-				AdlibConfig.getInstance().imp(Type.BANNER, "MOPUB");
+				AdlibConfig.getInstance().imp(SubAdlibAdViewMopub.this, Type.BANNER);
 			}
 			
 			@Override
@@ -77,7 +78,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 			
 			@Override
 			public void onBannerClicked(MoPubView banner) {
-				AdlibConfig.getInstance().clk(Type.BANNER, "MOPUB");
+				AdlibConfig.getInstance().clk(SubAdlibAdViewMopub.this, Type.BANNER);
 			}
 
 			@Override
@@ -106,8 +107,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		if(ad == null)
 			initMobpubView();
@@ -123,10 +123,9 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					failed();
 				}
 			}
@@ -135,10 +134,8 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -147,20 +144,16 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{		
+	public void onResume() {		
         super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause() {
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			ad.destroy();
 			ad = null;
 		}
@@ -171,9 +164,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 	}
 
 	// 전면광고가 호출되는 경우
-	static Handler intersHandler = null;
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		final MoPubInterstitial mInterstitial;
 		mInterstitial = new MoPubInterstitial((Activity) ctx, mopubInterstitialID);
 		
@@ -183,8 +174,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 
 			@Override
 			public void onInterstitialLoaded(MoPubInterstitial interstitial) {
-				try
-				{
+				try{
 					if(intersHandler != null){							
 	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "MOPUB"));
 	 				}
@@ -192,59 +182,50 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore  {
 					if(mInterstitial.isReady()){
 						mInterstitial.show();
 					}
-				}
-				catch(Exception e)
-				{
+				}catch(Exception e){
 				}
 			}
 
 			@Override
 			public void onInterstitialFailed( MoPubInterstitial interstitial, MoPubErrorCode errorCode) {
-				try
-				{
+				try{
 					if(intersHandler != null){
 	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "MOPUB"));
 	 				}
+					
+					if(mInterstitial != null){
+						mInterstitial.destroy();
+					}
+				}catch(Exception e){
 				}
-				catch(Exception e)
-				{
-				}
-				
-				// release.
-				mInterstitial.destroy();									
-				
 			}
 
 			@Override
 			public void onInterstitialShown(MoPubInterstitial interstitial) {
-				AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "MOPUB");
+				AdlibConfig.getInstance().imp(SubAdlibAdViewMopub.this, Type.INTERSTITIAL);
 			}
 
 			@Override
 			public void onInterstitialClicked(MoPubInterstitial interstitial) {
-				AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "MOPUB");
+				AdlibConfig.getInstance().clk(SubAdlibAdViewMopub.this, Type.INTERSTITIAL);
 			}
 
 			@Override
 			public void onInterstitialDismissed(MoPubInterstitial interstitial) {
-				try
-				{
+				try{
 					if(intersHandler != null){
 	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "MOPUB"));
 	 				}
-				}
-				catch(Exception e)
-				{
-				}
-
-				
-				if(mInterstitial != null)
-				{
-					mInterstitial.destroy();
+					
+					if(mInterstitial != null){
+						mInterstitial.destroy();
+					}
+				}catch(Exception e){
 				}
 			}
 	    	
 	    });
+	    
 	    mInterstitial.load();	
 	}
 }

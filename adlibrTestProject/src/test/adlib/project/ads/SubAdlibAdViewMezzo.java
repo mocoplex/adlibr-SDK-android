@@ -36,13 +36,13 @@ import android.view.View;
     android:theme="@android:style/Theme.Translucent"/>
  */
 
-public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	
 	protected AdView ad;
 	protected boolean bPassAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
-	String mezzoID = "MEZZO_ID";
+	protected String mezzoID = "MEZZO_ID";
 
 	public SubAdlibAdViewMezzo(Context context) {
 		this(context,null);
@@ -57,11 +57,9 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 			@Override
 			public void onChargeableBannerType(View v, boolean bcharge) {
 				
-				if(ad == v)
-				{
+				if(ad == v){
 					// 무료광고 일 경우 다음광고로 넘깁니다.
-					if(!bcharge)
-					{
+					if(!bcharge){
 						bPassAd = true;
 						failed();
 					}
@@ -71,20 +69,15 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 			@Override
 			public void onFailedToReceive(View v, int errCode) {
 				
-				if(ad == v)
-				{
-					// 광고 수신 성공
-					if(errCode == 0)
-					{
-						if(!bPassAd)
-						{
+				if(ad == v){
+					if(errCode == 0){
+						// 광고 수신 성공
+						if(!bPassAd){
 							queryAd();
 							gotAd();
 						}
-					}
-					// 광고 수신 실패
-					else
-					{
+					}else{
+						// 광고 수신 실패
 						failed();
 					}
 				}
@@ -94,8 +87,7 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bPassAd = false;
 		
 		this.removeAllViews();
@@ -105,10 +97,8 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.StopService();
 		}
@@ -116,30 +106,24 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{
-		if(ad != null)
-		{
+	public void onResume() {
+		if(ad != null){
 			ad.StartService();
 		}
 		
         super.onResume();
 	}
 	
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	public void onPause() {
+		if(ad != null){
 			ad.StopService();
 		}
 		
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.StopService();
 			ad = null;

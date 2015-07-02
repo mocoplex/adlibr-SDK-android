@@ -16,10 +16,6 @@ import net.daum.adam.publisher.AdView.OnAdClosedListener;
 import net.daum.adam.publisher.AdView.OnAdFailedListener;
 import net.daum.adam.publisher.AdView.OnAdLoadedListener;
 import net.daum.adam.publisher.impl.AdError;
-
-import com.mocoplex.adlib.AdlibManager;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -28,14 +24,17 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
+
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	protected net.daum.adam.publisher.AdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADAM ID 를 입력하세요.
-	static String adamID = "ADAM_ID";
-    static String adamInterstitialID = "ADAM_INTERSTITIAL_ID";
+	protected String adamID = "ADAM_ID";
+	protected String adamInterstitialID = "ADAM_INTERSTITIAL_ID";
 
 	public SubAdlibAdViewAdam(Context context) {
 		this(context,null);
@@ -47,8 +46,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		initAdamView();
 	}
 	
-	public void initAdamView()
-	{
+	public void initAdamView() {
 		ad = new net.daum.adam.publisher.AdView(getContext());
 		// 킷캣 디바이스에서 렌더링에 생기는 문제로 인한 예외처리.
 		// 에러표시가 생기면 disalbe check하시고 무시하셔도 무방합니다.
@@ -86,8 +84,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -103,12 +100,12 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					if(ad != null)
 						ad.pause();
+					
 					failed();
 				}
 			}
@@ -117,10 +114,8 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null) {
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -129,28 +124,24 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{		
-		if(ad != null)
-		{
+	public void onResume() {		
+		if(ad != null){
 			ad.resume();
 		}
         
         super.onResume();
 	}
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	
+	public void onPause() {
+		if(ad != null){
 			ad.pause();
 		}
         
         super.onPause();
 	}
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	
+	public void onDestroy() {
+		if(ad != null){
 			ad.destroy();
 			ad = null;
 		}
@@ -158,24 +149,18 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
         super.onDestroy();
 	}
 	
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		AdInterstitial mAdInterstitial = new AdInterstitial((Activity)ctx);
  	    mAdInterstitial.setClientId(adamInterstitialID);
  	    mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
 
  			@Override
  			public void OnAdLoaded() {
-	 			try
-	 			{
-	 				if(h != null)
-	 				{
+	 			try{
+	 				if(h != null){
 	 					h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADAM"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
  					
  			}
@@ -185,16 +170,11 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
  			@Override
  			public void OnAdFailed(AdError arg0, String arg1) {
  					
-	 			try
-	 			{
-	 				if(h != null)
-	 				{
+	 			try{
+	 				if(h != null){
 	 	 				h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADAM"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
  			}
  	    });
@@ -203,16 +183,11 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
  			@Override
  			public void OnAdClosed() {
  					
-	 			try
-	 			{
-	 				if(h != null)
-	 				{
+	 			try{
+	 				if(h != null){
 	 					h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADAM"));
 	 				}
-	 			}
-	 			catch(Exception e)
-	 			{
-	 					
+	 			}catch(Exception e){
 	 			}
  				
  			}

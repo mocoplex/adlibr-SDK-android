@@ -27,15 +27,17 @@ import android.util.AttributeSet;
 import android.view.View;
 
 // 자세한 세부 내용은 CAULY SDK 개발 문서를 참조해주세요.
-public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.cauly.CaulyAdViewListener  {
+public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.cauly.CaulyAdViewListener {
 
 	protected CaulyAdView ad;
 	protected boolean bGotAd = false;
 	protected boolean isAdAvailable = false;
 	
 	// 여기에 CAULY ID를 입력합니다.
-	static String caulyID = "CAULY_ID";
-	static String caulyInterstitialID = "CAULY_INTERSTITIAL_ID";
+	protected String caulyID = "CAULY_ID";
+	protected String caulyInterstitialID = "CAULY_INTERSTITIAL_ID";
+	
+	protected Handler intersHandler = null;
 	
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -47,8 +49,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		initCaulyView();
 	}
 	
-	public void initCaulyView()
-	{
+	public void initCaulyView() {
 		/* 애니메이션 effect
 		 * LeftSlide(기본) : 왼쪽에서 오른쪽으로 슬라이드 
 		 * RightSlide     : 오른쪽에서 왼쪽으로 슬라이드 
@@ -74,25 +75,18 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		
 		isAdAvailable = true;
 		bGotAd = true;
-		if(isChargeableAd)
-		{
-			try
-			{
-				if(ad != null)
-				{
+		if(isChargeableAd){
+			try{
+				if(ad != null){
 					ad.setVisibility(View.VISIBLE);
 				}
 
 				// 유료광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
-			}
-			catch(Exception e)
-			{
+			}catch(Exception e){
 				failed();
 			}
-		}
-		else
-		{
+		}else{
 			// 무료광고는 보여주지 않습니다.
 			failed();
 		}
@@ -117,8 +111,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -134,10 +127,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					if(ad != null)
 						ad.pause();
 					failed();
@@ -148,10 +140,8 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			ad.setVisibility(View.GONE);
 			this.removeView(ad);
 			ad.destroy();
@@ -162,10 +152,8 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	}
 
 	// destroy ad view
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -174,13 +162,10 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		super.onDestroy();
 	}
 	
-	public void onResume()
-	{
-		if(ad != null)
-		{
+	public void onResume() {
+		if(ad != null){
 			// 최초 리스너 응답을 받지 못한 상태에서 액티비티 전환이 일어나면 광고뷰가 보이지 않는 현상을 방지합니다.
-			if(!isAdAvailable)
-			{
+			if(!isAdAvailable){
 				this.removeView(ad);
 				ad.destroy();
 				ad = null;
@@ -193,68 +178,51 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 
 		super.onResume();
 	}
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	
+	public void onPause() {
+		if(ad != null){
 			ad.pause();
 		}
 
 		super.onPause();
 	}
 	
-	static Handler intersHandler = null;
-	static CaulyInterstitialAdListener intersListener = new CaulyInterstitialAdListener() {
+	CaulyInterstitialAdListener intersListener = new CaulyInterstitialAdListener() {
 
 		@Override
 		public void onReceiveInterstitialAd(CaulyInterstitialAd ad, boolean arg1) {
 			
-				try
-				{
-	 				if(intersHandler != null)
-	 				{
-	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "CAULY"));
-	 				}
-				}
-				catch(Exception e)
-				{
-					
-				}
-			
-			ad.show();
+			try{
+ 				if(intersHandler != null){
+ 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "CAULY"));
+ 				}
+ 				
+ 				ad.show();
+			}catch(Exception e){
+			}
 		}
 		
 		@Override
 		public void onFailedToReceiveInterstitialAd(CaulyInterstitialAd ad, int errCode, String errMsg) {
 			
-				try
-				{
-	 				if(intersHandler != null)
-	 				{
-	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "CAULY"));
-	 				}
-				}
-				catch(Exception e)
-				{
-					
-				}
+			try{
+ 				if(intersHandler != null){
+ 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "CAULY"));
+ 				}
+			}catch(Exception e){
+			}
 		}
 		
 		@Override
 		public void onClosedInterstitialAd(CaulyInterstitialAd ad) {
 			
-				try
-				{
-	 				// 전면광고 닫혔다.
-	 				if(intersHandler != null)
-	 				{
-	 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "CAULY"));
-	 				} 				   		 					
-				}
-				catch(Exception e)
-				{
-					
-				}					
+			try{
+ 				// 전면광고 닫혔다.
+ 				if(intersHandler != null){
+ 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "CAULY"));
+ 				} 				   		 					
+			}catch(Exception e){
+			}					
 			
 		}
 		
@@ -264,8 +232,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		}
     };
 	
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		// CaulyAdInfo 생성
 	    CaulyAdInfo adInfo = new CaulyAdInfoBuilder(caulyInterstitialID).build();
 	    // 전면 광고 생성

@@ -45,8 +45,7 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
         
         View.OnClickListener cl;
         
-        cl = new View.OnClickListener()
-        {
+        cl = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 			
@@ -72,8 +71,7 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
         };
         this.findViewById(R.id.btn1).setOnClickListener(cl);
         
-        cl = new View.OnClickListener()
-        {
+        cl = new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				

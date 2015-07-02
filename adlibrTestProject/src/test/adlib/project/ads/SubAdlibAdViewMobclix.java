@@ -31,7 +31,7 @@ import android.view.Gravity;
 	android:hardwareAccelerated="true" />
  */
 
-public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore {
 	
 	protected MobclixAdView ad;
 	protected boolean bGotAd = false;
@@ -46,8 +46,7 @@ public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
 		initMobclixView();
 	}
 	
-	public void initMobclixView()
-	{
+	public void initMobclixView() {
 		ad = new MobclixMMABannerXLAdView(getContext());
 		
 		ad.addMobclixAdViewListener(new MobclixAdViewListener() {
@@ -102,8 +101,7 @@ public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -119,10 +117,9 @@ public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					failed();
 				}
 			}
@@ -131,10 +128,8 @@ public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			ad.pause();
 			this.removeView(ad);
 			ad = null;
@@ -143,30 +138,24 @@ public class SubAdlibAdViewMobclix extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{
-		if(ad != null)
-		{
+	public void onResume() {
+		if(ad != null){
 			ad.getAd();
 		}
 		
         super.onResume();
 	}
 	
-	public void onPause()
-	{
-		if(ad != null)
-		{
+	public void onPause() {
+		if(ad != null){
 			ad.pause();
 		}
 		
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			ad.pause();
 			this.removeView(ad);
 			ad = null;

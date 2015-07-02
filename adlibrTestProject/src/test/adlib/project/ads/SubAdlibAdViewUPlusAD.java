@@ -35,9 +35,9 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 UPLUS ID 를 입력하세요.
-	static String uplusID = "UPLUS_ID";
-	static String uplusInterstitialID = "UPLUS_INTERSTITIAL_ID";
-	static final int REQUEST_CODE = 101;
+	protected String uplusID = "UPLUS_ID";
+	protected String uplusInterstitialID = "UPLUS_INTERSTITIAL_ID";
+	protected int REQUEST_CODE = 101;
     
 	public SubAdlibAdViewUPlusAD(Context context) {
 		this(context,null);
@@ -50,8 +50,7 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 		initUPlusAdView();
 	}
 	
-	public void initUPlusAdView()
-	{
+	public void initUPlusAdView() {
 		ad = new LGUDMPAdView(getContext());
 		ad.setSlotID(uplusID);
 		ad.setHouseAD(false);
@@ -100,8 +99,7 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
     
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -117,10 +115,9 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					if(ad != null)
 					{
 						SubAdlibAdViewUPlusAD.this.removeView(ad);
@@ -135,10 +132,8 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	}
 	
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
         	this.removeView(ad);
         	ad.destroy();
         	ad = null;
@@ -147,20 +142,16 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
         super.clearAdView();
 	}
 	
-	public void onResume()
-	{
+	public void onResume() {
         super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause() {
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			ad.destroy();
 			ad = null;
 		}
@@ -179,8 +170,7 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	 *		      super.onActivityResult(requestCode, resultCode, data);
 	 *        }
 	 */
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		LGUDMPAdView.fullscreenImage((Activity)ctx, REQUEST_CODE, uplusInterstitialID, false, null);
 	}
 }

@@ -43,11 +43,11 @@ public class AdlibTestProjectActivity5 extends AdlibActivity {
 			                        break;
 			                    // 전면배너 스케줄링 사용시, 각각의 플랫폼의 수신 실패 이벤트를 받습니다.
 			                    case AdlibManager.DID_ERROR:
-			                    	Toast.makeText(AdlibTestProjectActivity5.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
 			                        Log.d("ADLIBr", "[Interstitial] onFailedToReceiveAd " + (String)message.obj);
 			                        break;
 			                    // 전면배너 스케줄로 설정되어있는 모든 플랫폼의 수신이 실패했을 경우 이벤트를 받습니다.
 			                    case AdlibManager.INTERSTITIAL_FAILED:
+			                    	Toast.makeText(AdlibTestProjectActivity5.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
 			                    	Log.d("ADLIBr", "[Interstitial] All Failed.");
 			                    	break;
 			                    case AdlibManager.INTERSTITIAL_CLOSED:

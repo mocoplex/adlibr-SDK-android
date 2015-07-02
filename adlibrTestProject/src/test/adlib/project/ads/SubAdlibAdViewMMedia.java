@@ -43,14 +43,16 @@ import com.mocoplex.adlib.AdlibConfig.Type;
  </activity>
  */
 
-public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 	
 	protected MMAdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
-	static String mMediaID = "MILLENNIALMEDIA_ID";
-	static String mMediaInterstitialID = "MILLENNIALMEDIA_INTERSTITIAL_ID";
+	protected String mMediaID = "MILLENNIALMEDIA_ID";
+	protected String mMediaInterstitialID = "MILLENNIALMEDIA_INTERSTITIAL_ID";
+	
+	protected Handler intersHandler = null;
 
 	public SubAdlibAdViewMMedia(Context context) {
 		this(context,null);
@@ -94,7 +96,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 
 			@Override
 			public void onSingleTap(MMAd mmAd) {
-				AdlibConfig.getInstance().clk(Type.BANNER, "MMEDIA");
+				// 미디에이션 통계 정보
+				AdlibConfig.getInstance().clk(SubAdlibAdViewMMedia.this, Type.BANNER);
 			}
 
 			@Override
@@ -104,7 +107,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 				
-				AdlibConfig.getInstance().imp(Type.BANNER, "MMEDIA");
+				// 미디에이션 통계 정보
+				AdlibConfig.getInstance().imp(SubAdlibAdViewMMedia.this, Type.BANNER);
 			}
 
 			@Override
@@ -123,8 +127,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.	
-	public void query()
-	{
+	public void query() {
 		bGotAd = false;
 		
 		if(ad == null)
@@ -140,10 +143,9 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 
 			@Override
 			public void run() {
-				if(bGotAd)
+				if(bGotAd){
 					return;
-				else
-				{
+				}else{
 					failed();
 				}
 			}
@@ -152,10 +154,8 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 	}
 
 	// 광고뷰가 사라지는 경우 호출됩니다. 
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
 			this.removeView(ad);
 			ad = null;
 		}
@@ -163,20 +163,16 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 		super.clearAdView();
 	}
 	
-	public void onResume()
-	{       
+	public void onResume(){       
         super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause(){
         super.onPause();
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy(){
+		if(ad != null){
 			this.removeView(ad);
 			ad = null;
 		}
@@ -184,9 +180,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
         super.onDestroy();
 	}
 	
-	static Handler intersHandler = null;
-	public static void loadInterstitial(Context ctx, final Handler h)
-	{
+	public void loadInterstitial(Context ctx, final Handler h) {
 		final MMInterstitial interstitial = new MMInterstitial(ctx);
 		MMRequest request = new MMRequest();
 		interstitial.setMMRequest(request);
@@ -198,21 +192,17 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 				
 				@Override
 				public void MMAdOverlayClosed(MMAd mmAd) {
-					try
-					{
+					try{
 						if(intersHandler != null){
 		 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "MMEDIA"));
 		 				}
-					}
-					catch(Exception e)
-					{
+					}catch(Exception e){
 					}
 				}
 				
 				@Override
 				public void requestCompleted(MMAd mmAd) {
-					try
-					{
+					try{
 						if(interstitial.isAdAvailable()){
 							
 							if(intersHandler != null){
@@ -221,30 +211,27 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore  {
 							
 							interstitial.display();
 							
-							AdlibConfig.getInstance().imp(Type.INTERSTITIAL, "MMEDIA");
+							// 미디에이션 통계 정보
+							AdlibConfig.getInstance().imp(SubAdlibAdViewMMedia.this, Type.INTERSTITIAL);
 						}
-					}
-					catch(Exception e)
-					{
+					}catch(Exception e){
 					}
 				}
 
 				@Override
 				public void requestFailed(MMAd mmAd, MMException exception) {
-					try
-					{
+					try{
 						if(intersHandler != null){
 		 					intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "MMEDIA"));
 		 				}
-					}
-					catch(Exception e)
-					{
+					}catch(Exception e){
 					}
 				}
 				
 				@Override
 				public void onSingleTap(MMAd mmAd) {
-					AdlibConfig.getInstance().clk(Type.INTERSTITIAL, "MMEDIA");
+					// 미디에이션 통계 정보
+					AdlibConfig.getInstance().clk(SubAdlibAdViewMMedia.this, Type.INTERSTITIAL);
 				}
 			}
 		);
