@@ -5,6 +5,6 @@ public class AdlibTestProjectConstans {
 	public static String ADLIB_API_KEY = "53858972e4b0ef94c0636d85";
 	
 	// false : 상용 광고, true : 테스트 광고
-	public static boolean ADLIB_TEST_MODE = false;
+	public static boolean ADLIB_TEST_MODE = true;
 
 }
