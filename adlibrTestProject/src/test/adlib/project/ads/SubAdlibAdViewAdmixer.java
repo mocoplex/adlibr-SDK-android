@@ -34,7 +34,7 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	
 	// 여기에 AdMixer ID 를 입력하세요.
 	protected String admixerID = "AdMixer_ID";
-	protected String admixerInterstitialID = "AdMixer_Interstitial_ID";
+	protected static String admixerInterstitialID = "AdMixer_Interstitial_ID";
 
 	public SubAdlibAdViewAdmixer(Context context) {
 		this(context,null);
@@ -148,7 +148,7 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
         super.onDestroy();
 	}
 	
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		AdInfo adInfo = new AdInfo(admixerInterstitialID); // AxKey 값 설정
 		adInfo.setInterstitialTimeout(0);   // 초단위로 전면 광고 타이아웃 설정(기본값 : 0, 0 이면 서버 지정 시간으로 처리됨)
 		adInfo.setMaxRetryCountInSlot(-1);  // 리로드 시간 내에 전체 AdNetwork 반복 최대 횟수(-1 : 무한, 0 : 반복 없음, n : n번 반복)

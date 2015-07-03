@@ -41,6 +41,8 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 	
 	// 여기에 AMAZON ID 를 입력하세요.
 	protected String amazonID = "AMAZON_ID";
+	
+	private AdTargetingOptions adOptions = new AdTargetingOptions();
     
 	public SubAdlibAdViewAmazon(Context context) {
 		this(context,null);
@@ -53,8 +55,7 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 		initAmazonView();
 	}
 	
-	public void initAmazonView()
-	{
+	public void initAmazonView() {
 		// For debugging purposes enable logging, but disable for production builds
         AdRegistration.enableLogging(false);
         // For debugging purposes flag all ad requests as tests, but set to false for production builds
@@ -106,12 +107,9 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 		this.setGravity(Gravity.CENTER);
 	}
 	
-	private AdTargetingOptions adOptions = new AdTargetingOptions();
-	
 	// 스케줄러에의해 자동으로 호출됩니다.
 	// 실제로 광고를 보여주기 위하여 요청합니다.
-	public void query()
-	{
+	public void query() {
 		if(ad == null)
 			initAmazonView();
 		
@@ -128,11 +126,9 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 			public void run() {
 				if(bGotAd)
 					return;
-				else
-				{
+				else{
 					failed();
-					if(ad != null)
-					{
+					if(ad != null){
 						SubAdlibAdViewAmazon.this.removeView(ad);
 						ad.destroy();
 						ad = null;
@@ -144,10 +140,8 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 		}, 3000);
 	}
 	
-	public void onDestroy()
-	{
-		if(ad != null)
-		{
+	public void onDestroy() {
+		if(ad != null){
 			this.removeView(ad);
 			ad.destroy();
 			ad = null;
@@ -156,23 +150,19 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 		super.onDestroy();
 	}
 	
-	public void clearAdView()
-	{
-		if(ad != null)
-		{
+	public void clearAdView() {
+		if(ad != null){
         	this.removeView(ad);
 		}
 		
         super.clearAdView();
 	}
 	
-	public void onResume()
-	{
+	public void onResume(){
         super.onResume();
 	}
 	
-	public void onPause()
-	{
+	public void onPause(){
         super.onPause();
 	}
 }

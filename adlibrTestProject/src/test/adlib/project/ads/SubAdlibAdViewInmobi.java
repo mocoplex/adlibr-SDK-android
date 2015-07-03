@@ -13,6 +13,15 @@ package test.adlib.project.ads;
 
 import java.util.Map;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
+
 import com.inmobi.commons.InMobi;
 import com.inmobi.monetization.IMBanner;
 import com.inmobi.monetization.IMBannerListener;
@@ -22,16 +31,6 @@ import com.inmobi.monetization.IMInterstitialListener;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.mocoplex.adlib.AdlibConfig.Type;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
-import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -48,9 +47,9 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
 	protected String inmobiKey = "INMOBI_APP_ID";
-	protected String inmobiInterstitialKey = "INMOBI_INTERSTITIAL_ID";
+	protected static String inmobiInterstitialKey = "INMOBI_INTERSTITIAL_ID";
 	
-	protected Handler intersHandler = null;
+	protected static Handler intersHandler = null;
 
 	private int getPixels(int dipValue) {
         Resources r = getResources();
@@ -86,7 +85,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 			@Override
 			public void onBannerInteraction(IMBanner arg0, Map<String, String> arg1) {
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().clk(SubAdlibAdViewInmobi.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewInmobi.this);
 			}
 
 			@Override
@@ -104,7 +103,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 				gotAd();
 				
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().imp(SubAdlibAdViewInmobi.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewInmobi.this);
 			}
 
 			@Override
@@ -186,71 +185,72 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 		super.onPause();
 	}
 	
-	IMInterstitialListener intersListener = new IMInterstitialListener() {
-
-		@Override
-		public void onDismissInterstitialScreen(IMInterstitial arg0) {
-
-			try{
-	 			// 전면광고 닫혔다.
-	 			if(intersHandler != null){
-	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "INMOBI"));
-	 			} 				   		 					
-			}catch(Exception e){
-			}
-		}
-
-		@Override
-		public void onInterstitialFailed(IMInterstitial arg0, IMErrorCode arg1) {
-			
-			try{
-	 			if(intersHandler != null){
-	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "INMOBI"));
-	 			}
-			}catch(Exception e){
-			}
-		}
-
-		@Override
-		public void onInterstitialInteraction(IMInterstitial arg0,
-				Map<String, String> arg1) {
-			// 미디에이션 통계 정보
-			AdlibConfig.getInstance().clk(SubAdlibAdViewInmobi.this, Type.INTERSTITIAL);
-		}
-
-		@Override
-		public void onInterstitialLoaded(IMInterstitial ad) {
-			
-			try{
-	 			if(intersHandler != null){
-	 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "INMOBI"));
-	 			}
-	 			
-	 			// 미디에이션 통계 정보
-	 			AdlibConfig.getInstance().imp(SubAdlibAdViewInmobi.this, Type.INTERSTITIAL);
-	 			
-	 			ad.show();
-			}catch(Exception e){
-			}
-		}
-
-		@Override
-		public void onLeaveApplication(IMInterstitial arg0) {
-			
-		}
-
-		@Override
-		public void onShowInterstitialScreen(IMInterstitial arg0) {
-			
-		}
-    };
-    
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		InMobi.initialize((Activity) ctx, inmobiInterstitialKey);
 		
 		final IMInterstitial interstitial = new IMInterstitial((Activity) ctx, inmobiInterstitialKey);
 		interstitial.loadInterstitial();
 		intersHandler = h;
+		
+		IMInterstitialListener intersListener = new IMInterstitialListener() {
+
+			@Override
+			public void onDismissInterstitialScreen(IMInterstitial arg0) {
+
+				try{
+		 			// 전면광고 닫혔다.
+		 			if(intersHandler != null){
+		 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.INTERSTITIAL_CLOSED, "INMOBI"));
+		 			} 				   		 					
+				}catch(Exception e){
+				}
+			}
+
+			@Override
+			public void onInterstitialFailed(IMInterstitial arg0, IMErrorCode arg1) {
+				
+				try{
+		 			if(intersHandler != null){
+		 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_ERROR, "INMOBI"));
+		 			}
+				}catch(Exception e){
+				}
+			}
+
+			@Override
+			public void onInterstitialInteraction(IMInterstitial arg0,
+					Map<String, String> arg1) {
+				// 미디에이션 통계 정보
+				AdlibConfig.getInstance().interstitialClk(adlibKey, "INMOBI");
+			}
+
+			@Override
+			public void onInterstitialLoaded(IMInterstitial ad) {
+				
+				try{
+		 			if(intersHandler != null){
+		 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "INMOBI"));
+		 			}
+		 			
+		 			// 미디에이션 통계 정보
+		 			AdlibConfig.getInstance().interstitialImp(adlibKey, "INMOBI");
+		 			
+		 			ad.show();
+				}catch(Exception e){
+				}
+			}
+
+			@Override
+			public void onLeaveApplication(IMInterstitial arg0) {
+				
+			}
+
+			@Override
+			public void onShowInterstitialScreen(IMInterstitial arg0) {
+				
+			}
+	    };
+		
 		interstitial.setIMInterstitialListener(intersListener);
 	}
 }

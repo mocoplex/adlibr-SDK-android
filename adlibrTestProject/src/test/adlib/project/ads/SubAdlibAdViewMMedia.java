@@ -30,7 +30,6 @@ import com.millennialmedia.android.RequestListener.RequestListenerImpl;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.mocoplex.adlib.AdlibConfig.Type;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -50,9 +49,9 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
 	protected String mMediaID = "MILLENNIALMEDIA_ID";
-	protected String mMediaInterstitialID = "MILLENNIALMEDIA_INTERSTITIAL_ID";
+	protected static String mMediaInterstitialID = "MILLENNIALMEDIA_INTERSTITIAL_ID";
 	
-	protected Handler intersHandler = null;
+	protected static Handler intersHandler = null;
 
 	public SubAdlibAdViewMMedia(Context context) {
 		this(context,null);
@@ -97,7 +96,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 			@Override
 			public void onSingleTap(MMAd mmAd) {
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().clk(SubAdlibAdViewMMedia.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMMedia.this);
 			}
 
 			@Override
@@ -108,7 +107,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 				gotAd();
 				
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().imp(SubAdlibAdViewMMedia.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewMMedia.this);
 			}
 
 			@Override
@@ -180,7 +179,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
         super.onDestroy();
 	}
 	
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		final MMInterstitial interstitial = new MMInterstitial(ctx);
 		MMRequest request = new MMRequest();
 		interstitial.setMMRequest(request);
@@ -212,7 +211,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 							interstitial.display();
 							
 							// 미디에이션 통계 정보
-							AdlibConfig.getInstance().imp(SubAdlibAdViewMMedia.this, Type.INTERSTITIAL);
+							AdlibConfig.getInstance().interstitialImp(adlibKey, "MMEDIA");
 						}
 					}catch(Exception e){
 					}
@@ -231,7 +230,7 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 				@Override
 				public void onSingleTap(MMAd mmAd) {
 					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().clk(SubAdlibAdViewMMedia.this, Type.INTERSTITIAL);
+					AdlibConfig.getInstance().interstitialClk(adlibKey, "MMEDIA");
 				}
 			}
 		);

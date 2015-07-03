@@ -34,7 +34,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	
 	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
 	protected String tAdId = "T_AD_ID";
-	protected String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
+	protected static String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
     // 스케줄 설정에서 T-AD만 사용하신다면 반드시 아래 ad.setRefreshInterval(0); refresh interval을 0이 아닌 다른 값으로 변경해 주세요.
 	
 	public SubAdlibAdViewTAD(Context context) {
@@ -209,7 +209,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 		super.onDestroy();
 	}
 	
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		final AdInterstitial adInterstitial = new AdInterstitial((Activity) ctx);
 	    adInterstitial.setClientId(tAdInterstitialId);
 	    adInterstitial.setSlotNo(AdSlot.INTERSTITIAL);

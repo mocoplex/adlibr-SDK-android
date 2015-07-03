@@ -20,7 +20,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.mocoplex.adlib.AdlibConfig;
-import com.mocoplex.adlib.AdlibConfig.Type;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -40,7 +39,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 	
 	// 여기에 ADMOB ID 를 입력하세요. (여기서 ADMOB ID는 AD_UNIT_ID, 광고 단위 ID를 지칭합니다.)
 	protected String admobID = "ADMOB_ID";
-	protected String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
+	protected static String admobInterstitialID = "ADMOB_INTERSTITIAL_ID";
     
     private AdRequest request = new AdRequest.Builder().build();
     
@@ -81,7 +80,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 				gotAd();
 				
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().imp(SubAdlibAdViewAdmob.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewAdmob.this);
 			}
 			
 			@Override
@@ -91,7 +90,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			@Override
 			public void onAdLeftApplication() {
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewAdmob.this);
 			}
 		});
 	}
@@ -155,7 +154,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
         super.onPause();
 	}
 	
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		// Create the interstitial
 		final InterstitialAd interstitial = new InterstitialAd(ctx);
 		interstitial.setAdUnitId(admobInterstitialID);
@@ -198,7 +197,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			 			}
 						
 						// 미디에이션 통계 정보
-						AdlibConfig.getInstance().imp(SubAdlibAdViewAdmob.this, Type.INTERSTITIAL);
+						AdlibConfig.getInstance().interstitialImp(adlibKey, "ADMOB");
 						
 						interstitial.show();
 					}
@@ -214,7 +213,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			public void onAdLeftApplication() {
 				try{
 					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.INTERSTITIAL);
+					AdlibConfig.getInstance().interstitialClk(adlibKey, "ADMOB");
 				}catch(Exception e){
 				}
 			}

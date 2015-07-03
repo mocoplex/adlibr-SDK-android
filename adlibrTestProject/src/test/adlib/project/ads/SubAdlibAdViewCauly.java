@@ -35,9 +35,9 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 	
 	// 여기에 CAULY ID를 입력합니다.
 	protected String caulyID = "CAULY_ID";
-	protected String caulyInterstitialID = "CAULY_INTERSTITIAL_ID";
+	protected static String caulyInterstitialID = "CAULY_INTERSTITIAL_ID";
 	
-	protected Handler intersHandler = null;
+	protected static Handler intersHandler = null;
 	
 	public SubAdlibAdViewCauly(Context context) {
 		this(context,null);
@@ -187,7 +187,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		super.onPause();
 	}
 	
-	CaulyInterstitialAdListener intersListener = new CaulyInterstitialAdListener() {
+	static CaulyInterstitialAdListener intersListener = new CaulyInterstitialAdListener() {
 
 		@Override
 		public void onReceiveInterstitialAd(CaulyInterstitialAd ad, boolean arg1) {
@@ -232,7 +232,7 @@ public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.c
 		}
     };
 	
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		// CaulyAdInfo 생성
 	    CaulyAdInfo adInfo = new CaulyAdInfoBuilder(caulyInterstitialID).build();
 	    // 전면 광고 생성

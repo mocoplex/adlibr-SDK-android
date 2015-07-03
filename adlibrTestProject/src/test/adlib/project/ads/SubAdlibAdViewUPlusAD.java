@@ -29,15 +29,15 @@ import android.util.AttributeSet;
  	android:configChanges="keyboard|keyboardHidden|orientation"/>
  */
 
-public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
+public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore {
 	
 	protected LGUDMPAdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 UPLUS ID 를 입력하세요.
 	protected String uplusID = "UPLUS_ID";
-	protected String uplusInterstitialID = "UPLUS_INTERSTITIAL_ID";
-	protected int REQUEST_CODE = 101;
+	protected static String uplusInterstitialID = "UPLUS_INTERSTITIAL_ID";
+	protected static int REQUEST_CODE = 101;
     
 	public SubAdlibAdViewUPlusAD(Context context) {
 		this(context,null);
@@ -170,7 +170,7 @@ public class SubAdlibAdViewUPlusAD extends SubAdlibAdViewCore  {
 	 *		      super.onActivityResult(requestCode, resultCode, data);
 	 *        }
 	 */
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		LGUDMPAdView.fullscreenImage((Activity)ctx, REQUEST_CODE, uplusInterstitialID, false, null);
 	}
 }

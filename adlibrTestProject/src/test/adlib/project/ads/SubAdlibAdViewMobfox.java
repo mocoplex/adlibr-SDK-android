@@ -21,7 +21,6 @@ import com.adsdk.sdk.AdListener;
 import com.adsdk.sdk.AdManager;
 import com.adsdk.sdk.banner.AdView;
 import com.mocoplex.adlib.AdlibConfig;
-import com.mocoplex.adlib.AdlibConfig.Type;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -48,9 +47,9 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 	
 	// 여기에 MOBFOX ID 를 입력하세요.
 	protected String mofoxID = "MOBFOX_ID";
-	protected String mofoxInterstitialID = "MOBFOX_INTERSTITIAL_ID";
+	protected static String mofoxInterstitialID = "MOBFOX_INTERSTITIAL_ID";
     
-	protected Handler intersHandler = null;
+	protected static Handler intersHandler = null;
 	
 	public SubAdlibAdViewMobfox(Context context) {
 		this(context,null);		
@@ -77,7 +76,7 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 			@Override
 			public void adClicked() {
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().clk(SubAdlibAdViewMobfox.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMobfox.this);
 			}
 
 			@Override
@@ -92,7 +91,7 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 				gotAd();
 				
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().imp(SubAdlibAdViewMobfox.this, Type.BANNER);
+				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewMobfox.this);
 			}
 
 			@Override
@@ -170,7 +169,7 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 
 	
 	// 전면광고가 호출되는 경우
-	public void loadInterstitial(Context ctx, final Handler h) {
+	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		final AdManager mManager;
 		mManager = new AdManager(ctx, url, mofoxInterstitialID, true);
 		
@@ -185,7 +184,7 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 			@Override
 			public void adClicked() {
 				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().clk(SubAdlibAdViewMobfox.this, Type.INTERSTITIAL);
+				AdlibConfig.getInstance().interstitialClk(adlibKey, "MOBFOX");
 			}
 
 			@Override
@@ -211,7 +210,7 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 		 				}
 						
 						// 미디에이션 통계 정보
-						AdlibConfig.getInstance().imp(SubAdlibAdViewMobfox.this, Type.INTERSTITIAL);
+						AdlibConfig.getInstance().interstitialImp(adlibKey, "MOBFOX");
 						
 						mManager.showAd();
 					}catch(Exception e){
