@@ -44,7 +44,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
     
     private AdRequest request = new AdRequest.Builder().build();
     
-	public SubAdlibAdViewAdmob(Context context) {
+    public SubAdlibAdViewAdmob(Context context) {
 		this(context,null);
 	}
 	
@@ -86,10 +86,13 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			
 			@Override
 			public void onAdOpened() {
+			}
+			
+			@Override
+			public void onAdLeftApplication() {
 				// 미디에이션 통계 정보
 				AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.BANNER);
 			}
-			
 		});
 	}
 	
@@ -205,6 +208,10 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			
 			@Override
 			public void onAdOpened() {
+			}
+			
+			@Override
+			public void onAdLeftApplication() {
 				try{
 					// 미디에이션 통계 정보
 					AdlibConfig.getInstance().clk(SubAdlibAdViewAdmob.this, Type.INTERSTITIAL);
