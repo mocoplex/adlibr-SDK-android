@@ -183,6 +183,12 @@
             android:configChanges="orientation"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity8"
+            android:configChanges="orientation"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -46,7 +46,6 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 	protected static String mopubInterstitialID = "MOPUB_INTERSTITIAL_ID";
 	
 	protected static Handler intersHandler = null;
-	protected static MoPubInterstitial mInterstitial = null;
 	
 	protected void initMobpubView() {
 		ad = new MoPubView(getContext());
@@ -160,10 +159,6 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 			ad = null;
 		}
 		
-		if(mInterstitial != null){
-			mInterstitial.destroy();
-		}
-		
 		this.removeAllViews();
 		
         super.onDestroy();
@@ -171,9 +166,7 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 
 	// 전면광고가 호출되는 경우
 	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
-		if(mInterstitial == null){
-			mInterstitial = new MoPubInterstitial((Activity) ctx, mopubInterstitialID);
-		}
+		final MoPubInterstitial mInterstitial = new MoPubInterstitial((Activity) ctx, mopubInterstitialID);
 		
 		intersHandler = h;
 		
