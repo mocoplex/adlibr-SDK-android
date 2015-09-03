@@ -136,8 +136,12 @@
         <activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation"/>
         <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
 
-        <!-- 기본 권한 추가 끝 -->
+        <!-- TNK - 광고 노출을 위해 필요한 선언입니다. -->
+        <meta-data android:name="tnkad_app_id" android:value="발급받은 TNK App-ID를 입력해주세요." />
+        <activity android:name="com.tnkfactory.ad.AdWallActivity" />
+        <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
 
+        <!-- 기본 권한 추가 끝 -->
 
         <activity
             android:name=".AdlibTestProjectActivity"
