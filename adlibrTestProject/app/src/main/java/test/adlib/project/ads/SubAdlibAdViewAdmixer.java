@@ -19,12 +19,14 @@ import com.admixer.InterstitialAd;
 import com.admixer.InterstitialAdListener;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.mocoplex.adlib.util.LogUtil;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
@@ -70,13 +72,15 @@ public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 
 			@Override
 			public void onReceivedAd(String arg0, AdView arg1) {
+				Log.d("ADMIXER", "[B_ADMIXER] onReceiveAd ");
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
 			}
 		
 		});
-		ad.setAdapterOption(AdAdapter.ADAPTER_CAULY, "allow_call", "yes"); // Cauly 콜 광고 여부 설정
+//		ad.setAdapterOption(AdAdapter.ADAPTER_CAULY, "allow_call", "yes"); // Cauly 콜 광고 여부 설정
+		ad.setAdapterOption(AdAdapter.ADAPTER_ADMIXER_RTB, "bannerHeight", "fixed");
 		ad.setAlwaysShowAdView(false); // 광고 로딩 전에도 영역을 차지할 것인지 설정(false – 기본값)
 		
 		this.addView(ad);

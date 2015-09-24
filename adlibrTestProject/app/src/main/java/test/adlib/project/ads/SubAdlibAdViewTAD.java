@@ -6,10 +6,19 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.10.1
+ * confirmed compatible with T ad SDK 3.11.0
  */
 
 package test.adlib.project.ads;
+
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.skplanet.tad.AdInterstitial;
+import com.skplanet.tad.AdInterstitialListener;
+import com.skplanet.tad.AdListener;
+import com.skplanet.tad.AdRequest.ErrorCode;
+import com.skplanet.tad.AdView.AnimationType;
+import com.skplanet.tad.AdSlot;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,23 +27,14 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import com.mocoplex.adlib.AdlibManager;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.skplanet.tad.AdInterstitial;
-import com.skplanet.tad.AdInterstitialListener;
-import com.skplanet.tad.AdListener;
-import com.skplanet.tad.AdRequest.ErrorCode;
-import com.skplanet.tad.AdSlot;
-import com.skplanet.tad.AdView.AnimationType;
-
 public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	
 	protected com.skplanet.tad.AdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 T-AD 에서 발급받은 id 를 입력하세요.
-	protected String tAdId = "T_AD_ID";
-	protected static String tAdInterstitialId = "T_AD_INTERSTITIAL_ID";
+	protected String tAdId = "Tad_ID";
+	protected static String tAdInterstitialId = "Tad_Interstitial_ID";
     // 스케줄 설정에서 T-AD만 사용하신다면 반드시 아래 ad.setRefreshInterval(0); refresh interval을 0이 아닌 다른 값으로 변경해 주세요.
 	
 	public SubAdlibAdViewTAD(Context context) {
@@ -74,7 +74,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 		 * useBackFill 속성을 true 로 설정하면 각 광고마다 광고주가 설정한 배경색이 그려지고 false 인 경우 투명(0x00000000)으로 나타납니다. */
 		ad.setUseBackFill(true);
 		// TestMode 를 정합니다. true 인경우 test 광고가 수신됩니다.
-		ad.setTestMode(false);
+		ad.setTestMode(true);
 		ad.setListener(new AdListener(){
 			
 			@Override
@@ -214,7 +214,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	    adInterstitial.setClientId(tAdInterstitialId);
 	    adInterstitial.setSlotNo(AdSlot.INTERSTITIAL);
 	    // TestMode 를 정합니다. true 인 경우 test 광고가 수신됩니다.
-	    adInterstitial.setTestMode(false);
+	    adInterstitial.setTestMode(true);
 	    // 광고가 노출된 후 5 초 동안 사용자의 반응이 없을 경우 광고 창을 자동으로 닫을 것인지를 설정합니다.
 	    adInterstitial.setAutoCloseWhenNoInteraction(false);
 	    // 광고가 노출된 후 랜딩 액션에 인해 다른 App 으로 전환 시 광고 창을 자동으로 닫을 것인지를 설정합니다.

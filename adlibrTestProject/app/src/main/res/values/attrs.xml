@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 본 설정은 MAN(Mezzo Media Ad)를 위한 설정입니다. -->
+<resources>
+	<declare-styleable name="com.mapps.android.view.AdView">
+		<attr name="applicationID" format ="string" />
+		<attr name="backgroundStretch" format="integer" />
+		<attr name="locationType" format="integer" />
+	</declare-styleable>
+	<declare-styleable name="com.mapps.android.view.FloatingADView">
+		<attr name="appID" format ="string" />
+	</declare-styleable>
+	<declare-styleable name="com.mapps.android.view.FlexibleAdView">
+		<attr name="app_ID" format ="string" />
+	</declare-styleable>
+	<declare-styleable name="com.mapps.android.view.EndingAdView">
+		<attr name="ap_ID" format ="string" />
+	</declare-styleable>
+</resources>

@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with Inmobi SDK 4.5.3
+ * confirmed compatible with Inmobi SDK 4.5.6
  */
 
 package test.adlib.project.ads;
@@ -46,8 +46,8 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	protected boolean bGotAd = false;
 
 	// 여기에 인모비에서 발급받은 key 를 입력하세요.
-	protected String inmobiKey = "INMOBI_APP_ID";
-	protected static String inmobiInterstitialKey = "INMOBI_INTERSTITIAL_ID";
+	protected String inmobiKey = "INMOBI_ID";
+	protected static String inmobiInterstitialKey = "INMOBI_Interstitial_ID";
 	
 	protected static Handler intersHandler = null;
 

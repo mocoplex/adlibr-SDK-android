@@ -11,21 +11,21 @@
 
 package test.adlib.project.ads;
 
+import net.daum.adam.publisher.AdInterstitial;
+import net.daum.adam.publisher.AdView.OnAdClosedListener;
+import net.daum.adam.publisher.AdView.OnAdFailedListener;
+import net.daum.adam.publisher.AdView.OnAdLoadedListener;
+import net.daum.adam.publisher.impl.AdError;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-
-import net.daum.adam.publisher.AdInterstitial;
-import net.daum.adam.publisher.AdView.OnAdClosedListener;
-import net.daum.adam.publisher.AdView.OnAdFailedListener;
-import net.daum.adam.publisher.AdView.OnAdLoadedListener;
-import net.daum.adam.publisher.impl.AdError;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
@@ -33,8 +33,8 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADAM ID 를 입력하세요.
-	protected String adamID = "ADAM_ID";
-	protected static String adamInterstitialID = "ADAM_INTERSTITIAL_ID";
+	protected String adamID = "Adam_ID";
+	protected static String adamInterstitialID = "Adam_Interstitial_ID";
 
 	public SubAdlibAdViewAdam(Context context) {
 		this(context,null);

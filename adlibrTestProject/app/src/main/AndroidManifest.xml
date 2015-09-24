@@ -1,6 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="test.adlib.project">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="test.adlib.project"
+    android:versionCode="1"
+    android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="9" />
+    <uses-sdk  android:minSdkVersion="9"
+        tools:overrideLibrary="com.millennialmedia"/>
 
     <!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,9 +21,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
 
-    <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme"
-        android:name="android.support.multidex.MultiDexApplication">
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name" >
 
         <!-- 구글 광고 ID 사용을 위해 꼭 추가해주세요. -->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
@@ -43,12 +49,6 @@
             android:label="Ad Activity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        <activity
-            android:name="com.skplanet.tad.AdVideoPlayer"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:label="Ad Video Player"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
         <!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
 
         <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
@@ -67,9 +67,6 @@
             android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
             android:hardwareAccelerated="true" />
 
-        <!-- NAVER - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
-
         <!-- SHALLWEAD - 광고 노출을 위해 필요한 선언입니다. -->
         <activity
             android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
@@ -80,17 +77,22 @@
             android:value="발급받은 ShallWeAd 등록키" />
 
         <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="com.millennialmedia.android.MMActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|keyboard" >
-        </activity>
+        <!-- -->
+        <activity
+            android:name="com.millennialmedia.internal.MMActivity"
+            android:theme="@style/Theme.MMTransparent" />
+        <activity android:name="com.millennialmedia.internal.MMIntentWrapperActivity" />
 
-        <!-- MOBCLIX - 광고 노출을 위해 필요한 선언입니다. -->
-        <meta-data android:name="com.mobclix.APPLICATION_ID"
-            android:value="insert-your-application-key" />
-        <activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
+        <!-- AXONIX(MOBCLIX) - 광고 노출을 위해 필요한 선언입니다. -->
+        <!-- Add the application key -->
+        <meta-data android:name="com.axonix.APPLICATION_ID"
+            android:value="발급받은 AXONIX(MOBCLIX) 등록키"/>
+        <!-- Axonix browser activity -->
+        <activity
+            android:name="com.axonix.android.sdk.AxonixBrowserActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:hardwareAccelerated="true" />
+
 
         <!-- UPLUSAD - 광고 노출을 위해 필요한 선언입니다. -->
         <activity android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
@@ -104,9 +106,11 @@
         <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
         <meta-data android:name="DEBUG_MODE" android:value="1" />
         <activity
-            android:name="com.mapps.android.view.InterstitialView" />
+            android:name="com.mapps.android.view.InterstitialView"
+            android:screenOrientation = "portrait"/>
         <activity
-            android:name="com.mapps.android.view.MultimediaView" />
+            android:name="com.mapps.android.view.MultimediaView"
+            android:theme="@android:style/Theme.Translucent"/>
         <activity
             android:name="com.mapps.android.view.AlertNotiView"
             android:theme="@android:style/Theme.Translucent"/>
@@ -142,6 +146,7 @@
         <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
 
         <!-- 기본 권한 추가 끝 -->
+
 
         <activity
             android:name=".AdlibTestProjectActivity"
@@ -189,7 +194,12 @@
             android:hardwareAccelerated="true"
             android:label="@string/app_name" >
         </activity>
-
+        <activity
+            android:name=".AdlibTestProjectActivity9"
+            android:configChanges="orientation"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

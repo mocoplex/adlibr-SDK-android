@@ -73,8 +73,13 @@ public class AdlibTestProjectActivity extends ListActivity {
                 startActivity(intent);
                 break;
 
-            case 6: // Native AD
+            case 6: // Native AD (Multiple Items)
                 intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity8.class);
+                startActivity(intent);
+                break;
+
+            case 7: // Native AD (Single Item)
+                intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity9.class);
                 startActivity(intent);
                 break;
         }
@@ -113,10 +118,10 @@ public class AdlibTestProjectActivity extends ListActivity {
         // ADLIB - API - KEY 설정
 
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
-        _amanager = new AdlibManager(AdlibTestProjectConstans.ADLIB_API_KEY);
+        _amanager = new AdlibManager(AdlibTestProjectConstants.ADLIB_API_KEY);
         _amanager.onCreate(this);
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
-        _amanager.setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
+        _amanager.setAdlibTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
     }
 
     protected void onResume() {
