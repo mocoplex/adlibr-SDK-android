@@ -6,13 +6,13 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 2.6.1
+ * confirmed compatible with ShallWeAd SDK 20151016
  */
 
 package test.adlib.project.ads;
 
-import com.jm.co.shallwead.sdk.ShallWeAdBanner;
-import com.jm.co.shallwead.sdk.ShallWeAdBannerListener;
+import com.co.shallwead.sdk.ShallWeAdBanner;
+import com.co.shallwead.sdk.ShallWeAdBanner.ShallWeAdBannerListener;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
@@ -22,21 +22,24 @@ import android.util.AttributeSet;
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
 
- <activity
-	android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
-	android:configChanges="orientation|keyboard|keyboardHidden" />
- <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" >
- 	<intent-filter>
-		<action android:name="android.intent.action.USER_PRESENT" />
-	</intent-filter>
-	<intent-filter>
-		<action android:name="android.intent.action.PACKAGE_ADDED" />
-		<data android:scheme="package" />
-	</intent-filter>
+ <receiver android:name="com.co.shallwead.sdk.ShallWeAdReceiver" >
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.PACKAGE_ADDED" />
+        <data android:scheme="package" />
+    </intent-filter>
  </receiver>
  <meta-data
-	android:name="ShallWeAd_AppKey"
-	android:value="발급받은 ShallWeAd 등록키" />
+    android:name="ShallWeAd_Application_Key"
+    android:value="발급받은 ShallWeAd 등록키" />
+ <activity
+    android:name="com.co.shallwead.sdk.activity.ShallWeAdActivity"
+    android:excludeFromRecents="true"
+    android:launchMode="singleInstance"
+    android:taskAffinity=""
+    android:theme="@android:style/Theme.Translucent.NoTitleBar" />
  */
 
 public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
@@ -52,7 +55,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 		super(context, attrs);
 		
 		ad = new ShallWeAdBanner(context);
-		ad.setBannerListener(new ShallWeAdBannerListener() {
+		ad.setShallWeAdBannerListener(new ShallWeAdBannerListener() {
 			@Override
 			public void onShowBannerResult(boolean pResult) {
 				
@@ -80,7 +83,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
         queryAd();
         gotAd();
 		
-		// 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
+		// 5초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
 		adHandler.postDelayed(new Runnable() {
 
@@ -93,7 +96,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 				}
 			}
 				
-		}, 3000);
+		}, 5000);
 	}
 
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
@@ -116,7 +119,6 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
     public void onDestroy() {
 		if(ad != null){
 			this.removeView(ad);
-			ad.destroy();
 			ad = null;
 		}
 		

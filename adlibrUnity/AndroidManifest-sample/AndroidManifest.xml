@@ -91,13 +91,24 @@
         <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
         
         <!-- SHALLWEAD - 광고 노출을 위해 필요한 선언입니다. -->
-		<activity
-			android:name="com.jm.co.shallwead.sdk.ShallWeAdActivity"
-			android:configChanges="orientation|keyboard|keyboardHidden" />
-        <receiver android:name="com.jm.co.shallwead.sdk.ShallWeAdReceiver" />
-		<meta-data
-			android:name="ShallWeAd_AppKey"
-			android:value="발급받은 ShallWeAd 등록키" />
+        <receiver android:name="com.co.shallwead.sdk.ShallWeAdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <meta-data
+            android:name="ShallWeAd_Application_Key"
+            android:value="발급받은 ShallWeAd 등록키" />
+        <activity
+            android:name="com.co.shallwead.sdk.activity.ShallWeAdActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         
         <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
 		<activity android:name="com.millennialmedia.android.MMActivity"
