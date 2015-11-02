@@ -111,6 +111,7 @@ public class AdlibTestProjectActivity extends ListActivity {
         AdlibConfig.getInstance().bindPlatform("MOPUB","test.adlib.project.ads.SubAdlibAdViewMopub");
         AdlibConfig.getInstance().bindPlatform("ADMIXER","test.adlib.project.ads.SubAdlibAdViewAdmixer");
         AdlibConfig.getInstance().bindPlatform("TNK","test.adlib.project.ads.SubAdlibAdViewTNK");
+        AdlibConfig.getInstance().bindPlatform("FACEBOOK","test.adlib.project.ads.SubAdlibAdViewFacebook");
         // 쓰지 않을 플랫폼은 JAR 파일 및 test.adlib.project.ads 경로에서 삭제하면 최종 바이너리 크기를 줄일 수 있습니다.
 
         // SMART* dialog 노출 시점 선택시 / setAdlibKey 키가 호출되는 activity 가 시작 activity 이며 해당 activity가 종료되면 app 종료로 인식합니다.
