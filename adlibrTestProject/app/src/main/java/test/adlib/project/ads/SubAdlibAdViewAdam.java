@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with ad@m SDK 2.3.4
+ * confirmed compatible with AdFit SDK 2.3.6
  */
 
 package test.adlib.project.ads;
