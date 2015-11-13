@@ -10,7 +10,7 @@ import com.google.android.gms.ads.mediation.customevent.CustomEventInterstitialL
 import com.mocoplex.adlib.AdlibAdInterstitial;
 import com.mocoplex.adlib.AdlibAdInterstitialListener;
 
-import test.adlib.project.AdlibTestProjectConstans;
+import test.adlib.project.AdlibTestProjectConstants;
 
 /**
  * 애드립의 전면배너
@@ -49,7 +49,7 @@ public class CustomEventAdlibInterstitial implements CustomEventInterstitial, Ad
 		
 		this.interstitialListener = listener;
 		
-		this.adInterstitial = new AdlibAdInterstitial(context, AdlibTestProjectConstans.ADLIB_API_KEY);
+		this.adInterstitial = new AdlibAdInterstitial(context, AdlibTestProjectConstants.ADLIB_API_KEY);
 		this.adInterstitial.setAdlibAdListener(this);
 		
 		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.

@@ -11,7 +11,7 @@ import com.google.android.gms.ads.mediation.customevent.CustomEventBannerListene
 import com.mocoplex.adlib.AdlibAdListener;
 import com.mocoplex.adlib.AdlibAdView;
 
-import test.adlib.project.AdlibTestProjectConstans;
+import test.adlib.project.AdlibTestProjectConstants;
 
 /**
  * 애드립의 띠배너
@@ -35,7 +35,7 @@ public class CustomEventAdlib implements CustomEventBanner, AdlibAdListener {
 			bannerListener.onAdFailedToLoad(AdRequest.ERROR_CODE_INVALID_REQUEST);
 			return;
 		}
-		this.adView = new AdlibAdView(context, AdlibTestProjectConstans.ADLIB_API_KEY);
+		this.adView = new AdlibAdView(context, AdlibTestProjectConstants.ADLIB_API_KEY);
 		this.adView.setAdlibAdListener(this);
 		
 		// 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.

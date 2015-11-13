@@ -20,9 +20,9 @@ public class AdlibTestProjectActivity7 extends AdlibActivity {
         setContentView(R.layout.main7);
 
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
-        setAdlibKey(AdlibTestProjectConstans.ADLIB_API_KEY);
+        setAdlibKey(AdlibTestProjectConstants.ADLIB_API_KEY);
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
-        setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
+        setAdlibTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

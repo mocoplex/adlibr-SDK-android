@@ -61,10 +61,10 @@ public class AdlibTestProjectActivity8 extends Activity {
         listView.setOnScrollListener(scrollListener);
 
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
-        _amanager = new AdlibManager(AdlibTestProjectConstans.ADLIB_API_KEY);
+        _amanager = new AdlibManager(AdlibTestProjectConstants.ADLIB_API_KEY);
         _amanager.onCreate(this);
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
-        _amanager.setAdlibTestMode(AdlibTestProjectConstans.ADLIB_TEST_MODE);
+        _amanager.setAdlibTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
 
         // 네이티브 광고를 받고싶다면 아래의 코드를 호출 합니다.
         // 1. 수량 : 최대로 수신하고자 하는 수량을 지정합니다. (10개를 초과한 경우 10개로 지정됩니다.)
@@ -176,7 +176,7 @@ public class AdlibTestProjectActivity8 extends Activity {
 
                 // 광고 뷰에 대해 처리를 합니다.
 
-                return anh.getView(position, convertView, mList, R.layout.main8_item);
+                return anh.getView(position, convertView, mList, R.layout.main8_item, parent);
 
             }
 
