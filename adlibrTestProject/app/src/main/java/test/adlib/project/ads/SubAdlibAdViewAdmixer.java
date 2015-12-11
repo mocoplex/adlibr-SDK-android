@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with AdMixer SDK 1.3.5
+ * confirmed compatible with AdMixer SDK 1.3.11
  */
 
 package test.adlib.project.ads;
@@ -19,7 +19,6 @@ import com.admixer.InterstitialAd;
 import com.admixer.InterstitialAdListener;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.mocoplex.adlib.util.LogUtil;
 
 import android.app.Activity;
 import android.content.Context;

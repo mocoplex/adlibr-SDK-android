@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.11.0
+ * confirmed compatible with T ad SDK 3.13.0
  */
 
 package test.adlib.project.ads;
@@ -26,6 +26,22 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
+
+/*
+AndroidManifest.xml 에 아래 내용을 추가해주세요.
+
+ <activity
+	android:name="com.skplanet.tad.AdActivity"
+	android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+	android:label="Ad Activity"
+	android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+ </activity>
+ <receiver android:name="com.skplanet.tad.SyrupAdReceiver" >
+    <intent-filter>
+        <action android:name="com.skplanet.syrupad.action.SAID_CHANGED" />
+    </intent-filter>
+ </receiver>
+*/
 
 public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	
