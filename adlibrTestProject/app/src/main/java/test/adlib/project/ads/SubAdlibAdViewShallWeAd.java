@@ -18,6 +18,7 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -65,11 +66,11 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 					// 무료광고를 받아왔으면 다음 플랫폼으로 넘깁니다.
 					failed();
 				}
+				else {
+					ad.setShow(View.VISIBLE);
+				}
 			}
 		});
-				
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		ad.setLayoutParams(params);
 	}
 
 	// 스케줄러에의해 자동으로 호출됩니다.
