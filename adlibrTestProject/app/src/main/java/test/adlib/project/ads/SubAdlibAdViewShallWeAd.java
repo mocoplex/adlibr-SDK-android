@@ -81,10 +81,10 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 		this.removeAllViews();
 		this.addView(ad);
         
-        queryAd();
-        gotAd();
+		queryAd();
+		gotAd();
         
-        ad.start();
+		ad.start();
 		
 		// 5초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
@@ -119,7 +119,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 		super.onPause();
 	}
 	
-    public void onDestroy() {
+	public void onDestroy() {
 		if(ad != null){
 			this.removeView(ad);
 			ad = null;
