@@ -83,6 +83,8 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
         
         queryAd();
         gotAd();
+        
+        ad.start();
 		
 		// 5초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
