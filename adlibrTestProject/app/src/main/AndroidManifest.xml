@@ -170,7 +170,7 @@
 
         <activity
             android:name=".AdlibTestProjectActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -180,44 +180,49 @@
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity2"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity3"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity4"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity5"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity6"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity7"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity8"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity9"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity10"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
     </application>

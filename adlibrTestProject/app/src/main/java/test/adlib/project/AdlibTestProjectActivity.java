@@ -32,6 +32,7 @@ public class AdlibTestProjectActivity extends ListActivity {
         itemList.add("Interstitial (Preload)");
         itemList.add("Interstitial (View)");
         itemList.add("Native AD");
+        itemList.add("Icon AD");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
 
         this.setListAdapter(adapter);
@@ -78,8 +79,8 @@ public class AdlibTestProjectActivity extends ListActivity {
                 startActivity(intent);
                 break;
 
-            case 7: // Native AD (Single Item)
-                intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity9.class);
+            case 7: // Icon AD
+                intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity10.class);
                 startActivity(intent);
                 break;
         }
