@@ -13,10 +13,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 여기까지 애드립 사용을 위한 필수 권한 -->
 
     <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
