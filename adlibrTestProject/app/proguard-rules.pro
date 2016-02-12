@@ -19,6 +19,7 @@
 # 아래는 애드립 사용을 위한 필수 설정입니다.
 
 -keep class com.mocoplex.adlib.** { *; }
+-dontwarn com.mocoplex.adlib.**
 
 # 빌드 SDK 버전이 킷캣(Android 19) 이하 일 경우 추가해주세요.
 -dontwarn android.os.Build
@@ -27,11 +28,6 @@
 # Mac OS 경로 예시 : /Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/development/bin/classes.jar
 # Windows 경로 예시 : 'C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\androidplayer\bin\classes.jar'
 #-libraryjars /Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/development/bin/classes.jar
-
-# 유니티를 이용하지 않는 경우 아래와 같이 경고가 뜨지 않게 설정해주시기 바랍니다.
--dontwarn com.mocoplex.adlib.unity.**
-
-# 여기까지가 필수 설정입니다.
 
 
 # 아래부터 끝까지는 광고 플랫폼 사용을 위한 설정입니다.
