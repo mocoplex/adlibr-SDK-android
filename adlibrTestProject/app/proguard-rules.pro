@@ -29,6 +29,7 @@
 # Windows 경로 예시 : 'C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\androidplayer\bin\classes.jar'
 #-libraryjars /Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/development/bin/classes.jar
 
+# 여기까지가 필수 설정입니다.
 
 # 아래부터 끝까지는 광고 플랫폼 사용을 위한 설정입니다.
 # 사용하지 않을 광고 플랫폼 설정은 삭제하셔도 됩니다.
