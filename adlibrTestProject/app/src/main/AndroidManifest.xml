@@ -140,6 +140,7 @@
         <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
 
         <!-- MOBFOX - 광고 노출을 위해 필요한 선언입니다. -->
+        <!--
         <activity android:name="com.adsdk.sdk.banner.InAppWebView"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity android:name="com.adsdk.sdk.video.RichMediaActivity"
@@ -147,6 +148,7 @@
             android:hardwareAccelerated="false" />
         <activity android:name="com.adsdk.sdk.mraid.MraidBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+         -->
         <!--<activity android:name="com.google.android.gms.ads.AdActivity"
              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>  -->
 
