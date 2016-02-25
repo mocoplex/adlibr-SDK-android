@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with MezzoMediaMAN SDK 3.6
+ * confirmed compatible with MezzoMediaMAN SDK 4.2
  */
 
 package test.adlib.project.ads;
@@ -38,14 +38,14 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	
-	protected AdView ad;
+	protected AdView ad = null;
 	protected boolean bPassAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
-	protected String mezzoID = "MEZZO_ID";
+	protected String mezzoID = "MAN_ID";
 
 	public SubAdlibAdViewMezzo(Context context) {
-		this(context,null);
+		this(context, null);
 	}	
 	
 	public SubAdlibAdViewMezzo(Context context, AttributeSet attrs) {
