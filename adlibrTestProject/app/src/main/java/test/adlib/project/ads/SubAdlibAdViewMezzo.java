@@ -11,13 +11,13 @@
 
 package test.adlib.project.ads;
 
-import com.mapps.android.view.AdView;
-import com.mapps.android.view.ManAdListner;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.mapps.android.listner.ManAdListner;
+import com.mapps.android.view.AdView;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
