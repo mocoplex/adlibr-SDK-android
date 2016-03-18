@@ -46,9 +46,9 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	protected InMobiBanner ad;
 	protected boolean bGotAd = false;
 
-	// 여기에 인모비에서 발급받은 key 를 입력하세요.
-	protected static String inmobiKey = "INMOBI_ID";
-    protected static String inmobiInterstitialKey = "INMOBI_INTERSTITIAL_ID";
+	// 여기에 인모비의 계정 ID 를 입력하세요. 
+	// 계정 ID를 확인하려면, 인모비 페이지에 로그인 후 페이지 오른쪽 상단 계정이름 옆의 드롭다운을 클릭하세요.
+	protected static String inmobiAccountId = "INMOBI_ACCOUNT_ID";
 	// 여기에 인모비에서 발급받은 Placement Id 를 입력하세요.
 	protected static long inmobiPlacementId = 0L;
 	protected static long inmobiInterstitialPlacementId = 0L;
@@ -69,8 +69,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	public SubAdlibAdViewInmobi(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		// Insert your InMobi App Id here
-		InMobiSdk.init(context, inmobiKey);
+		InMobiSdk.init(context, inmobiAccountId);
 	}
 	
 	public void initInmobiView() {
@@ -196,7 +195,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	}
 	
 	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
-		InMobiSdk.init(ctx, inmobiInterstitialKey);
+		InMobiSdk.init(ctx, inmobiAccountId);
 		
 		InterstitialAdListener intersListener = new InterstitialAdListener() {
 
