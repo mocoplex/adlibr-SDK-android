@@ -25,16 +25,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name" >
 
-        <!-- 구글 광고 ID 사용을 위해 꼭 추가해주세요. -->
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         <activity
             android:name="com.mocoplex.adlib.AdlibDialogActivity"
             android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
-
-        <activity android:name="com.mocoplex.adlib.AdlibWebBrowserActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
 
         <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
