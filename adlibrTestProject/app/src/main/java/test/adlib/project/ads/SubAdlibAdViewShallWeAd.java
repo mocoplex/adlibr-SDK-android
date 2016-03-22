@@ -23,15 +23,6 @@ import android.view.View;
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
 
- <receiver android:name="com.co.shallwead.sdk.ShallWeAdReceiver" >
-    <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED" />
-    </intent-filter>
-    <intent-filter>
-        <action android:name="android.intent.action.PACKAGE_ADDED" />
-        <data android:scheme="package" />
-    </intent-filter>
- </receiver>
  <meta-data
     android:name="ShallWeAd_Application_Key"
     android:value="발급받은 ShallWeAd 등록키" />
