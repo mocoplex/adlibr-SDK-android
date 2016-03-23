@@ -35,4 +35,6 @@ dependencies {
     }
     // MillenialMedia
     compile(name:'mm-ad-sdk', ext:'aar')
+    // Facebook AudienceNetwork
+    compile(name: 'AudienceNetwork', ext: 'aar')
 }
