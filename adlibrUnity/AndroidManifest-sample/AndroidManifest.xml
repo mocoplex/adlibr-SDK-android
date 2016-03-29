@@ -18,10 +18,10 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<!-- 여기까지 애드립 사용을 위한 필수 권한 -->
 	
 	<!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 	<!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
@@ -63,12 +63,11 @@
 			android:label="Ad Activity"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar" >
 		</activity>
-		<activity
-			android:name="com.skplanet.tad.AdVideoPlayer"
-			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-			android:label="Ad Video Player"
-			android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
+        <receiver android:name="com.skplanet.tad.SyrupAdReceiver" >
+            <intent-filter>
+                <action android:name="com.skplanet.syrupad.action.SAID_CHANGED" />
+            </intent-filter>
+        </receiver>
 		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
         
         <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
@@ -82,24 +81,12 @@
         <!-- ADMOB - 사용하지 않는다면 여기까지 삭제 -->
         
         <!-- INMOBI - 광고 노출을 위해 필요한 선언입니다. -->        
-		<!-- Mandatory activity declaration to show the Ad in the embedded browser -->
-		<activity android:name="com.inmobi.androidsdk.IMBrowserActivity"
+        <activity android:name="com.inmobi.rendering.InMobiAdActivity"
             android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:hardwareAccelerated="true" />
-
-        <!-- NAVER - 광고 노출을 위해 필요한 선언입니다. -->                
-        <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
         
         <!-- SHALLWEAD - 광고 노출을 위해 필요한 선언입니다. -->
-        <receiver android:name="com.co.shallwead.sdk.ShallWeAdReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
         <meta-data
             android:name="ShallWeAd_Application_Key"
             android:value="발급받은 ShallWeAd 등록키" />
@@ -111,15 +98,19 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         
         <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
-		<activity android:name="com.millennialmedia.android.MMActivity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			android:configChanges="keyboardHidden|orientation|keyboard" >
-		</activity>
+        <!-- -->
+        <activity
+            android:name="com.millennialmedia.internal.MMActivity"
+            android:theme="@style/Theme.MMTransparent" />
+        <activity android:name="com.millennialmedia.internal.MMIntentWrapperActivity" />
         
-        <!-- MOBCLIX - 광고 노출을 위해 필요한 선언입니다. -->
-		<meta-data android:name="com.mobclix.APPLICATION_ID"
-            android:value="insert-your-application-key" />
-		<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
+        <!-- AXONIX(MOBCLIX) - 광고 노출을 위해 필요한 선언입니다. -->
+        <!-- Add the application key -->
+        <meta-data android:name="com.axonix.APPLICATION_ID"
+            android:value="발급받은 AXONIX(MOBCLIX) 등록키"/>
+        <!-- Axonix browser activity -->
+        <activity
+            android:name="com.axonix.android.sdk.AxonixBrowserActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:hardwareAccelerated="true" />
         
@@ -135,9 +126,11 @@
         <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
         <meta-data android:name="DEBUG_MODE" android:value="1" />
         <activity
-            android:name="com.mapps.android.view.InterstitialView" />
+            android:name="com.mapps.android.view.InterstitialView"
+            android:screenOrientation = "portrait"/>
         <activity
-            android:name="com.mapps.android.view.MultimediaView" />
+            android:name="com.mapps.android.view.MultimediaView"
+            android:theme="@android:style/Theme.Translucent"/>
         <activity
             android:name="com.mapps.android.view.AlertNotiView"
             android:theme="@android:style/Theme.Translucent"/>
@@ -171,6 +164,15 @@
 		<activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation"/>
 		<activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
+        
+        <!-- TNK - 광고 노출을 위해 필요한 선언입니다. -->
+        <meta-data android:name="tnkad_app_id" android:value="발급받은 TNK App-ID를 입력해주세요." />
+        <activity android:name="com.tnkfactory.ad.AdWallActivity" />
+        <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
+        
+        <!-- Facebook Audience Network - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity android:name="com.facebook.ads.InterstitialAdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         
 		<!-- 기본 권한 추가 끝 -->
             
