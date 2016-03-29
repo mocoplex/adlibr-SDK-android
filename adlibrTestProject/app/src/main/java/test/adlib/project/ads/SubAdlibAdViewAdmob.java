@@ -57,7 +57,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 	public void initAdmobView() {
 		ad = new AdView(getContext());
 		ad.setAdUnitId(admobID);
-		ad.setAdSize(AdSize.BANNER);
+		ad.setAdSize(AdSize.SMART_BANNER);
 		
 		// 광고 뷰의 위치 속성을 제어할 수 있습니다.
 		this.setGravity(Gravity.CENTER);
