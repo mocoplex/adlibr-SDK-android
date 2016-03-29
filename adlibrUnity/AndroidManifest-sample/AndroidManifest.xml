@@ -101,7 +101,8 @@
         <!-- -->
         <activity
             android:name="com.millennialmedia.internal.MMActivity"
-            android:theme="@style/Theme.MMTransparent" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
         <activity android:name="com.millennialmedia.internal.MMIntentWrapperActivity" />
         
         <!-- AXONIX(MOBCLIX) - 광고 노출을 위해 필요한 선언입니다. -->
