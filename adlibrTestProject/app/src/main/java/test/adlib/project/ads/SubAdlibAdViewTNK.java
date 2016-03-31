@@ -25,6 +25,8 @@ import com.tnkfactory.ad.TnkSession;
 /*
 AndroidManifest.xml 에 아래 내용을 추가해주세요.	
 <meta-data android:name="tnkad_app_id" android:value="발급받은 TNK App-ID를 입력해주세요." />
+<activity android:name="com.tnkfactory.ad.AdWallActivity" />
+<activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
 */
 
 
