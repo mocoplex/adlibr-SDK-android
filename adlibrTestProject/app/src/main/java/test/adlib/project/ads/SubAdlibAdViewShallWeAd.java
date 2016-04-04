@@ -11,14 +11,13 @@
 
 package test.adlib.project.ads;
 
-import com.co.shallwead.sdk.ShallWeAdBanner;
 import com.co.shallwead.sdk.ShallWeAdBanner.ShallWeAdBannerListener;
+import com.co.shallwead.sdk.ShallWeAdBannerForMediation;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.View;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -36,7 +35,7 @@ import android.view.View;
 
 public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	
-	protected ShallWeAdBanner ad;
+	protected ShallWeAdBannerForMediation ad;
 	protected boolean bGotAd = false;
 	
 	public SubAdlibAdViewShallWeAd(Context context) {
@@ -46,7 +45,11 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	public SubAdlibAdViewShallWeAd(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		ad = new ShallWeAdBanner(context);
+		initSwaView();
+	}
+	
+	public void initSwaView() {
+		ad = new ShallWeAdBannerForMediation(getContext());
 		ad.setShallWeAdBannerListener(new ShallWeAdBannerListener() {
 			@Override
 			public void onShowBannerResult(boolean pResult) {
@@ -58,7 +61,12 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 					failed();
 				}
 				else {
-					ad.setShow(View.VISIBLE);
+					if(ad != null) {
+						SubAdlibAdViewShallWeAd.this.removeAllViews();
+						SubAdlibAdViewShallWeAd.this.addView(ad);
+						
+						gotAd();
+					}
 				}
 			}
 		});
@@ -69,13 +77,12 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	public void query() {
 		bGotAd = false;
 		
-		this.removeAllViews();
-		this.addView(ad);
-        
+		if(ad == null)
+			initSwaView();
+		
 		queryAd();
-		gotAd();
-        
-		ad.start();
+		
+		ad.loadBanner();
 		
 		// 5초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
@@ -87,6 +94,11 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 					return;
 				}else{
 					failed();
+					if(ad != null) {
+						SubAdlibAdViewShallWeAd.this.removeAllViews();
+						ad = null;
+					}
+					bGotAd = false;
 				}
 			}
 				
@@ -96,7 +108,8 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	// 광고뷰를 삭제하는 경우 호출됩니다. 
 	public void clearAdView() {
 		if(ad != null){
-			this.removeView(ad);
+			SubAdlibAdViewShallWeAd.this.removeAllViews();
+			ad = null;
 		}
 
 		super.clearAdView();
@@ -112,7 +125,7 @@ public class SubAdlibAdViewShallWeAd extends SubAdlibAdViewCore {
 	
 	public void onDestroy() {
 		if(ad != null){
-			this.removeView(ad);
+			SubAdlibAdViewShallWeAd.this.removeAllViews();
 			ad = null;
 		}
 		
