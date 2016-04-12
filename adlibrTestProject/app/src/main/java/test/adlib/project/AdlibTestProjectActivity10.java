@@ -8,9 +8,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.mocoplex.adlib.AdError;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibIconAd;
-import com.mocoplex.adlib.AdlibIconAdListener;
+
+import kr.co.gapping.GappingAdListener;
+import kr.co.gapping.GappingConfig;
 
 public class AdlibTestProjectActivity10 extends Activity {
 
@@ -23,8 +24,8 @@ public class AdlibTestProjectActivity10 extends Activity {
 
         ad = new AdlibIconAd(this, AdlibTestProjectConstants.ADLIB_API_KEY);
         ad.setTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
-        ad.setAlign(AdlibConfig.IconAlign.BOTTOM_RIGHT);
-        ad.setAdListener(new AdlibIconAdListener() {
+        ad.setAlign(GappingConfig.IconAlign.RIGHT);
+        ad.setAdListener(new GappingAdListener() {
 
             @Override
             public void onReceiveAd() {
@@ -34,6 +35,21 @@ public class AdlibTestProjectActivity10 extends Activity {
             @Override
             public void onFailedToReceiveAd(AdError error) {
                 Toast.makeText(AdlibTestProjectActivity10.this, "Fail : " + error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onReceivedInteraction(String s) {
+
+            }
+
+            @Override
+            public void onClicked() {
+
+            }
+
+            @Override
+            public void onClosed() {
+
             }
 
         });
