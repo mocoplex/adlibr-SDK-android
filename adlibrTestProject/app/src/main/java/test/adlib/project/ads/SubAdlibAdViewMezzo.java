@@ -5,10 +5,6 @@
  * Licensed under the BSD open source license.
  */
 
-/*
- * confirmed compatible with MezzoMediaMAN SDK 4.2
- */
-
 package test.adlib.project.ads;
 
 import android.content.Context;
@@ -28,12 +24,17 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
  <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
  <meta-data android:name="DEBUG_MODE" android:value="0" />
  <activity
- 	android:name="com.mapps.android.view.InterstitialView" />
+ 	android:name="com.mapps.android.view_old.InterstitialView_old"
+ 	android:screenOrientation="portrait" />
  <activity
-	android:name="com.mapps.android.view.MultimediaView" /> 
+ 	android:name="com.mapps.android.view_new.InterstitialView_new"
+ 	android:screenOrientation="portrait" />
  <activity
-	android:name="com.mapps.android.view.AlertNotiView" 
-    android:theme="@android:style/Theme.Translucent"/>
+ 	android:name="com.mapps.android.view_old.MultimediaView_old"
+ 	android:configChanges="orientation|keyboard" /> 
+ <activity
+	android:name="com.mapps.android.view_old.AlertNotiView_old" 
+	android:theme="@android:style/Theme.Translucent"/>
  */
 
 public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
@@ -42,7 +43,12 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	protected boolean bPassAd = false;
 	
 	// 여기에 MMEDIA ID 를 입력하세요.
-	protected String mezzoID = "MAN_ID";
+	// 발급받은 지면이 mezzo/Solution/ 형식이면 mezzoID에 입력. 없으면 ""
+	protected String mezzoID = "";
+	// 발급받은 코드가 34,227,479 형식이면 순서대로 publisherCode, mediaCode, sectionCode에 입력. 없으면 ""
+	protected String publisherCode = "";
+	protected String mediaCode = "";
+	protected String sectionCode = "";
 
 	public SubAdlibAdViewMezzo(Context context) {
 		this(context, null);
@@ -51,7 +57,10 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	public SubAdlibAdViewMezzo(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		ad = new AdView(context, mezzoID, 1, 0);
+		ad = new AdView(context, mezzoID, 1, 0, AdView.TYPE_IMAGE);
+		if(!publisherCode.equals("") && !mediaCode.equals("") && !sectionCode.equals("")) {
+			ad.setAD_Infomation(publisherCode, mediaCode, sectionCode);
+		}
 		ad.setManAdListner(new ManAdListner() {
 
 			@Override

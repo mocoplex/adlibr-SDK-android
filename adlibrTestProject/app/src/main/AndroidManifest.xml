@@ -105,15 +105,18 @@
         <!-- MEZZO GPS 사용여부 0:사용안함 1:사용 -->
         <meta-data android:name="GPS_USE" android:value="0" />
         <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
-        <meta-data android:name="DEBUG_MODE" android:value="1" />
+        <meta-data android:name="DEBUG_MODE" android:value="0" />
         <activity
-            android:name="com.mapps.android.view.InterstitialView"
-            android:screenOrientation = "portrait"/>
+            android:name="com.mapps.android.view_old.InterstitialView_old"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.mapps.android.view.MultimediaView"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:name="com.mapps.android.view_new.InterstitialView_new"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.mapps.android.view.AlertNotiView"
+            android:name="com.mapps.android.view_old.MultimediaView_old"
+            android:configChanges="orientation|keyboard" />
+        <activity
+            android:name="com.mapps.android.view_old.AlertNotiView_old"
             android:theme="@android:style/Theme.Translucent"/>
 
         <!-- AMAZON - 광고 노출을 위해 필요한 선언입니다. -->
