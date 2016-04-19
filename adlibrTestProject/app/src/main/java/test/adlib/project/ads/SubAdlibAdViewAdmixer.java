@@ -5,10 +5,6 @@
  * Licensed under the BSD open source license.
  */
 
-/*
- * confirmed compatible with AdMixer SDK 1.3.11
- */
-
 package test.adlib.project.ads;
 
 import com.admixer.AdAdapter;
@@ -26,7 +22,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 public class SubAdlibAdViewAdmixer extends SubAdlibAdViewCore {
 	
