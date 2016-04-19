@@ -5,10 +5,6 @@
  * Licensed under the BSD open source license.
  */
 
-/*
- * confirmed compatible with amazon mobile ads SDK 5.6.20
- */
-
 package test.adlib.project.ads;
 
 import com.amazon.device.ads.Ad;
@@ -18,7 +14,6 @@ import com.amazon.device.ads.AdListener;
 import com.amazon.device.ads.AdProperties;
 import com.amazon.device.ads.AdRegistration;
 import com.amazon.device.ads.AdSize;
-import com.amazon.device.ads.AdTargetingOptions;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 import android.app.Activity;
@@ -41,8 +36,6 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
 	
 	// 여기에 AMAZON ID 를 입력하세요.
 	protected String amazonID = "AMAZON_ID";
-	
-	private AdTargetingOptions adOptions = new AdTargetingOptions();
     
 	public SubAdlibAdViewAmazon(Context context) {
 		this(context,null);
@@ -116,7 +109,7 @@ public class SubAdlibAdViewAmazon extends SubAdlibAdViewCore {
         this.removeAllViews();
 		this.addView(ad);
 		
-        ad.loadAd(adOptions);
+        ad.loadAd();
         
         // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
 		Handler adHandler = new Handler();
