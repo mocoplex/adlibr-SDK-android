@@ -230,7 +230,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 	    adInterstitial.setClientId(tAdInterstitialId);
 	    adInterstitial.setSlotNo(AdSlot.INTERSTITIAL);
 	    // TestMode 를 정합니다. true 인 경우 test 광고가 수신됩니다.
-	    adInterstitial.setTestMode(true);
+	    adInterstitial.setTestMode(false);
 	    // 광고가 노출된 후 5 초 동안 사용자의 반응이 없을 경우 광고 창을 자동으로 닫을 것인지를 설정합니다.
 	    adInterstitial.setAutoCloseWhenNoInteraction(false);
 	    // 광고가 노출된 후 랜딩 액션에 인해 다른 App 으로 전환 시 광고 창을 자동으로 닫을 것인지를 설정합니다.
