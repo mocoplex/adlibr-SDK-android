@@ -90,7 +90,7 @@ public class SubAdlibAdViewTAD extends SubAdlibAdViewCore {
 		 * useBackFill 속성을 true 로 설정하면 각 광고마다 광고주가 설정한 배경색이 그려지고 false 인 경우 투명(0x00000000)으로 나타납니다. */
 		ad.setUseBackFill(true);
 		// TestMode 를 정합니다. true 인경우 test 광고가 수신됩니다.
-		ad.setTestMode(true);
+		ad.setTestMode(false);
 		ad.setListener(new AdListener(){
 			
 			@Override
