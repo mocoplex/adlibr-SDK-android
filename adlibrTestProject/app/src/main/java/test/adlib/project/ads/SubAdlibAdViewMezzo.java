@@ -42,7 +42,7 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	protected AdView ad = null;
 	protected boolean bPassAd = false;
 	
-	// 여기에 MMEDIA ID 를 입력하세요.
+	// 여기에 MEZZO ID 를 입력하세요.
 	// 발급받은 지면이 mezzo/Solution/ 형식이면 mezzoID에 입력. 없으면 ""
 	protected String mezzoID = "";
 	// 발급받은 코드가 34,227,479 형식이면 순서대로 publisherCode, mediaCode, sectionCode에 입력. 없으면 ""
