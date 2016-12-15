@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "test.adlib.project"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -38,4 +38,7 @@ dependencies {
     compile(name:'mm-ad-sdk', ext:'aar')
     // Facebook AudienceNetwork
     compile(name: 'AudienceNetwork', ext: 'aar')
+    // Adfit
+    compile(name:'AdfitSDK-2.4.0', ext:'aar')
+
 }

@@ -11,7 +11,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.mapps.android.listner.ManAdListner;
+import com.mapps.android.listner.AdListner;
 import com.mapps.android.view.AdView;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -57,11 +57,11 @@ public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	public SubAdlibAdViewMezzo(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		ad = new AdView(context, mezzoID, 1, 0, AdView.TYPE_IMAGE);
+		ad = new AdView(context, 1, 0, AdView.TYPE_IMAGE);
 		if(!publisherCode.equals("") && !mediaCode.equals("") && !sectionCode.equals("")) {
-			ad.setAD_Infomation(publisherCode, mediaCode, sectionCode);
+			ad.setAdViewCode(publisherCode, mediaCode, sectionCode);
 		}
-		ad.setManAdListner(new ManAdListner() {
+		ad.setAdListner(new AdListner() {
 
 			@Override
 			public void onChargeableBannerType(View v, boolean bcharge) {

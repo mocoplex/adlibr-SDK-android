@@ -11,25 +11,22 @@
 
 package test.adlib.project.ads;
 
-import net.daum.adam.publisher.AdInterstitial;
-import net.daum.adam.publisher.AdView.OnAdClosedListener;
-import net.daum.adam.publisher.AdView.OnAdFailedListener;
-import net.daum.adam.publisher.AdView.OnAdLoadedListener;
-import net.daum.adam.publisher.impl.AdError;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 
+import com.kakao.adfit.publisher.AdInterstitial;
+import com.kakao.adfit.publisher.AdView;
+import com.kakao.adfit.publisher.impl.AdError;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	
-	protected net.daum.adam.publisher.AdView ad;
+	protected AdView ad;
 	protected boolean bGotAd = false;
 	
 	// 여기에 ADAM ID 를 입력하세요.
@@ -47,7 +44,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	}
 	
 	public void initAdamView() {
-		ad = new net.daum.adam.publisher.AdView(getContext());
+		ad = new AdView(getContext());
 		// 킷캣 디바이스에서 렌더링에 생기는 문제로 인한 예외처리.
 		// 에러표시가 생기면 disalbe check하시고 무시하셔도 무방합니다.
 		if (Build.VERSION.SDK_INT == 19) {
@@ -62,7 +59,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		ad.setLayoutParams(params);
 		
-		ad.setOnAdLoadedListener(new OnAdLoadedListener() {
+		ad.setOnAdLoadedListener(new AdView.OnAdLoadedListener() {
 			@Override
 			public void OnAdLoaded() {
 				
@@ -71,7 +68,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 				gotAd();
 			} });
 		
-		ad.setOnAdFailedListener(new OnAdFailedListener() {
+		ad.setOnAdFailedListener(new AdView.OnAdFailedListener() {
 			@Override
 			public void OnAdFailed(AdError arg0, String arg1) {
 				
@@ -152,7 +149,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
 		AdInterstitial mAdInterstitial = new AdInterstitial((Activity)ctx);
  	    mAdInterstitial.setClientId(adamInterstitialID);
- 	    mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
+ 	    mAdInterstitial.setOnAdLoadedListener(new AdView.OnAdLoadedListener() {
 
  			@Override
  			public void OnAdLoaded() {
@@ -165,7 +162,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
  					
  			}
  	    });
- 	    mAdInterstitial.setOnAdFailedListener(new OnAdFailedListener() {
+ 	    mAdInterstitial.setOnAdFailedListener(new AdView.OnAdFailedListener() {
 
  			@Override
  			public void OnAdFailed(AdError arg0, String arg1) {
@@ -178,7 +175,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore  {
 	 			}
  			}
  	    });
- 	    mAdInterstitial.setOnAdClosedListener(new OnAdClosedListener() {
+ 	    mAdInterstitial.setOnAdClosedListener(new AdView.OnAdClosedListener() {
 
  			@Override
  			public void OnAdClosed() {
