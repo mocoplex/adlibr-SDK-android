@@ -51,9 +51,10 @@
 		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
 
         <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kakao.adfit.publisher.impl.AdInterstitialActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
 
         <!-- ADMOB - Google Play 버전을 위한 선언입니다. -->
         <activity android:name="com.google.android.gms.ads.AdActivity"
@@ -107,17 +108,10 @@
         <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
         <meta-data android:name="DEBUG_MODE" android:value="0" />
         <activity
-            android:name="com.mapps.android.view_old.InterstitialView_old"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.mapps.android.view_new.InterstitialView_new"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.mapps.android.view_old.MultimediaView_old"
-            android:configChanges="orientation|keyboard" />
-        <activity
-            android:name="com.mapps.android.view_old.AlertNotiView_old"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:name="com.mapps.android.view.InterstitialView"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustPan" />
 
         <!-- AMAZON - 광고 노출을 위해 필요한 선언입니다. -->
         <activity
@@ -128,17 +122,7 @@
         <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
 
         <!-- MOBFOX - 광고 노출을 위해 필요한 선언입니다. -->
-        <!--
-        <activity android:name="com.adsdk.sdk.banner.InAppWebView"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name="com.adsdk.sdk.video.RichMediaActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:hardwareAccelerated="false" />
-        <activity android:name="com.adsdk.sdk.mraid.MraidBrowser"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-         -->
-        <!--<activity android:name="com.google.android.gms.ads.AdActivity"
-             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>  -->
+        <activity android:name="com.mobfox.sdk.interstitialads.InterstitialActivity"></activity>
 
         <!-- MOPUB - 광고 노출을 위해 필요한 선언입니다. -->
         <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation"/>

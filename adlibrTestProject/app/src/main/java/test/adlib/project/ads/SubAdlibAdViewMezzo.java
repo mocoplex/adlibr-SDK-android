@@ -15,28 +15,6 @@ import com.mapps.android.listner.AdListner;
 import com.mapps.android.view.AdView;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
-/*
- AndroidManifest.xml 에 아래 내용을 추가해주세요.
- 
- <meta-data android:name="MEZZO_WINDOW_ID" android:value="banner" />
- <!-- MEZZO GPS 사용여부 0:사용안함 1:사용 -->
- <meta-data android:name="GPS_USE" android:value="0" />
- <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
- <meta-data android:name="DEBUG_MODE" android:value="0" />
- <activity
- 	android:name="com.mapps.android.view_old.InterstitialView_old"
- 	android:screenOrientation="portrait" />
- <activity
- 	android:name="com.mapps.android.view_new.InterstitialView_new"
- 	android:screenOrientation="portrait" />
- <activity
- 	android:name="com.mapps.android.view_old.MultimediaView_old"
- 	android:configChanges="orientation|keyboard" /> 
- <activity
-	android:name="com.mapps.android.view_old.AlertNotiView_old" 
-	android:theme="@android:style/Theme.Translucent"/>
- */
-
 public class SubAdlibAdViewMezzo extends SubAdlibAdViewCore {
 	
 	protected AdView ad = null;
