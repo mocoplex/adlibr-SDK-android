@@ -1,0 +1,114 @@
+{
+  "feed": [
+    {
+      "id": 1,
+      "name": "National Geographic Channel",
+      "image": "https://adlibr.com/test/native/data/feed/img/cosmos.jpg",
+      "status": "\"Science is a beautiful and emotional human endeavor,\" says Brannon Braga, executive producer and director. \"And Cosmos is all about making science an experience.\"",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/nat.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://google.com",
+      "width": 850,
+      "height": 315
+    },
+    {
+      "id": 2,
+      "name": "TIME",
+      "image": "https://adlibr.com/test/native/data/feed/img/time_best.jpg",
+      "status": "30 years of Cirque du Soleil's best photos",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/time.png",
+      "timeStamp": "1403375851930",
+      "url": "https://ti.me/1qW8MLB",
+      "width": 1200,
+      "height": 765
+    },
+    {
+      "id": 3,
+      "name": "Discovery",
+      "image": "https://adlibr.com/test/native/data/feed/img/discovery_mos.jpg",
+      "status": "A team of Austrian scientists has developed a laser system that causes fruit flies to dance.",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/discovery.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://dsc.tv/xmMxD",
+      "width": 670,
+      "height": 440
+    },
+    {
+      "id": 4,
+      "name": "Ravi Tamada",
+      "image": "https://adlibr.com/test/native/data/feed/img/nav_drawer.jpg",
+      "status": "Android Sliding Menu using Navigation Drawer",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/ravi_tamada.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/",
+      "width": 720,
+      "height": 378
+    },
+    {
+      "id": 6,
+      "name": "KTM",
+      "image": "https://adlibr.com/test/native/data/feed/img/ktm_1290.jpg",
+      "status": "\"The Beast\" KTM 1290 Super Duke",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/ktm.png",
+      "timeStamp": "1403375851930",
+      "url": "https://google.com",
+      "width": 1137,
+      "height": 873
+    },
+    {
+      "id": 7,
+      "name": "Harley-Davidson",
+      "image": "https://adlibr.com/test/native/data/feed/img/harley_bike.jpg",
+      "status": "We assembling riders of every style, bike, and passion. If you ride with conviction, ride with us. You have 24 days to get ready for World Ride. Prepare by visiting:",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/harley.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://bit.ly/1wmBWaN",
+      "width": 2048,
+      "height": 1365
+    },
+    {
+      "id": 8,
+      "name": "Rock & Girl",
+      "image": "https://adlibr.com/test/native/data/feed/img/rock.jpg",
+      "status": "A long time back...",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/rock_girl.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://google.com",
+      "width": 568,
+      "height": 700
+    },
+    {
+      "id": 9,
+      "name": "LIFE",
+      "image": "https://adlibr.com/test/native/data/feed/img/life_photo.jpg",
+      "status": "In 1965, LIFE photographer Bill Ray spent weeks with the Hells Angels, but his amazing photos never ran in the magazine",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/life.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://ti.me/1rfcQa4",
+      "width": 735,
+      "height": 492
+    },
+    {
+      "id": 10,
+      "name": "Shakira",
+      "image": "https://adlibr.com/test/native/data/feed/img/shakira_la_la.png",
+      "status": "Download La La La (Brazil 2014) from iTunes:",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/shakira.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://smarturl.it/FWCalbum?IQid=sh",
+      "width": 851,
+      "height": 315
+    },
+    {
+      "id": 11,
+      "name": "A. R. rahman",
+      "image": "https://adlibr.com/test/native/data/feed/img/ar_bw.jpg",
+      "status": "",
+      "profilePic": "https://adlibr.com/test/native/data/feed/img/ar.jpg",
+      "timeStamp": "1403375851930",
+      "url": "https://google.com",
+      "width": 2048,
+      "height": 1035
+    }
+  ]
+}

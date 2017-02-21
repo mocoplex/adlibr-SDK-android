@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import test.adlib.project.util.bitmap.ImageCache;
 import test.adlib.project.util.bitmap.ImageFetcher;
 
-public class AdlibTestProjectActivity8 extends Activity {
+public class AdlibTestProjectActivity11 extends Activity {
 
     // 일반 Activity 에서의 adlib 연동
     private AdlibManager _amanager;
@@ -47,9 +47,9 @@ public class AdlibTestProjectActivity8 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main8_list);
+        setContentView(R.layout.main11_list);
 
-        initSampleFeedData();
+        initSampleSongData();
 
         listView = (ListView) findViewById(R.id.list);
 
@@ -66,7 +66,8 @@ public class AdlibTestProjectActivity8 extends Activity {
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
                 anh.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
             }
         };
@@ -82,7 +83,6 @@ public class AdlibTestProjectActivity8 extends Activity {
         // 네이티브 광고를 받고싶다면 아래의 코드를 호출 합니다.
         // 1. 타입 : 광고 유형을 지정합니다. (ALL : 비디오와 이미지, VIDEO : 비디오만 해당, IMAGE : 이미지만 해당)
         // 2. 이벤트 리스너 : 성공과 실패를 알기 위한 리스너를 지정합니다.
-
         _amanager.loadNativeAd(AdlibConfig.ContentType.VIDEO, new AdlibNativeAdListener() {
             @Override
             public void onReceiveAd(AdlibNativeItem item) {
@@ -106,7 +106,7 @@ public class AdlibTestProjectActivity8 extends Activity {
             public void onError(int errorCode) {
                 Log.d("ADLIB-Native", "onError ::: error code : " + errorCode);
 
-                Toast.makeText(AdlibTestProjectActivity8.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdlibTestProjectActivity11.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -129,15 +129,17 @@ public class AdlibTestProjectActivity8 extends Activity {
         super.onDestroy();
     }
 
-    private void initSampleFeedData() {
+    private void initSampleSongData() {
         try {
             JSONObject json = new JSONObject(loadJSONFromAsset());
-            JSONArray arr = json.getJSONArray("feed");
+            JSONArray arr = json.getJSONArray("list");
             int size = arr.length();
-            for (int i = 0; i < size; i++) {
-                JSONObject obj = arr.getJSONObject(i);
-                sampleFeedData child = new sampleFeedData(obj);
-                mList.add(child);
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < size; j++) {
+                    JSONObject obj = arr.getJSONObject(j);
+                    sampleSongData child = new sampleSongData(obj);
+                    mList.add(child);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -148,13 +150,12 @@ public class AdlibTestProjectActivity8 extends Activity {
         String json = null;
         try {
 
-            InputStream is = getAssets().open("sample_feed.json");
+            InputStream is = getAssets().open("sample_song.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
@@ -163,32 +164,24 @@ public class AdlibTestProjectActivity8 extends Activity {
 
     }
 
-    private class sampleFeedData {
+    private class sampleSongData {
         private int id;
-        private String name;
-        private String img;
-        private String status;
-        private String profilePic;
-        private String timeStamp;
-        private String url;
-        private int width;
-        private int height;
+        private String title;
+        private String artist;
+        private String duration;
+        private String thumb_url;
 
-        public sampleFeedData(JSONObject obj) {
+        public sampleSongData(JSONObject obj) {
             init(obj);
         }
 
         private void init(JSONObject obj) {
             try {
                 id = obj.getInt("id");
-                name = obj.getString("name");
-                img = obj.getString("image");
-                status = obj.getString("status");
-                profilePic = obj.getString("profilePic");
-                timeStamp = obj.getString("timeStamp");
-                url = obj.getString("url");
-                width = obj.getInt("width");
-                height = obj.getInt("height");
+                title = obj.getString("title");
+                artist = obj.getString("artist");
+                duration = obj.getString("duration");
+                thumb_url = obj.getString("thumb_url");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -198,37 +191,22 @@ public class AdlibTestProjectActivity8 extends Activity {
             return id;
         }
 
-        public String getName() {
-            return name;
+        public String getTitle() {
+            return title;
         }
 
-        public String getImg() {
-            return img;
+        public String getArtist() {
+            return artist;
         }
 
-        public String getStatus() {
-            return status;
+        public String getDuration() {
+            return duration;
         }
 
-        public String getProfilePic() {
-            return profilePic;
+        public String getThumb_url() {
+            return thumb_url;
         }
 
-        public String getTimeStamp() {
-            return timeStamp;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
     }
 
     public class Adapter extends BaseAdapter {
@@ -298,26 +276,27 @@ public class AdlibTestProjectActivity8 extends Activity {
 
                 // 기본 뷰에 대해 처리를 합니다.
                 if (convertView == null) {
-                    convertView = getLayoutInflater().inflate(R.layout.main8_item_sample, null);
+                    convertView = getLayoutInflater().inflate(R.layout.main11_item_sample, null);
                 }
-                sampleFeedData data = (sampleFeedData) mList.get(position);
-                ImageView profileImg = (ImageView) convertView.findViewById(R.id.profilePic);
-                loadImage(data.getProfilePic(), profileImg, 100, 100);
+                sampleSongData data = (sampleSongData) mList.get(position);
+                ImageView profileImg = (ImageView) convertView.findViewById(R.id.icon);
+                loadImage(data.getThumb_url(), profileImg, 100, 100);
 
-                ImageView mainImg = (ImageView) convertView.findViewById(R.id.img);
-                loadImage(data.getImg(), mainImg, data.getWidth(), data.getHeight());
+                TextView mainText = (TextView) convertView.findViewById(R.id.title_text);
+                mainText.setText(data.getTitle());
 
-                TextView nameTxt = (TextView) convertView.findViewById(R.id.name);
-                nameTxt.setText(data.getName());
+                TextView durationText = (TextView) convertView.findViewById(R.id.duration_text);
+                durationText.setText(data.getDuration());
 
-                TextView statusTxt = (TextView) convertView.findViewById(R.id.status);
-                statusTxt.setText(data.getStatus());
+                TextView subText = (TextView) convertView.findViewById(R.id.artist_text);
+                subText.setText(data.getArtist());
+
 
             } else if (type == VIEW_TYPE_AD) {
 
                 // 광고 뷰에 대해 처리를 합니다.
                 AdlibNativeItem item = (AdlibNativeItem) mList.get(position);
-                return anh.getView(convertView, item, R.layout.main8_item);
+                return anh.getView(convertView, item, R.layout.main11_item);
             }
 
             return convertView;

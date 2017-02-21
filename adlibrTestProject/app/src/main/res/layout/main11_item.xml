@@ -2,14 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
-			  android:background="@color/feed_bg"
+			  android:background="@color/song_bg"
 			  android:orientation="vertical"
-			  android:padding="@dimen/feed_bg_padding" >
+			  android:padding="@dimen/song_bg_padding" >
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" >
+
+		<!-- 메인 이미지 또는 비디오 영역 (비디오 광고를 표출할 경우 필수로 들어가야 합니다.) -->
+
+		<com.mocoplex.adlib.nativead.view.Banner
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/white"
+			android:scaleType="fitXY"
+			android:visibility="visible" />
+	</RelativeLayout>
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="@color/feed_description_bg"
+		android:background="@color/song_description_bg"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
 		android:padding="10dp" >
@@ -17,9 +31,9 @@
 		<!-- 아이콘 영역 -->
 
 		<com.mocoplex.adlib.nativead.view.Icon
-			android:layout_width="@dimen/feed_profile_size"
-			android:layout_height="@dimen/feed_profile_size"
-			android:layout_marginRight="@dimen/feed_profile_margin" />
+			android:layout_width="@dimen/song_icon_size"
+			android:layout_height="@dimen/song_icon_size"
+			android:layout_marginRight="@dimen/song_icon_margin" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -35,8 +49,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:singleLine="true"
-				android:textColor="@color/feed_name"
-				android:textSize="@dimen/feed_name_size" />
+				android:textColor="@color/song_title"
+				android:textSize="@dimen/song_title_size" />
 
 			<!-- 부제목 영역 -->
 
@@ -46,8 +60,8 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:maxLines="2"
-				android:textColor="@color/feed_status"
-				android:textSize="@dimen/feed_status_size" />
+				android:textColor="@color/song_artist"
+				android:textSize="@dimen/song_artist_size" />
 
 			<!-- 설명 영역 -->
 
@@ -56,33 +70,23 @@
 				android:layout_height="wrap_content"
 				android:ellipsize="end"
 				android:singleLine="true"
-				android:textColor="@color/feed_status"
-				android:textSize="@dimen/feed_status_size" />
+				android:textColor="@color/song_artist"
+				android:textSize="@dimen/song_artist_size" />
 		</LinearLayout>
 
 		<com.mocoplex.adlib.nativead.view.GoButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@color/feed_landing"
+			android:background="@color/song_landing"
 			android:textColor="@android:color/white"
-			android:textSize="@dimen/feed_status_size" />
+			android:textSize="@dimen/song_artist_size" />
 	</LinearLayout>
 
-	<RelativeLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:background="@color/feed_img_bg" >
-
-		<!-- 메인 이미지 또는 비디오 영역 (비디오 광고를 표출할 경우 필수로 들어가야 합니다.) -->
-
-		<com.mocoplex.adlib.nativead.view.Banner
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/feed_img_margin"
-			android:layout_marginTop="@dimen/feed_img_margin"
-			android:background="@color/white"
-			android:scaleType="fitXY"
-			android:visibility="visible" />
-	</RelativeLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginTop="10dp"
+		android:background="@color/song_divider" />
 
 </LinearLayout>

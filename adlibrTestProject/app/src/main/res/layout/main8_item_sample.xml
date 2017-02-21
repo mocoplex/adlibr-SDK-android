@@ -14,23 +14,20 @@
 		android:orientation="horizontal"
 		android:padding="10dp" >
 
-		<!-- 아이콘 영역 -->
-
-		<com.mocoplex.adlib.nativead.view.Icon
+		<ImageView
+			android:id="@+id/profilePic"
 			android:layout_width="@dimen/feed_profile_size"
 			android:layout_height="@dimen/feed_profile_size"
-			android:layout_marginRight="@dimen/feed_profile_margin" />
+			android:layout_marginRight="@dimen/feed_profile_margin"
+			android:scaleType="fitCenter" />
 
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
-			android:layout_marginRight="@dimen/feed_profile_margin"
 			android:layout_weight="1"
 			android:orientation="vertical" >
 
-			<!-- 제목 영역 -->
-
-			<com.mocoplex.adlib.nativead.view.Title
+			<TextView
 				android:id="@+id/name"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -38,9 +35,7 @@
 				android:textColor="@color/feed_name"
 				android:textSize="@dimen/feed_name_size" />
 
-			<!-- 부제목 영역 -->
-
-			<com.mocoplex.adlib.nativead.view.Subtitle
+			<TextView
 				android:id="@+id/status"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -48,41 +43,21 @@
 				android:maxLines="2"
 				android:textColor="@color/feed_status"
 				android:textSize="@dimen/feed_status_size" />
-
-			<!-- 설명 영역 -->
-
-			<com.mocoplex.adlib.nativead.view.Description
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:ellipsize="end"
-				android:singleLine="true"
-				android:textColor="@color/feed_status"
-				android:textSize="@dimen/feed_status_size" />
 		</LinearLayout>
-
-		<com.mocoplex.adlib.nativead.view.GoButton
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@color/feed_landing"
-			android:textColor="@android:color/white"
-			android:textSize="@dimen/feed_status_size" />
 	</LinearLayout>
 
 	<RelativeLayout
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@color/feed_img_bg" >
 
-		<!-- 메인 이미지 또는 비디오 영역 (비디오 광고를 표출할 경우 필수로 들어가야 합니다.) -->
-
-		<com.mocoplex.adlib.nativead.view.Banner
+		<ImageView
+			android:id="@+id/img"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="@dimen/feed_img_height"
 			android:layout_marginBottom="@dimen/feed_img_margin"
 			android:layout_marginTop="@dimen/feed_img_margin"
-			android:background="@color/white"
-			android:scaleType="fitXY"
-			android:visibility="visible" />
+			android:scaleType="fitCenter" />
 	</RelativeLayout>
 
 </LinearLayout>

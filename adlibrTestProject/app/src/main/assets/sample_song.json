@@ -1,0 +1,53 @@
+{
+  "list": [
+    {
+      "id": 1,
+      "title": "Someone Like You",
+      "artist": "Adele",
+      "duration": "4:47",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/adele.png"
+    },
+    {
+      "id": 2,
+      "title": "Space Bound",
+      "artist": "Eminem",
+      "duration": "4:38",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/eminem.png"
+    },
+    {
+      "id": 3,
+      "title": "Stranger In Moscow",
+      "artist": "Michael Jackson",
+      "duration": "5:44",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/mj.png"
+    },
+    {
+      "id": 4,
+      "title": "Love The Way You Lie",
+      "artist": "Rihanna",
+      "duration": "4:23",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/rihanna.png"
+    },
+    {
+      "id": 6,
+      "title": "All My Days",
+      "artist": "Alexi Murdoch",
+      "duration": "4:47",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/alexi_murdoch.png"
+    },
+    {
+      "id": 7,
+      "title": "Life For Rent",
+      "artist": "Dido",
+      "duration": "3:41",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/dido.png"
+    },
+    {
+      "id": 8,
+      "title": "Love The Way You Lie",
+      "artist": "Enrique Iglesias",
+      "duration": "4:07",
+      "thumb_url": "https://adlibr.com/test/native/data/list/img/enrique.png"
+    }
+  ]
+}

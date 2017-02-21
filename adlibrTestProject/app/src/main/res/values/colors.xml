@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffff</color>
-    <color name="feed_bg">#d3d6db</color>
-    <color name="feed_item_bg">#ffffff</color>
-    <color name="feed_item_border">#c2c3c8</color>
-    <color name="link">#0a80d1</color>
-    <color name="timestamp">#a0a3a7</color>    
+
+    <!-- AdlibTestProjectActivity8 -->
+    <color name="feed_bg">#555555</color>
+    <color name="feed_description_bg">#dff7f4</color>
+    <color name="feed_img_bg">#ffffff</color>
+    <color name="feed_name">#ff000000</color>
+    <color name="feed_status">#aaa</color>
+    <color name="feed_landing">#338eff</color>
+
+    <!-- AdlibTestProjectActivity11 -->
+    <color name="song_bg">#ffffff</color>
+    <color name="song_divider">#ddd</color>
+    <color name="song_description_bg">#ffffff</color>
+    <color name="song_title">#ff000000</color>
+    <color name="song_artist">#aaa</color>
+    <color name="song_duration">#aaa</color>
+    <color name="song_landing">#338eff</color>
 </resources>

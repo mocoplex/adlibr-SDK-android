@@ -22,6 +22,13 @@ public class AdlibTestProjectActivity4 extends Activity {
         _amanager.onCreate(this);
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
         _amanager.setAdlibTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
+        // 배너 스케쥴에 등록된 광고 모두 광고 요청 실패 시 대기 시간 설정(단위:초, 기본:10초, 최소:5초)
+        // _amanager.setBannerFailDelayTime(10);
+
+        // 배너 스케쥴 요청 실패 시 대기 시간동안 노출되는 View 설정
+        // View backFill = new View(this);
+        // backFill.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        // _amanager.setBannerBackfillView(backFill);
 
         _amanager.setAdsHandler(new Handler() {
             public void handleMessage(Message message) {
@@ -33,6 +40,9 @@ public class AdlibTestProjectActivity4 extends Activity {
                             break;
                         case AdlibManager.DID_ERROR:
                             Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String)message.obj);
+                            break;
+                        case AdlibManager.BANNER_FAILED:
+                            Log.d("ADLIBr", "[Banner] All Failed.");
                             break;
                     }
                 }

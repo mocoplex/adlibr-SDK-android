@@ -31,7 +31,8 @@ public class AdlibTestProjectActivity extends ListActivity {
         itemList.add("Interstitial (Mediation)");
         itemList.add("Interstitial (Preload)");
         itemList.add("Interstitial (View)");
-        itemList.add("Native AD");
+        itemList.add("Native AD (List Type 1)");
+        itemList.add("Native AD (List Type 2)");
         itemList.add("Icon AD");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
 
@@ -74,12 +75,17 @@ public class AdlibTestProjectActivity extends ListActivity {
                 startActivity(intent);
                 break;
 
-            case 6: // Native AD (Multiple Items)
+            case 6: // Native AD (List : Feed)
                 intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity8.class);
                 startActivity(intent);
                 break;
 
-            case 7: // Icon AD
+            case 7: // Native AD (List : Song)
+                intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity11.class);
+                startActivity(intent);
+                break;
+
+            case 8: // Icon AD
                 intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity10.class);
                 startActivity(intent);
                 break;
@@ -95,23 +101,23 @@ public class AdlibTestProjectActivity extends ListActivity {
         // 광고 subview 의 패키지 경로를 설정합니다. (실제로 작성된 패키지 경로로 수정해주세요.)
 
         // 쓰지 않을 광고플랫폼은 삭제해주세요.
-        AdlibConfig.getInstance().bindPlatform("ADAM","test.adlib.project.ads.SubAdlibAdViewAdam");
-        AdlibConfig.getInstance().bindPlatform("ADMOB","test.adlib.project.ads.SubAdlibAdViewAdmob");
-        AdlibConfig.getInstance().bindPlatform("CAULY","test.adlib.project.ads.SubAdlibAdViewCauly");
-        AdlibConfig.getInstance().bindPlatform("TAD","test.adlib.project.ads.SubAdlibAdViewTAD");
-        AdlibConfig.getInstance().bindPlatform("SHALLWEAD","test.adlib.project.ads.SubAdlibAdViewShallWeAd");
-        AdlibConfig.getInstance().bindPlatform("INMOBI","test.adlib.project.ads.SubAdlibAdViewInmobi");
-        AdlibConfig.getInstance().bindPlatform("MMEDIA","test.adlib.project.ads.SubAdlibAdViewMMedia");
-        AdlibConfig.getInstance().bindPlatform("MOBCLIX","test.adlib.project.ads.SubAdlibAdViewMobclix");
-        AdlibConfig.getInstance().bindPlatform("UPLUSAD","test.adlib.project.ads.SubAdlibAdViewUPlusAD");
-        AdlibConfig.getInstance().bindPlatform("MEZZO","test.adlib.project.ads.SubAdlibAdViewMezzo");
-        AdlibConfig.getInstance().bindPlatform("AMAZON","test.adlib.project.ads.SubAdlibAdViewAmazon");
-        AdlibConfig.getInstance().bindPlatform("MEDIBAAD","test.adlib.project.ads.SubAdlibAdViewMedibaAd");
-        AdlibConfig.getInstance().bindPlatform("MOBFOX","test.adlib.project.ads.SubAdlibAdViewMobfox");
-        AdlibConfig.getInstance().bindPlatform("MOPUB","test.adlib.project.ads.SubAdlibAdViewMopub");
-        AdlibConfig.getInstance().bindPlatform("ADMIXER","test.adlib.project.ads.SubAdlibAdViewAdmixer");
-        AdlibConfig.getInstance().bindPlatform("TNK","test.adlib.project.ads.SubAdlibAdViewTNK");
-        AdlibConfig.getInstance().bindPlatform("FACEBOOK","test.adlib.project.ads.SubAdlibAdViewFacebook");
+        AdlibConfig.getInstance().bindPlatform("ADAM", "test.adlib.project.ads.SubAdlibAdViewAdam");
+        AdlibConfig.getInstance().bindPlatform("ADMOB", "test.adlib.project.ads.SubAdlibAdViewAdmob");
+        AdlibConfig.getInstance().bindPlatform("CAULY", "test.adlib.project.ads.SubAdlibAdViewCauly");
+        AdlibConfig.getInstance().bindPlatform("TAD", "test.adlib.project.ads.SubAdlibAdViewTAD");
+        AdlibConfig.getInstance().bindPlatform("SHALLWEAD", "test.adlib.project.ads.SubAdlibAdViewShallWeAd");
+        AdlibConfig.getInstance().bindPlatform("INMOBI", "test.adlib.project.ads.SubAdlibAdViewInmobi");
+        AdlibConfig.getInstance().bindPlatform("MMEDIA", "test.adlib.project.ads.SubAdlibAdViewMMedia");
+        AdlibConfig.getInstance().bindPlatform("MOBCLIX", "test.adlib.project.ads.SubAdlibAdViewMobclix");
+        AdlibConfig.getInstance().bindPlatform("UPLUSAD", "test.adlib.project.ads.SubAdlibAdViewUPlusAD");
+        AdlibConfig.getInstance().bindPlatform("MEZZO", "test.adlib.project.ads.SubAdlibAdViewMezzo");
+        AdlibConfig.getInstance().bindPlatform("AMAZON", "test.adlib.project.ads.SubAdlibAdViewAmazon");
+        AdlibConfig.getInstance().bindPlatform("MEDIBAAD", "test.adlib.project.ads.SubAdlibAdViewMedibaAd");
+        AdlibConfig.getInstance().bindPlatform("MOBFOX", "test.adlib.project.ads.SubAdlibAdViewMobfox");
+        AdlibConfig.getInstance().bindPlatform("MOPUB", "test.adlib.project.ads.SubAdlibAdViewMopub");
+        AdlibConfig.getInstance().bindPlatform("ADMIXER", "test.adlib.project.ads.SubAdlibAdViewAdmixer");
+        AdlibConfig.getInstance().bindPlatform("TNK", "test.adlib.project.ads.SubAdlibAdViewTNK");
+        AdlibConfig.getInstance().bindPlatform("FACEBOOK", "test.adlib.project.ads.SubAdlibAdViewFacebook");
         // 쓰지 않을 플랫폼은 JAR 파일 및 test.adlib.project.ads 경로에서 삭제하면 최종 바이너리 크기를 줄일 수 있습니다.
 
         // SMART* dialog 노출 시점 선택시 / setAdlibKey 키가 호출되는 activity 가 시작 activity 이며 해당 activity가 종료되면 app 종료로 인식합니다.
@@ -140,14 +146,14 @@ public class AdlibTestProjectActivity extends ListActivity {
         super.onDestroy();
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         //Back키 눌렀을 때 dialog 닫히는것 막기
-        if(keyCode == KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             // 종료 대화상자 광고를 노출하기 위해서 호출합니다.
             _amanager.showAdDialog("취소", "확인", "App 을 정말로 종료하시겠습니까?");
 
 			/*
-			 * 필요시 아래와 같이 색상과 클릭 액션을 변경할 수 있습니다.
+             * 필요시 아래와 같이 색상과 클릭 액션을 변경할 수 있습니다.
 			 * backgroundColor, backgroundColor(click), textColor, textColor, textColor(click), lineColor
 			 */
 //			int[] colors = new int[]{0xffffffff, 0xffa8a8a8, 0xff404040, 0xff404040, 0xffdfdfdf};

@@ -23,21 +23,29 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
         // 테스트 광고 노출로, 상용일 경우 꼭 제거해야 합니다.
         setAdlibTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
 
+        // 배너 스케쥴에 등록된 광고 모두 광고 요청 실패 시 대기 시간 설정(단위:초, 기본:10초, 최소:5초)
+        // setBannerFailDelayTime(10);
+
+        // 배너 스케쥴 요청 실패 시 대기 시간동안 노출되는 View 설정
+        // View backFill = new View(this);
+        // backFill.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        // this.setBannerBackfillView(backFill);
+
         this.setAdsHandler(new Handler() {
             public void handleMessage(Message message) {
-                try
-                {
+                try {
                     switch (message.what) {
                         case AdlibManager.DID_SUCCEED:
                             Log.d("ADLIBr", "[Banner] onReceiveAd " + (String) message.obj);
                             break;
                         case AdlibManager.DID_ERROR:
-                            Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String)message.obj);
+                            Log.d("ADLIBr", "[Banner] onFailedToReceiveAd " + (String) message.obj);
+                            break;
+                        case AdlibManager.BANNER_FAILED:
+                            Log.d("ADLIBr", "[Banner] All Failed.");
                             break;
                     }
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
 
                 }
             }
@@ -49,7 +57,7 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
             @Override
             public void onClick(View v) {
 
-                if(avc != null)
+                if (avc != null)
                     return;
 
                 // 액티비티에 AdlibAdViewContainer 는 하나만 허용합니다.
@@ -61,7 +69,7 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
                 ViewGroup.LayoutParams p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 avc.setLayoutParams(p);
 
-                ViewGroup vg = (ViewGroup)findViewById(R.id.maincontainer);
+                ViewGroup vg = (ViewGroup) findViewById(R.id.maincontainer);
                 vg.addView(avc);
 
                 // 동적으로 생성한 adview 에 스케줄러를 바인드합니다.
@@ -71,11 +79,11 @@ public class AdlibTestProjectActivity3 extends AdlibActivity {
         };
         this.findViewById(R.id.btn1).setOnClickListener(cl);
 
-        cl = new View.OnClickListener(){
+        cl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(avc == null)
+                if (avc == null)
                     return;
 
                 AdlibTestProjectActivity3.this.destroyAdsContainer();

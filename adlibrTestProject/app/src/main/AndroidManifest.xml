@@ -199,6 +199,13 @@
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity11"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name" >
+
+        </activity>
     </application>
 
 </manifest>

@@ -11,9 +11,9 @@ import com.mocoplex.adlib.AdError;
 import com.mocoplex.adlib.AdlibIconAd;
 
 import kr.co.gapping.GappingAdListener;
+import kr.co.gapping.GappingConstans;
 import kr.co.gapping.GappingConstans.AdEvent;
 import kr.co.gapping.GappingConstans.AdStatus;
-import kr.co.gapping.GappingConstans.IconAlign;
 
 public class AdlibTestProjectActivity10 extends Activity {
 
@@ -26,7 +26,7 @@ public class AdlibTestProjectActivity10 extends Activity {
 
         ad = new AdlibIconAd(this, AdlibTestProjectConstants.ADLIB_API_KEY);
         ad.setTestMode(AdlibTestProjectConstants.ADLIB_TEST_MODE);
-        ad.setAlign(IconAlign.RIGHT);
+        ad.setAlign(GappingConstans.FloatingAlign.RIGHT);
         ad.setAdListener(new GappingAdListener() {
 
             @Override
