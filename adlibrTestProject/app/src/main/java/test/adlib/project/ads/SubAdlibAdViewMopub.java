@@ -27,7 +27,10 @@ import com.mopub.mobileads.MoPubInterstitial;
 import com.mopub.mobileads.MoPubView;
 
 /*
- AndroidManifest.xml 에 아래 내용을 추가해주세요.
+
+Gitgub url >> https://github.com/mopub/mopub-android-sdk
+
+AndroidManifest.xml 에 아래 내용을 추가해주세요.
  
 <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation"/>
 <activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation"/>
