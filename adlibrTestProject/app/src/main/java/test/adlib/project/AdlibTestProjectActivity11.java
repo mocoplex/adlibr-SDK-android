@@ -66,9 +66,7 @@ public class AdlibTestProjectActivity11 extends Activity {
             }
 
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-                anh.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         };
 
