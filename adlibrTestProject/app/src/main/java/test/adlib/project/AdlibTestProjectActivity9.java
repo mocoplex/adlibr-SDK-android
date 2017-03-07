@@ -45,7 +45,6 @@ public class AdlibTestProjectActivity9 extends Activity {
 
                 AdlibNativeLayout anl = new AdlibNativeLayout(AdlibTestProjectActivity9.this, R.layout.main9_item);
                 anl.setAdsData(item);
-
                 layout.removeView(anl);
                 anl.setVisibility(View.VISIBLE);
                 layout.addView(anl);
@@ -78,7 +77,6 @@ public class AdlibTestProjectActivity9 extends Activity {
             @Override
             public void onError(int errorCode) {
                 Log.d("ADLIB-Native", "onError ::: error code : " + errorCode);
-
                 Toast.makeText(AdlibTestProjectActivity9.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
             }
         });

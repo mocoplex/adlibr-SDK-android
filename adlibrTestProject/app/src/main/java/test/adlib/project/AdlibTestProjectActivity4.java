@@ -108,10 +108,6 @@ public class AdlibTestProjectActivity4 extends Activity {
         _amanager.showInterstitial(h);
     }
 
-    public void setVersionCheckingListner(AdlibManager.AdlibVersionCheckingListener l) {
-        _amanager.setVersionCheckingListner(l);
-    }
-
     // AD 영역을 동적으로 삭제할때 호출하는 메소드
     public void destroyAdsContainer() {
         _amanager.destroyAdsContainer();

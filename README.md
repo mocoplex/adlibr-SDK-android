@@ -10,6 +10,10 @@
 
 ## SDK Version History
 
+SDK version  4.5.0.2 (2017.03.07)
+> 샘플 업데이트 <br>
+마이너 버그 수정 <br>
+
 SDK version  4.5.0.1 (2017.02.22)
 > 네이티브 비디오 광고 개선 <br>
 마이너 버그 수정 <br>

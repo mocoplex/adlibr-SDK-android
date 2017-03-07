@@ -58,14 +58,12 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
         banner.setListener(new BannerListener() {
             @Override
             public void onBannerError(View banner, Exception e) {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onBannerError() - " + e.getMessage());
                 bGotAd = true;
                 failed();
             }
 
             @Override
             public void onBannerLoaded(View banner) {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onBannerLoaded() - " + banner.getVisibility() + " / " + SubAdlibAdViewMobfox.this.getVisibility());
                 bGotAd = true;
                 // 광고를 받아왔으면 이를 알려 화면에 표시합니다.
                 gotAd();
@@ -76,23 +74,19 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 
             @Override
             public void onBannerClosed(View banner) {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onBannerClosed() - ");
             }
 
             @Override
             public void onBannerFinished() {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onBannerFinished() - ");
             }
 
             @Override
             public void onBannerClicked(View banner) {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onBannerClicked() - ");
                 AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMobfox.this);
             }
 
             @Override
             public void onNoFill(View banner) {
-                Log.d("LSM", "SubAdlibAdViewMobfox.onNoFill() - ");
             }
         });
         banner.setInventoryHash(mofoxBannerID);

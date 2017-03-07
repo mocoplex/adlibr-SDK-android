@@ -33,6 +33,7 @@ public class AdlibTestProjectActivity extends ListActivity {
         itemList.add("Interstitial (View)");
         itemList.add("Native AD (List Type 1)");
         itemList.add("Native AD (List Type 2)");
+        itemList.add("Native AD (RecyclerView)");
         itemList.add("Icon AD");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
 
@@ -85,7 +86,12 @@ public class AdlibTestProjectActivity extends ListActivity {
                 startActivity(intent);
                 break;
 
-            case 8: // Icon AD
+            case 8: // Native AD (RecyclerView)
+                intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity12.class);
+                startActivity(intent);
+                break;
+
+            case 9: // Icon AD
                 intent = new Intent(AdlibTestProjectActivity.this, AdlibTestProjectActivity10.class);
                 startActivity(intent);
                 break;

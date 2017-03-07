@@ -1,210 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<manifest
     package="test.adlib.project"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk  android:minSdkVersion="11"
+    <!-- overrideLibrary 의 경우 MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
+    <uses-sdk
+        android:minSdkVersion="11"
         tools:overrideLibrary="com.millennialmedia"/>
 
-    <!-- 애드립 실행에 필요한 권한 각 플랫폼 별로 요청하는 권한이 모두 다르기 때문에 아래 권한들을 모두 추가하는것을 추천합니다. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 여기까지 애드립 사용을 위한 필수 권한 -->
+    <!-- 애드립 사용을 위한 필수 권한-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 애드립 사용을 위한 필수 권한 -->
 
     <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
 
+    <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name">
 
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
         <activity
             android:name="com.mocoplex.adlib.AdlibDialogActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
-
-        <activity android:name="com.mocoplex.adlib.AdlibVideoPlayer"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden" />
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent"/>
+        <activity
+            android:name="com.mocoplex.adlib.AdlibVideoPlayer"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <!-- 애드립 사용을 위해 꼭 추가해주세요. -->
 
         <!-- T-AD - 광고 노출을 위해 필요한 선언입니다. -->
-		<activity
-			android:name="com.skplanet.tad.AdActivity"
-			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-			android:label="Ad Activity"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-		</activity>
-		<receiver android:name="com.skplanet.tad.SyrupAdReceiver" > 
-		    <intent-filter>
-		        <action android:name="com.skplanet.syrupad.action.SAID_CHANGED" />
-		    </intent-filter>
-		</receiver>
-		<!-- TAD - 사용하지 않는다면 여기까지 삭제 -->
+        <activity
+            android:name="com.skplanet.tad.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:label="Ad Activity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <receiver android:name="com.skplanet.tad.SyrupAdReceiver">
+            <intent-filter>
+                <action android:name="com.skplanet.syrupad.action.SAID_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <!-- T-AD -->
 
         <!-- ADAM - 전면광고 노출을 위해 필요한 선언입니다. -->
         <activity
             android:name="com.kakao.adfit.publisher.impl.AdInterstitialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
+        <!-- ADAM -->
 
         <!-- ADMOB - Google Play 버전을 위한 선언입니다. -->
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <!-- ADMOB - 사용하지 않는다면 여기까지 삭제 -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <!-- ADMOB -->
 
-        <!-- INMOBI - 광고 노출을 위해 필요한 선언입니다. -->        
-		<activity android:name="com.inmobi.rendering.InMobiAdActivity"
-			android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			android:hardwareAccelerated="true" />
+
+        <!-- INMOBI - 광고 노출을 위해 필요한 선언입니다. -->
+        <activity
+            android:name="com.inmobi.rendering.InMobiAdActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- INMOBI -->
 
         <!-- SHALLWEAD - 광고 노출을 위해 필요한 선언입니다. -->
         <meta-data
             android:name="ShallWeAd_Application_Key"
-            android:value="발급받은 ShallWeAd 등록키" />
+            android:value="발급받은 ShallWeAd 등록키"/>
+
         <activity
             android:name="com.co.shallwead.sdk.activity.ShallWeAdActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:taskAffinity=""
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- SHALLWEAD -->
 
         <!-- MILLENNIAL MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
-        <!-- -->
         <activity
             android:name="com.millennialmedia.internal.MMActivity"
-            android:theme="@style/Theme.MMTransparent" />
-        <activity android:name="com.millennialmedia.internal.MMIntentWrapperActivity" />
+            android:theme="@style/Theme.MMTransparent"/>
+        <activity android:name="com.millennialmedia.internal.MMIntentWrapperActivity"/>
+        <!--MILLENNIAL MEDIA-->
 
         <!-- AXONIX(MOBCLIX) - 광고 노출을 위해 필요한 선언입니다. -->
         <!-- Add the application key -->
-        <meta-data android:name="com.axonix.APPLICATION_ID"
+        <meta-data
+            android:name="com.axonix.APPLICATION_ID"
             android:value="발급받은 AXONIX(MOBCLIX) 등록키"/>
         <!-- Axonix browser activity -->
         <activity
             android:name="com.axonix.android.sdk.AxonixBrowserActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:hardwareAccelerated="true" />
-
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!--AXONIX-->
 
         <!-- UPLUSAD - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity
+            android:name="kr.co.uplusad.dmpcontrol.LGUDMPActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <!--UPLUSAD-->
 
         <!-- MEZZO MEDIA - 광고 노출을 위해 필요한 선언입니다. -->
-        <meta-data android:name="MEZZO_WINDOW_ID" android:value="banner" />
+        <meta-data
+            android:name="MEZZO_WINDOW_ID"
+            android:value="banner"/>
         <!-- MEZZO GPS 사용여부 0:사용안함 1:사용 -->
-        <meta-data android:name="GPS_USE" android:value="0" />
+        <meta-data
+            android:name="GPS_USE"
+            android:value="0"/>
         <!-- MEZZO DEBUG 모드 사용여부 0:사용안함 1:사용 -->
-        <meta-data android:name="DEBUG_MODE" android:value="0" />
+        <meta-data
+            android:name="DEBUG_MODE"
+            android:value="0"/>
+
         <activity
             android:name="com.mapps.android.view.InterstitialView"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
+        <!--MEZZO MEDIA-->
 
         <!-- AMAZON - 광고 노출을 위해 필요한 선언입니다. -->
         <activity
             android:name="com.amazon.device.ads.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <!--AMAZON-->
 
         <!-- MEDIBA AD - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview" />
+        <activity android:name="mediba.ad.sdk.android.openx.MasAdClickWebview"/>
+        <!--MEDIBA AD-->
 
         <!-- MOBFOX - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="com.mobfox.sdk.interstitialads.InterstitialActivity"></activity>
+        <activity android:name="com.mobfox.sdk.interstitialads.InterstitialActivity"/>
+        <!--MOBFOX-->
 
         <!-- MOPUB - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation"/>
-        <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.mopub.mobileads.MoPubActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.mopub.mobileads.MraidActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.mopub.common.MoPubBrowser"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+            android:configChanges="keyboardHidden|orientation"/>
+        <!--MOPUB-->
 
         <!-- TNK - 광고 노출을 위해 필요한 선언입니다. -->
-        <meta-data android:name="tnkad_app_id" android:value="발급받은 TNK App-ID를 입력해주세요." />
-        <activity android:name="com.tnkfactory.ad.AdWallActivity" />
-        <activity android:name="com.tnkfactory.ad.AdMediaActivity" android:screenOrientation="landscape"/>
-        
+        <meta-data
+            android:name="tnkad_app_id"
+            android:value="발급받은 TNK App-ID를 입력해주세요."/>
+
+        <activity android:name="com.tnkfactory.ad.AdWallActivity"/>
+        <activity
+            android:name="com.tnkfactory.ad.AdMediaActivity"
+            android:screenOrientation="landscape"/>
+        <!--TNK-->
+
         <!-- Facebook Audience Network - 광고 노출을 위해 필요한 선언입니다. -->
-        <activity android:name="com.facebook.ads.InterstitialAdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <!-- 기본 권한 추가 끝 -->
-
+        <activity
+            android:name="com.facebook.ads.InterstitialAdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <!--Facebook-->
 
         <activity
             android:name=".AdlibTestProjectActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity2"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity3"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity4"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity5"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity6"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity7"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity8"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity9"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity10"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
         </activity>
         <activity
             android:name=".AdlibTestProjectActivity11"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:hardwareAccelerated="true"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".AdlibTestProjectActivity12"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name">
         </activity>
     </application>
 

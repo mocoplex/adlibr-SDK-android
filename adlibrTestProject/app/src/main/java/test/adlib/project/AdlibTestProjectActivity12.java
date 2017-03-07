@@ -3,19 +3,19 @@ package test.adlib.project;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.nativead.layout.AdlibNativeLayout;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeAdListener;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeHelper;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeItem;
@@ -31,48 +31,39 @@ import java.util.ArrayList;
 import test.adlib.project.util.bitmap.ImageCache;
 import test.adlib.project.util.bitmap.ImageFetcher;
 
-public class AdlibTestProjectActivity8 extends Activity {
+public class AdlibTestProjectActivity12 extends Activity {
 
     // 일반 Activity 에서의 adlib 연동
     private AdlibManager _amanager;
 
     private ArrayList<Object> mList = new ArrayList<Object>();
 
-    private ListView listView;
-    private Adapter listAdapter;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter recyclerAdapter;
+    private LinearLayoutManager layoutManager;
 
     // 광고 뷰 표출에 도움을 주는 클래스
     // AdlibNativeHelper 사용하지 않는 경우 광고뷰 관리 필수
     private AdlibNativeHelper anh = null;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.main8_list);
+        setContentView(R.layout.main12_recycler);
 
         initSampleFeedData();
+        recyclerAdapter = new Adapter(this, mList);
 
-        listView = (ListView) findViewById(R.id.list);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        listAdapter = new Adapter(this, mList);
-        listView.setAdapter(listAdapter);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
 
-        anh = new AdlibNativeHelper(this, listView);
-
-        AbsListView.OnScrollListener scrollListener = new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                // 세로 스크롤 형태의 레이아웃에서만 사용 가능 - 추후 가로 지원 예정
-                anh.onScrollStateChanged(view, scrollState);
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            }
-        };
-
-        listView.setOnScrollListener(scrollListener);
+        anh = new AdlibNativeHelper(this, recyclerView);
+        // 세로 스크롤 형태의 레이아웃에서만 사용 가능 - 추후 가로 지원 예정
+        anh.registerScrollChangedListener();
 
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
         _amanager = new AdlibManager(AdlibTestProjectConstants.ADLIB_API_KEY);
@@ -98,7 +89,7 @@ public class AdlibTestProjectActivity8 extends Activity {
                 // Log.d("ADLIB-Native", i + " -> GoButton Text : " + item.getBtnText());
                 if (item != null) {
                     mList.add(mList.size() / 2, item);
-                    listAdapter.notifyDataSetChanged();
+                    recyclerAdapter.notifyDataSetChanged();
                     anh.update();
                 }
             }
@@ -107,7 +98,7 @@ public class AdlibTestProjectActivity8 extends Activity {
             public void onError(int errorCode) {
                 Log.d("ADLIB-Native", "onError ::: error code : " + errorCode);
 
-                Toast.makeText(AdlibTestProjectActivity8.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdlibTestProjectActivity12.this, "광고수신 실패 :)", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -232,9 +223,10 @@ public class AdlibTestProjectActivity8 extends Activity {
         }
     }
 
-    public class Adapter extends BaseAdapter {
+    public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private ArrayList<Object> mList = new ArrayList<Object>();
+        private Context context;
 
         // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
         private final String IMAGE_CACHE_DIR = "images";
@@ -246,26 +238,8 @@ public class AdlibTestProjectActivity8 extends Activity {
         private final int VIEW_TYPE = 0;
         private final int VIEW_TYPE_AD = 1;
 
-        @Override
-        public int getItemViewType(int position) {
-
-            if (mList.get(position) instanceof AdlibNativeItem) {
-                // 광고 타입을 추가합니다.
-                return VIEW_TYPE_AD;
-            } else {
-                return VIEW_TYPE;
-            }
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            int viewTypeCount = super.getViewTypeCount();
-            return viewTypeCount + 1; // 기존 레이아웃의 타입에 1을 더합니다.
-        }
-
-        // ---------- 리스트 아이템의 레이아웃 재정의 ---------- //
-
         public Adapter(Context context, ArrayList<Object> objects) {
+            this.context = context;
             mList = objects;
 
             DisplayMetrics dm = context.getResources().getDisplayMetrics();
@@ -276,52 +250,58 @@ public class AdlibTestProjectActivity8 extends Activity {
         }
 
         @Override
-        public int getCount() {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            RecyclerView.ViewHolder retHolder = null;
+            if (viewType == VIEW_TYPE) {
+                View itemView = getLayoutInflater().inflate(R.layout.main8_item_sample, null);
+                retHolder = new SampleViewHolder(itemView);
+            } else {
+                View itemView = new AdlibNativeLayout(context, R.layout.main8_item);
+                retHolder = new AdViewHolder(itemView);
+            }
+            return retHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            // 광고 ViewHolder
+            if (holder instanceof AdViewHolder) {
+                AdlibNativeItem item = (AdlibNativeItem) mList.get(position);
+
+                AdViewHolder adHolder = (AdViewHolder) holder;
+                AdlibNativeLayout layout = (AdlibNativeLayout) adHolder.itemView;
+                layout.setAdsData(item);
+
+            } else if (holder instanceof SampleViewHolder) {
+                SampleFeedData data = (SampleFeedData) mList.get(position);
+                SampleViewHolder sampleHolder = (SampleViewHolder) holder;
+                ImageView profileImg = sampleHolder.getProfileImg();
+                loadImage(data.getProfilePic(), profileImg, 100, 100);
+
+                ImageView mainImg = sampleHolder.getMainImg();
+                loadImage(data.getImg(), mainImg, data.getWidth(), data.getHeight());
+
+                TextView nameTxt = sampleHolder.getNameTxt();
+                nameTxt.setText(data.getName());
+
+                TextView statusTxt = sampleHolder.getStatusTxt();
+                statusTxt.setText(data.getStatus());
+            }
+        }
+
+        @Override
+        public int getItemCount() {
             return mList.size();
         }
 
         @Override
-        public Object getItem(int location) {
-            return mList.get(location);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            int type = getItemViewType(position);
-
-            if (type == VIEW_TYPE) {
-
-                // 기본 뷰에 대해 처리를 합니다.
-                if (convertView == null) {
-                    convertView = getLayoutInflater().inflate(R.layout.main8_item_sample, null);
-                }
-                SampleFeedData data = (SampleFeedData) mList.get(position);
-                ImageView profileImg = (ImageView) convertView.findViewById(R.id.profilePic);
-                loadImage(data.getProfilePic(), profileImg, 100, 100);
-
-                ImageView mainImg = (ImageView) convertView.findViewById(R.id.img);
-                loadImage(data.getImg(), mainImg, data.getWidth(), data.getHeight());
-
-                TextView nameTxt = (TextView) convertView.findViewById(R.id.name);
-                nameTxt.setText(data.getName());
-
-                TextView statusTxt = (TextView) convertView.findViewById(R.id.status);
-                statusTxt.setText(data.getStatus());
-
-            } else if (type == VIEW_TYPE_AD) {
-
-                // 광고 뷰에 대해 처리를 합니다.
-                AdlibNativeItem item = (AdlibNativeItem) mList.get(position);
-                return anh.getView(convertView, item, R.layout.main8_item);
+        public int getItemViewType(int position) {
+            if (mList.get(position) instanceof AdlibNativeItem) {
+                // 광고 타입을 추가합니다.
+                return VIEW_TYPE_AD;
+            } else {
+                return VIEW_TYPE;
             }
-
-            return convertView;
         }
 
         // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
@@ -330,6 +310,45 @@ public class AdlibTestProjectActivity8 extends Activity {
             if (imageFetcher != null) {
                 imageFetcher.loadImage(url, view);
             }
+        }
+    }
+
+    public class SampleViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView profileImg;
+        private ImageView mainImg;
+        private TextView nameTxt;
+        private TextView statusTxt;
+
+        public SampleViewHolder(View itemView) {
+            super(itemView);
+            profileImg = (ImageView) itemView.findViewById(R.id.profilePic);
+            mainImg = (ImageView) itemView.findViewById(R.id.img);
+            nameTxt = (TextView) itemView.findViewById(R.id.name);
+            statusTxt = (TextView) itemView.findViewById(R.id.status);
+        }
+
+        public ImageView getMainImg() {
+            return mainImg;
+        }
+
+        public TextView getNameTxt() {
+            return nameTxt;
+        }
+
+        public ImageView getProfileImg() {
+            return profileImg;
+        }
+
+        public TextView getStatusTxt() {
+            return statusTxt;
+        }
+    }
+
+    public class AdViewHolder extends RecyclerView.ViewHolder {
+
+        public AdViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

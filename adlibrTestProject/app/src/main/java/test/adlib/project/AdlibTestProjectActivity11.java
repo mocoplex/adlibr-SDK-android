@@ -42,6 +42,7 @@ public class AdlibTestProjectActivity11 extends Activity {
     private Adapter listAdapter;
 
     // 광고 뷰 표출에 도움을 주는 클래스
+    // AdlibNativeHelper 사용하지 않는 경우 광고뷰 관리 필수
     private AdlibNativeHelper anh = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class AdlibTestProjectActivity11 extends Activity {
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // 세로 스크롤 형태의 레이아웃에서만 사용 가능 - 추후 가로 지원 예정
                 anh.onScrollStateChanged(view, scrollState);
             }
 
@@ -135,7 +137,7 @@ public class AdlibTestProjectActivity11 extends Activity {
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < size; j++) {
                     JSONObject obj = arr.getJSONObject(j);
-                    sampleSongData child = new sampleSongData(obj);
+                    SampleSongData child = new SampleSongData(obj);
                     mList.add(child);
                 }
             }
@@ -162,14 +164,14 @@ public class AdlibTestProjectActivity11 extends Activity {
 
     }
 
-    private class sampleSongData {
+    private class SampleSongData {
         private int id;
         private String title;
         private String artist;
         private String duration;
         private String thumb_url;
 
-        public sampleSongData(JSONObject obj) {
+        public SampleSongData(JSONObject obj) {
             init(obj);
         }
 
@@ -276,7 +278,7 @@ public class AdlibTestProjectActivity11 extends Activity {
                 if (convertView == null) {
                     convertView = getLayoutInflater().inflate(R.layout.main11_item_sample, null);
                 }
-                sampleSongData data = (sampleSongData) mList.get(position);
+                SampleSongData data = (SampleSongData) mList.get(position);
                 ImageView profileImg = (ImageView) convertView.findViewById(R.id.icon);
                 loadImage(data.getThumb_url(), profileImg, 100, 100);
 
