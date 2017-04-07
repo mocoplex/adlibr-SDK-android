@@ -6,12 +6,10 @@
  */
 
 /*
- * confirmed compatible with Inmobi SDK 5.1.1
+ * confirmed compatible with Inmobi SDK 6.1.1
  */
 
 package test.adlib.project.ads;
-
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,11 +24,13 @@ import com.inmobi.ads.InMobiAdRequestStatus;
 import com.inmobi.ads.InMobiBanner;
 import com.inmobi.ads.InMobiBanner.BannerAdListener;
 import com.inmobi.ads.InMobiInterstitial;
-import com.inmobi.ads.InMobiInterstitial.InterstitialAdListener;
+import com.inmobi.ads.InMobiInterstitial.InterstitialAdListener2;
 import com.inmobi.sdk.InMobiSdk;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
+
+import java.util.Map;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.
@@ -57,8 +57,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 
 	private int getPixels(int dipValue) {
         Resources r = getResources();
-        int px = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, 
-        r.getDisplayMetrics());
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, r.getDisplayMetrics());
         return px;
 	}
 	
@@ -69,7 +68,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	public SubAdlibAdViewInmobi(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
-		InMobiSdk.init(context, inmobiAccountId);
+        InMobiSdk.init((Activity) context, inmobiAccountId);
 	}
 	
 	public void initInmobiView() {
@@ -195,9 +194,9 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 	}
 	
 	public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
-		InMobiSdk.init(ctx, inmobiAccountId);
+        InMobiSdk.init((Activity)ctx, inmobiAccountId);
 		
-		InterstitialAdListener intersListener = new InterstitialAdListener() {
+        InterstitialAdListener2 intersListener = new InterstitialAdListener2() {
 
 			@Override
 			public void onAdDismissed(InMobiInterstitial ad) {
@@ -235,7 +234,12 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 				}
 			}
 
-			@Override
+            @Override
+            public void onAdReceived(InMobiInterstitial inMobiInterstitial) {
+
+            }
+
+            @Override
 			public void onAdLoadSucceeded(InMobiInterstitial ad) {
 				
 				try{
@@ -258,7 +262,17 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 				
 			}
 
-			@Override
+            @Override
+            public void onAdDisplayFailed(InMobiInterstitial inMobiInterstitial) {
+
+            }
+
+            @Override
+            public void onAdWillDisplay(InMobiInterstitial inMobiInterstitial) {
+
+            }
+
+            @Override
 			public void onUserLeftApplication(InMobiInterstitial ad) {
 				
 			}

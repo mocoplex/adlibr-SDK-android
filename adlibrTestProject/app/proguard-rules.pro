@@ -32,11 +32,35 @@
 # 여기까지가 필수 설정입니다.
 
 # 아래부터 끝까지는 광고 플랫폼 사용을 위한 설정입니다.
+# 사용하시는 플랫폼에 필요한 부분 추가 부탁드립니다.
 # 사용하지 않을 광고 플랫폼 설정은 삭제하셔도 됩니다.
 
 # Inmobi 사용을 위한 설정입니다.
 -keep class com.inmobi.** { *; }
--keep class test.adlib.project.ads.SubAdlibAdViewInmobi { *; }
+-dontwarn com.inmobi.**
+-keep public class com.google.android.gms.**
+-dontwarn com.google.android.gms.**
+-dontwarn com.squareup.picasso.**
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient{
+     public *;
+}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info{
+     public *;
+}
+
+## skip the Picasso library classes
+-keep class com.squareup.picasso.** {*;}
+-dontwarn com.squareup.picasso.**
+-dontwarn com.squareup.okhttp.**
+
+## skip Moat classes
+-keep class com.moat.** {*;}
+-dontwarn com.moat.**
+
+## skip AVID classes
+-keep class com.integralads.avid.library.* {*;}
+
+# Inmobi 사용을 위한 설정입니다. -- END
 
 # Adam 사용을 위한 설정입니다.
 -keep class net.daum.adam.publisher.* { public *; }
@@ -97,3 +121,8 @@
 
 # Facebook Audience Network 사용을 위한 설정입니다.
 -keep class test.adlib.project.ads.SubAdlibAdViewFacebook { *; }
+
+# MobFox 사용을 위한 설정입니다.
+-keep class com.mobfox.** { *; } 
+-keep class com.mobfox.adapter.** {*;} 
+-keep class com.mobfox.sdk.** {*;}

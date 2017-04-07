@@ -2,7 +2,7 @@
 <resources>
     <color name="white">#ffffff</color>
 
-    <!-- AdlibTestProjectActivity8 -->
+    <!-- AdlibNativeSampleFeedActivity -->
     <color name="feed_bg">#555555</color>
     <color name="feed_description_bg">#dff7f4</color>
     <color name="feed_img_bg">#ffffff</color>
@@ -10,7 +10,7 @@
     <color name="feed_status">#aaa</color>
     <color name="feed_landing">#338eff</color>
 
-    <!-- AdlibTestProjectActivity11 -->
+    <!-- AdlibNativeSampleSongActivity -->
     <color name="song_bg">#ffffff</color>
     <color name="song_divider">#ddd</color>
     <color name="song_description_bg">#ffffff</color>

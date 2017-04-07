@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with TNK SDK 6.10
+ * confirmed compatible with TNK SDK 6.33
  */
 
 package test.adlib.project.ads;

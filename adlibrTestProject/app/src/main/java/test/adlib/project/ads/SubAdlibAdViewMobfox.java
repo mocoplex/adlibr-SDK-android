@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with mobfox SDK 5.0.0
+ * confirmed compatible with mobfox SDK v3.2.5
 */
 package test.adlib.project.ads;
 
@@ -14,7 +14,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 

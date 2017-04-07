@@ -6,18 +6,18 @@
  */
 
 /*
- * confirmed compatible with ShallWeAd SDK 20151016
+ * confirmed compatible with ShallWeAd SDK v1.8_20160804
  */
 
 package test.adlib.project.ads;
 
-import com.co.shallwead.sdk.ShallWeAdBanner.ShallWeAdBannerListener;
-import com.co.shallwead.sdk.ShallWeAdBannerForMediation;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+
+import com.co.shallwead.sdk.ShallWeAdBanner.ShallWeAdBannerListener;
+import com.co.shallwead.sdk.ShallWeAdBannerForMediation;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/feed_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/feed_bg_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/feed_description_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="@dimen/feed_profile_size"
+            android:layout_height="@dimen/feed_profile_size"
+            android:layout_marginRight="@dimen/feed_profile_margin"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/feed_name"
+                android:textSize="@dimen/feed_name_size"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/feed_status"
+                android:textSize="@dimen/feed_status_size"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/feed_img_bg">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feed_img_height"
+            android:layout_marginBottom="@dimen/feed_img_margin"
+            android:layout_marginTop="@dimen/feed_img_margin"
+            android:scaleType="centerCrop"/>
+    </RelativeLayout>
+
+</LinearLayout>

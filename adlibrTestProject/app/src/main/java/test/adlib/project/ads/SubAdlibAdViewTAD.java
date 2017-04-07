@@ -6,19 +6,10 @@
  */
 
 /*
- * confirmed compatible with T ad SDK 3.13.0
+ * confirmed compatible with T ad SDK 3.16
  */
 
 package test.adlib.project.ads;
-
-import com.mocoplex.adlib.AdlibManager;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.skplanet.tad.AdInterstitial;
-import com.skplanet.tad.AdInterstitialListener;
-import com.skplanet.tad.AdListener;
-import com.skplanet.tad.AdRequest.ErrorCode;
-import com.skplanet.tad.AdView.AnimationType;
-import com.skplanet.tad.AdSlot;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +17,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
+
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
+import com.skplanet.tad.AdInterstitial;
+import com.skplanet.tad.AdInterstitialListener;
+import com.skplanet.tad.AdListener;
+import com.skplanet.tad.AdRequest.ErrorCode;
+import com.skplanet.tad.AdSlot;
+import com.skplanet.tad.AdView.AnimationType;
 
 /*
 AndroidManifest.xml 에 아래 내용을 추가해주세요.

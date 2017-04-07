@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with MillennialMedia SDK 6.1
+ * confirmed compatible with MillennialMedia SDK 6.3.1
  */
 
 package test.adlib.project.ads;
@@ -16,17 +16,13 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.LinearLayout;
 
-import com.millennialmedia.InterstitialAd;
-import com.millennialmedia.MMSDK;
 import com.millennialmedia.InlineAd;
-import com.millennialmedia.MMException;
 import com.millennialmedia.InlineAd.InlineErrorStatus;
+import com.millennialmedia.InterstitialAd;
 import com.millennialmedia.InterstitialAd.InterstitialErrorStatus;
+import com.millennialmedia.MMException;
+import com.millennialmedia.MMSDK;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;

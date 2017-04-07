@@ -25,9 +25,8 @@ import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 /*
 AndroidManifest.xml 에 아래 내용을 추가해주세요.
-
- <activity android:name="com.facebook.ads.InterstitialAdActivity"
-	android:configChanges="keyboardHidden|orientation|screenSize" />
+	<activity android:name="com.facebook.ads.AudienceNetworkActivity"
+ 			android:configChanges="keyboardHidden|orientation|screenSize" />
 */
 
 public class SubAdlibAdViewFacebook extends SubAdlibAdViewCore {

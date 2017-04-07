@@ -24,19 +24,36 @@ android {
 }
 
 dependencies {
+    //default
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.google.android.gms:play-services-base:8.4.0'
-    compile 'com.google.android.gms:play-services-ads:8.4.0'
-    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.google.android.gms:play-services-base:10.2.0'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.android.support:multidex:1.0.1'
+
+    // Adfit
+    compile(name: 'AdfitSDK-2.4.1', ext: 'aar')
+
+    // facebook audiencenetwork
+    // Audience Network SDK. Only versions 4.6.0 and above are available
+    compile 'com.facebook.android:audience-network-sdk:4.+'
+
+    // Inmobi
+    compile 'com.inmobi.monetization:inmobi-ads:6.1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     // Mopub
-    compile('com.mopub:mopub-sdk:4.12.0@aar') {
+    compile('com.mopub:mopub-sdk:4.13.0@aar') {
         transitive = true
     }
+
     // MillenialMedia
-    compile(name: 'mm-ad-sdk', ext: 'aar')
-    // Facebook AudienceNetwork
-    compile(name: 'AudienceNetwork', ext: 'aar')
-    // Adfit
-    compile(name: 'AdfitSDK-2.4.0', ext: 'aar')
+    compile(name: 'mm-ad-sdk-v6.3.1', ext: 'aar')
+
+    // Inbomi
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+
+    //MobFox
+    compile 'com.github.mobfox:MobFox-Android-SDK-Core:3.2.5'
+
 }

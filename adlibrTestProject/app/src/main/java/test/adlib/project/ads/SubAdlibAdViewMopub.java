@@ -6,7 +6,7 @@
  */
 
 /*
- * confirmed compatible with mopub SDK 3.8.0
+ * confirmed compatible with mopub SDK 4.13
 */
 
 package test.adlib.project.ads;
@@ -17,7 +17,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.widget.LinearLayout;
 
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;

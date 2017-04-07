@@ -6,19 +6,10 @@
  */
 
 /*
- * confirmed compatible with Axonix(mobclix) SDK 4.3.0
+ * confirmed compatible with Axonix(mobclix) SDK 4.4.0
  */
 
 package test.adlib.project.ads;
-
-import com.axonix.android.sdk.AxonixAdView;
-import com.axonix.android.sdk.AxonixAdViewListener;
-import com.axonix.android.sdk.AxonixFullScreenAdViewListener;
-import com.axonix.android.sdk.AxonixFullScreenAdView;
-import com.axonix.android.sdk.AxonixMMABannerXLAdView;
-import com.mocoplex.adlib.AdlibManager;
-import com.mocoplex.adlib.SubAdlibAdViewCore;
-import com.tnkfactory.ad.TnkSession;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +17,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
+
+import com.axonix.android.sdk.AxonixAdView;
+import com.axonix.android.sdk.AxonixAdViewListener;
+import com.axonix.android.sdk.AxonixFullScreenAdView;
+import com.axonix.android.sdk.AxonixFullScreenAdViewListener;
+import com.axonix.android.sdk.AxonixMMABannerXLAdView;
+import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 /*
  AndroidManifest.xml 에 아래 내용을 추가해주세요.

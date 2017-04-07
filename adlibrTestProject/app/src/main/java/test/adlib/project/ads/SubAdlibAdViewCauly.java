@@ -6,10 +6,17 @@
  */
 
 /*
- * confirmed compatible with cauly SDK 3.3.30
+ * confirmed compatible with cauly SDK 3.4.11
  */
 
 package test.adlib.project.ads;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.view.View;
 
 import com.fsn.cauly.CaulyAdInfo;
 import com.fsn.cauly.CaulyAdInfoBuilder;
@@ -18,13 +25,6 @@ import com.fsn.cauly.CaulyInterstitialAd;
 import com.fsn.cauly.CaulyInterstitialAdListener;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
-
-import android.app.Activity;
-import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.util.AttributeSet;
-import android.view.View;
 
 // 자세한 세부 내용은 CAULY SDK 개발 문서를 참조해주세요.
 public class SubAdlibAdViewCauly extends SubAdlibAdViewCore implements com.fsn.cauly.CaulyAdViewListener {
