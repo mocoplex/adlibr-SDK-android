@@ -1,11 +1,11 @@
 # ADLib Android SDK 적용 샘플 프로젝트
 
-<br>
 애드립 광고 연동 및 애드립에서 제공하는 광고 플랫폼 미디에이션 연동을 적용하기위한 샘플 프로젝트를 포함합니다. <br>
 <br>
 
 ## 프로젝트 설정 및 가이드 
-* [프로젝트 설정 가이드 링크](http://developer.adlibr.com/ssp_android_guide.html)
+* [프로젝트 설정 가이드 링크 #1](http://developer.adlibr.com/ssp_android_guide.html)
+* [프로젝트 설정 가이드 링크 #2](./adlibrTestProject/README.md)
 <br>
 
 ## SDK Version History
