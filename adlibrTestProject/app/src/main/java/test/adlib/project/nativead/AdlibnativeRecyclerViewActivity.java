@@ -2,10 +2,10 @@ package test.adlib.project.nativead;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.nativead.layout.AdlibNativeLayout;
@@ -30,8 +31,6 @@ import java.util.ArrayList;
 
 import test.adlib.project.AdlibTestProjectConstants;
 import test.adlib.project.R;
-import test.adlib.project.util.bitmap.ImageCache;
-import test.adlib.project.util.bitmap.ImageFetcher;
 
 public class AdlibnativeRecyclerViewActivity extends Activity {
 
@@ -46,7 +45,7 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
 
     // 광고 뷰 표출에 도움을 주는 클래스
     // AdlibNativeHelper 사용하지 않는 경우 광고뷰 관리 필수
-    private AdlibNativeHelper anh = null;
+    private AdlibNativeHelper nativeHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +62,9 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerAdapter);
 
-        anh = new AdlibNativeHelper(this, recyclerView);
+        nativeHelper = new AdlibNativeHelper(recyclerView);
         // 세로 스크롤 형태의 레이아웃에서만 사용 가능 - 추후 가로 지원 예정
-        anh.registerScrollChangedListener();
+        nativeHelper.registerScrollChangedListener();
 
         // 각 애드립 액티비티에 애드립 앱 키값을 필수로 넣어주어야 합니다.
         _amanager = new AdlibManager(AdlibTestProjectConstants.ADLIB_API_KEY);
@@ -92,7 +91,7 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
                 if (item != null) {
                     mList.add(mList.size() / 2, item);
                     recyclerAdapter.notifyDataSetChanged();
-                    anh.update();
+                    nativeHelper.update();
                 }
             }
 
@@ -105,22 +104,31 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
         });
     }
 
+    @Override
     protected void onResume() {
         _amanager.onResume(this);
-        anh.onResume();
+        nativeHelper.onResume();
         super.onResume();
     }
 
+    @Override
     protected void onPause() {
         _amanager.onPause(this);
-        anh.onPause();
+        nativeHelper.onPause();
         super.onPause();
     }
 
+    @Override
     protected void onDestroy() {
         _amanager.onDestroy(this);
-        anh.onDestroy();
+        nativeHelper.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        nativeHelper.update();
     }
 
     private void initSampleFeedData() {
@@ -230,11 +238,6 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
         private ArrayList<Object> mList = new ArrayList<Object>();
         private Context context;
 
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
-        private final String IMAGE_CACHE_DIR = "images";
-        private ImageFetcher imageFetcher;
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
-
         // ---------- 리스트 아이템의 레이아웃 재정의 ---------- //
 
         private final int VIEW_TYPE = 0;
@@ -244,11 +247,6 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
             this.context = context;
             mList = objects;
 
-            DisplayMetrics dm = context.getResources().getDisplayMetrics();
-            ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams(context, IMAGE_CACHE_DIR);
-            cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
-            imageFetcher = new ImageFetcher(context, dm.widthPixels, dm.heightPixels);
-            imageFetcher.addImageCache(cacheParams);
         }
 
         @Override
@@ -272,16 +270,27 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
 
                 AdViewHolder adHolder = (AdViewHolder) holder;
                 AdlibNativeLayout layout = (AdlibNativeLayout) adHolder.itemView;
+
+                // 광고 데이터 설정
                 layout.setAdsData(item);
+
+                // 인앱 랜딩 지원 - 옵션
+                // 콜백으로 전달되는 URL 변경 시 클릭 집계 문제가 발생할 수 있습니다.
+                // layout.setAdsData(item, new AdlibInAppLandingListener() {
+                //     @Override
+                //     public void onLanding(String url) {
+                //
+                //     }
+                // });
 
             } else if (holder instanceof SampleViewHolder) {
                 SampleFeedData data = (SampleFeedData) mList.get(position);
                 SampleViewHolder sampleHolder = (SampleViewHolder) holder;
                 ImageView profileImg = sampleHolder.getProfileImg();
-                loadImage(data.getProfilePic(), profileImg, 100, 100);
+                Glide.with(profileImg).load(data.getProfilePic()).into(profileImg);
 
                 ImageView mainImg = sampleHolder.getMainImg();
-                loadImage(data.getImg(), mainImg, data.getWidth(), data.getHeight());
+                Glide.with(mainImg).load(data.getImg()).into(mainImg);
 
                 TextView nameTxt = sampleHolder.getNameTxt();
                 nameTxt.setText(data.getName());
@@ -303,14 +312,6 @@ public class AdlibnativeRecyclerViewActivity extends Activity {
                 return VIEW_TYPE_AD;
             } else {
                 return VIEW_TYPE;
-            }
-        }
-
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
-        private void loadImage(String url, ImageView view, int width, int height) {
-
-            if (imageFetcher != null) {
-                imageFetcher.loadImage(url, view);
             }
         }
     }

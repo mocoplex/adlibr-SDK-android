@@ -27,6 +27,7 @@
     <!-- 플랫폼에 따라 권한을 추가하시기 바랍니다. (애드립의 필수는 아닙니다.) -->
     <application
         android:icon="@mipmap/ic_launcher"
+        android:name="android.support.multidex.MultiDexApplication"
         android:label="@string/app_name"
         android:allowBackup="false"
         android:theme="@android:style/Theme.Black">

@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.MemoryCategory;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import test.adlib.project.banner.AdlibBannerDynamicActivity;
 import test.adlib.project.banner.AdlibBannerMediationActivity;
 import test.adlib.project.etc.AdlibIconAdActivity;
+import test.adlib.project.etc.AdlibSampleActivity;
 import test.adlib.project.interstitial.AdlibIntersDynamicActivity;
 import test.adlib.project.interstitial.AdlibIntersMediationActivity;
 import test.adlib.project.nativead.AdlibNativeSampleFeedActivity;
@@ -35,6 +38,9 @@ public class AdlibTestProjectActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Glide Library
+        Glide.get(this).setMemoryCategory(MemoryCategory.HIGH);
 
         // 샘플 프로젝트 화면 구성
         initLayout();
@@ -101,7 +107,7 @@ public class AdlibTestProjectActivity extends ListActivity {
                 intent = new Intent(this, AdlibIconAdActivity.class);
                 break;
             case ADLIB_ACTIVITY:
-                intent = new Intent(this, AdlibIconAdActivity.class);
+                intent = new Intent(this, AdlibSampleActivity.class);
                 break;
         }
 

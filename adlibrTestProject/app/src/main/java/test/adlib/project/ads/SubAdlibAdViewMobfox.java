@@ -21,7 +21,6 @@ import com.mobfox.sdk.bannerads.Banner;
 import com.mobfox.sdk.bannerads.BannerListener;
 import com.mobfox.sdk.interstitialads.InterstitialAd;
 import com.mobfox.sdk.interstitialads.InterstitialAdListener;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -66,9 +65,6 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
                 bGotAd = true;
                 // 광고를 받아왔으면 이를 알려 화면에 표시합니다.
                 gotAd();
-
-                // 미디에이션 통계 정보
-                AdlibConfig.getInstance().bannerImp(SubAdlibAdViewMobfox.this);
             }
 
             @Override
@@ -81,7 +77,6 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 
             @Override
             public void onBannerClicked(View banner) {
-                AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMobfox.this);
             }
 
             @Override
@@ -204,18 +199,10 @@ public class SubAdlibAdViewMobfox extends SubAdlibAdViewCore {
 
             @Override
             public void onInterstitialClicked(InterstitialAd interstitial) {
-                try {
-                    AdlibConfig.getInstance().interstitialClk(adlibKey, "MOBFOX");
-                } catch (Exception e) {
-                }
             }
 
             @Override
             public void onInterstitialShown(InterstitialAd interstitial) {
-                try {
-                    AdlibConfig.getInstance().interstitialImp(adlibKey, "MOBFOX");
-                } catch (Exception e) {
-                }
             }
         };
         interstitial.setListener(listener);

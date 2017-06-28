@@ -5,21 +5,21 @@
 
 ## 지원 광고 플랫폼
 - adlib / adlib-house 
-- AdMixer v1.4.0
-- Adfit(Adam) v2.4.1
+- AdMixer v1.4.2
+- Adfit(Adam) v2.4.2
 - Admob   Google Play Version
 - Amazon  v5.8.1.1
 - Axonix(Mobclix) v4.4.0
-- Cauly   v3.4.11
-- FaceBook    v4+
-- Inmobi  v6.1.1
-- MillennialMedia v6.1
+- Cauly   v3.4.15
+- FaceBook v4.23.0
+- Inmobi  v6.2.0
+- MillennialMedia v6.4.0
 - MezzoMedia(A-plus)  v2.0(20161207)
-- Mobfox  v3.2.5
-- Mopub   v4.13
-- ShallWeAd   v1.8_20160804
+- Mobfox  v3.2.7
+- Mopub   v4.15
+- ShallWeAd   v1.8_20170124
 - T-ad(Syrup Ad)  v3.16
-- TNK v6.33
+- TNK v6.34
 
 
 ## 개발환경

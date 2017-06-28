@@ -22,7 +22,6 @@ import android.view.View;
 import com.kakao.adfit.publisher.AdInterstitial;
 import com.kakao.adfit.publisher.AdView;
 import com.kakao.adfit.publisher.impl.AdError;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -60,7 +59,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
         // 광고 클릭시 실행할 리스너
         ad.setOnAdClickedListener(new AdView.OnAdClickedListener() {
             public void OnAdClicked() {
-                AdlibConfig.getInstance().bannerClk(SubAdlibAdViewAdam.this);
+
             }
         });
 
@@ -78,8 +77,6 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
                 bGotAd = true;
                 // 광고를 받아왔으면 이를 알려 화면에 표시합니다.
                 gotAd();
-
-                AdlibConfig.getInstance().bannerImp(SubAdlibAdViewAdam.this);
             }
         });
 

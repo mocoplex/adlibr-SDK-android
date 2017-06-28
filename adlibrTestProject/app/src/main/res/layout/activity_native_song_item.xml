@@ -79,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/song_landing"
+            android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="@dimen/song_artist_size"/>
     </LinearLayout>

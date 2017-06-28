@@ -2,8 +2,8 @@ package test.adlib.project.nativead;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
+import com.mocoplex.adlib.nativead.layout.AdlibNativeLayout;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeAdListener;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeHelper;
 import com.mocoplex.adlib.platform.nativeads.AdlibNativeItem;
@@ -30,8 +32,6 @@ import java.util.ArrayList;
 
 import test.adlib.project.AdlibTestProjectConstants;
 import test.adlib.project.R;
-import test.adlib.project.util.bitmap.ImageCache;
-import test.adlib.project.util.bitmap.ImageFetcher;
 
 public class AdlibNativeSampleSongActivity extends Activity {
 
@@ -45,7 +45,7 @@ public class AdlibNativeSampleSongActivity extends Activity {
 
     // 광고 뷰 표출에 도움을 주는 클래스
     // AdlibNativeHelper 사용하지 않는 경우 광고뷰 관리 필수
-    private AdlibNativeHelper anh = null;
+    private AdlibNativeHelper nativeHelper = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +59,14 @@ public class AdlibNativeSampleSongActivity extends Activity {
         listAdapter = new Adapter(this, mList);
         listView.setAdapter(listAdapter);
 
-        anh = new AdlibNativeHelper(this, listView);
+        nativeHelper = new AdlibNativeHelper(listView);
 
         AbsListView.OnScrollListener scrollListener = new AbsListView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 // 세로 스크롤 형태의 레이아웃에서만 사용 가능 - 추후 가로 지원 예정
-                anh.onScrollStateChanged(view, scrollState);
+                nativeHelper.onScrollStateChanged(view, scrollState);
             }
 
             @Override
@@ -100,7 +100,7 @@ public class AdlibNativeSampleSongActivity extends Activity {
                 if (item != null) {
                     mList.add(mList.size() / 2, item);
                     listAdapter.notifyDataSetChanged();
-                    anh.update();
+                    nativeHelper.update();
                 }
             }
 
@@ -113,22 +113,31 @@ public class AdlibNativeSampleSongActivity extends Activity {
         });
     }
 
+    @Override
     protected void onResume() {
         _amanager.onResume(this);
-        anh.onResume();
+        nativeHelper.onResume();
         super.onResume();
     }
 
+    @Override
     protected void onPause() {
         _amanager.onPause(this);
-        anh.onPause();
+        nativeHelper.onPause();
         super.onPause();
     }
 
+    @Override
     protected void onDestroy() {
         _amanager.onDestroy(this);
-        anh.onDestroy();
+        nativeHelper.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        nativeHelper.update();
     }
 
     private void initSampleSongData() {
@@ -213,12 +222,9 @@ public class AdlibNativeSampleSongActivity extends Activity {
 
     public class Adapter extends BaseAdapter {
 
-        private ArrayList<Object> mList = new ArrayList<Object>();
+        private Context context;
 
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
-        private final String IMAGE_CACHE_DIR = "images";
-        private ImageFetcher imageFetcher;
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
+        private ArrayList<Object> mList = new ArrayList<Object>();
 
         // ---------- 리스트 아이템의 레이아웃 재정의 ---------- //
 
@@ -245,13 +251,8 @@ public class AdlibNativeSampleSongActivity extends Activity {
         // ---------- 리스트 아이템의 레이아웃 재정의 ---------- //
 
         public Adapter(Context context, ArrayList<Object> objects) {
+            this.context = context;
             mList = objects;
-
-            DisplayMetrics dm = context.getResources().getDisplayMetrics();
-            ImageCache.ImageCacheParams cacheParams = new ImageCache.ImageCacheParams(context, IMAGE_CACHE_DIR);
-            cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
-            imageFetcher = new ImageFetcher(context, dm.widthPixels, dm.heightPixels);
-            imageFetcher.addImageCache(cacheParams);
         }
 
         @Override
@@ -282,7 +283,7 @@ public class AdlibNativeSampleSongActivity extends Activity {
                 }
                 SampleSongData data = (SampleSongData) mList.get(position);
                 ImageView profileImg = (ImageView) convertView.findViewById(R.id.icon);
-                loadImage(data.getThumb_url(), profileImg, 100, 100);
+                Glide.with(profileImg).load(data.getThumb_url()).into(profileImg);
 
                 TextView mainText = (TextView) convertView.findViewById(R.id.title_text);
                 mainText.setText(data.getTitle());
@@ -294,21 +295,31 @@ public class AdlibNativeSampleSongActivity extends Activity {
                 subText.setText(data.getArtist());
 
             } else if (type == VIEW_TYPE_AD) {
-
                 // 광고 뷰에 대해 처리를 합니다.
                 AdlibNativeItem item = (AdlibNativeItem) mList.get(position);
-                return anh.getView(convertView, item, R.layout.activity_native_song_item);
+                if (convertView == null) {
+                    convertView = new AdlibNativeLayout(context, R.layout.activity_native_song_item);
+                }
+
+                if (convertView instanceof AdlibNativeLayout) {
+                    AdlibNativeLayout nativeLayout = (AdlibNativeLayout) convertView;
+                    if (item != null) {
+                        // 광고 데이터 설정
+                        nativeLayout.setAdsData(item);
+
+                        // 인앱 랜딩 지원 - 옵션
+                        // 콜백으로 전달되는 URL 변경 시 클릭 집계 문제가 발생할 수 있습니다.
+                        // nativeLayout.setAdsData(item, new AdlibInAppLandingListener() {
+                        //     @Override
+                        //     public void onLanding(String url) {
+                        //
+                        //     }
+                        // });
+                    }
+                }
             }
 
             return convertView;
-        }
-
-        // 이미지 로딩을 위한 안드로이드 오픈 소스 사용
-        private void loadImage(String url, ImageView view, int width, int height) {
-
-            if (imageFetcher != null) {
-                imageFetcher.loadImage(url, view);
-            }
         }
     }
 }

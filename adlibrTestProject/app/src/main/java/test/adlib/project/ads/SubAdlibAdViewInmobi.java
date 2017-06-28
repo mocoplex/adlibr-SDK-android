@@ -26,7 +26,6 @@ import com.inmobi.ads.InMobiBanner.BannerAdListener;
 import com.inmobi.ads.InMobiInterstitial;
 import com.inmobi.ads.InMobiInterstitial.InterstitialAdListener2;
 import com.inmobi.sdk.InMobiSdk;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -96,9 +95,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 
 			@Override
 			public void onAdInteraction(InMobiBanner arg0, Map<Object, Object> arg1) {
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewInmobi.this);
 			}
 
 			@Override
@@ -114,9 +110,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewInmobi.this);
 			}
 
 			@Override
@@ -218,9 +211,6 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 
 			@Override
 			public void onAdInteraction(InMobiInterstitial ad, Map<Object, Object> arg1) {
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().interstitialClk(adlibKey, "INMOBI");
 			}
 
 			@Override
@@ -246,10 +236,7 @@ public class SubAdlibAdViewInmobi extends SubAdlibAdViewCore {
 		 			if(intersHandler != null){
 		 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "INMOBI"));
 		 			}
-		 			
-		 			// 미디에이션 통계 정보
-		 			AdlibConfig.getInstance().interstitialImp(adlibKey, "INMOBI");
-		 			
+
 		 			if(ad.isReady()){
 		 				ad.show();
 		 			}

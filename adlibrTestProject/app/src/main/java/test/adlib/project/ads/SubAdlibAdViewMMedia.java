@@ -23,7 +23,6 @@ import com.millennialmedia.InterstitialAd;
 import com.millennialmedia.InterstitialAd.InterstitialErrorStatus;
 import com.millennialmedia.MMException;
 import com.millennialmedia.MMSDK;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -83,9 +82,6 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 					bGotAd = true;
 					// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 					gotAd();
-					
-					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().bannerImp(SubAdlibAdViewMMedia.this);
 				}
 				
 				@Override
@@ -106,8 +102,6 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 				
 				@Override
 				public void onClicked(InlineAd arg0) {
-					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMMedia.this);
 				}
 				
 				@Override
@@ -199,10 +193,6 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 						if(intersHandler != null){
 			 				intersHandler.sendMessage(Message.obtain(intersHandler, AdlibManager.DID_SUCCEED, "MMEDIA"));
 			 			}
-							
-						// 미디에이션 통계 정보
-						AdlibConfig.getInstance().interstitialImp(adlibKey, "MMEDIA");
-						
 					}catch(Exception e){
 					}
 				}
@@ -252,7 +242,6 @@ public class SubAdlibAdViewMMedia extends SubAdlibAdViewCore {
 				
 				@Override
 				public void onClicked(InterstitialAd arg0) {
-					AdlibConfig.getInstance().interstitialClk(adlibKey, "MMEDIA");
 				}
 				
 				@Override

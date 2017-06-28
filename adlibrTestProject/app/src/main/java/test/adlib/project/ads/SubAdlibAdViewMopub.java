@@ -18,7 +18,6 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 import com.mopub.mobileads.MoPubErrorCode;
@@ -67,9 +66,6 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 				bGotAd = true;
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewMopub.this);
 			}
 			
 			@Override
@@ -80,8 +76,6 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 			
 			@Override
 			public void onBannerClicked(MoPubView banner) {
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewMopub.this);
 			}
 
 			@Override
@@ -204,14 +198,10 @@ public class SubAdlibAdViewMopub extends SubAdlibAdViewCore {
 
 			@Override
 			public void onInterstitialShown(MoPubInterstitial interstitial) {
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().interstitialImp(adlibKey, "MOPUB");
 			}
 
 			@Override
 			public void onInterstitialClicked(MoPubInterstitial interstitial) {
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().interstitialClk(adlibKey, "MOPUB");
 			}
 
 			@Override

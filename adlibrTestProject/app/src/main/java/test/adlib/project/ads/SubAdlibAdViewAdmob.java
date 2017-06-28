@@ -19,7 +19,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -78,9 +77,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 				queryAd();
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewAdmob.this);
 			}
 			
 			@Override
@@ -89,8 +85,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			
 			@Override
 			public void onAdLeftApplication() {
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewAdmob.this);
 			}
 		});
 	}
@@ -195,10 +189,7 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 						if(h != null){
 			 				h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADMOB"));
 			 			}
-						
-						// 미디에이션 통계 정보
-						AdlibConfig.getInstance().interstitialImp(adlibKey, "ADMOB");
-						
+
 						interstitial.show();
 					}
 				}catch(Exception e){
@@ -211,11 +202,6 @@ public class SubAdlibAdViewAdmob extends SubAdlibAdViewCore {
 			
 			@Override
 			public void onAdLeftApplication() {
-				try{
-					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().interstitialClk(adlibKey, "ADMOB");
-				}catch(Exception e){
-				}
 			}
 	    	
 	    });

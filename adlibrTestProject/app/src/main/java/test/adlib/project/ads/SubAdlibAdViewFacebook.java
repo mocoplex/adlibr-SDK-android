@@ -19,7 +19,6 @@ import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
-import com.mocoplex.adlib.AdlibConfig;
 import com.mocoplex.adlib.AdlibManager;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
@@ -55,8 +54,11 @@ public class SubAdlibAdViewFacebook extends SubAdlibAdViewCore {
 
 			@Override
 			public void onAdClicked(Ad arg0) {
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerClk(SubAdlibAdViewFacebook.this);
+			}
+
+			@Override
+			public void onLoggingImpression(Ad ad) {
+
 			}
 
 			@Override
@@ -65,9 +67,6 @@ public class SubAdlibAdViewFacebook extends SubAdlibAdViewCore {
 				queryAd();
 				// 광고를 받아왔으면 이를 알려 화면에 표시합니다.
 				gotAd();
-				
-				// 미디에이션 통계 정보
-				AdlibConfig.getInstance().bannerImp(SubAdlibAdViewFacebook.this);
 			}
 
 			@Override
@@ -145,11 +144,11 @@ public class SubAdlibAdViewFacebook extends SubAdlibAdViewCore {
 
 			@Override
 			public void onAdClicked(Ad ad) {
-				try{
-					// 미디에이션 통계 정보
-					AdlibConfig.getInstance().interstitialClk(adlibKey, "FACEBOOK");
-				}catch(Exception e){
-				}
+			}
+
+			@Override
+			public void onLoggingImpression(Ad ad) {
+
 			}
 
 			@Override
@@ -159,10 +158,6 @@ public class SubAdlibAdViewFacebook extends SubAdlibAdViewCore {
 						if(h != null){
 			 				h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "FACEBOOK"));
 			 			}
-						
-						// 미디에이션 통계 정보
-						AdlibConfig.getInstance().interstitialImp(adlibKey, "FACEBOOK");
-						
 						interstitialAd.show();
 					}
 				}catch(Exception e){
