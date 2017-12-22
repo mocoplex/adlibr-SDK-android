@@ -11,28 +11,23 @@
 
 package test.adlib.project.ads;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.kakao.adfit.publisher.AdInterstitial;
-import com.kakao.adfit.publisher.AdView;
-import com.kakao.adfit.publisher.impl.AdError;
-import com.mocoplex.adlib.AdlibManager;
+import com.kakao.adfit.ads.AdListener;
+import com.kakao.adfit.ads.ba.BannerAdView;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
 
-    protected AdView ad;
+    protected BannerAdView ad;
     protected boolean bGotAd = false;
 
     // 여기에 ADAM ID 를 입력하세요.
-	protected String adamID = "Adam_ID";
-    protected static String adamInterstitialID = "Adam_Interstitial_ID";
+    protected String adamID = "Adam_ID";
 
     public SubAdlibAdViewAdam(Context context) {
         this(context, null);
@@ -45,7 +40,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
 
     public void initAdamView() {
         // AdFit 광고 뷰 생성 및 설정
-        ad = new AdView(getContext());
+        ad = new BannerAdView(getContext());
 
         // 킷캣 디바이스에서 렌더링에 생기는 문제로 인한 예외처리.
         // 에러표시가 생기면 disalbe check하시고 무시하셔도 무방합니다.
@@ -56,39 +51,22 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         ad.setLayoutParams(params);
 
-        // 광고 클릭시 실행할 리스너
-        ad.setOnAdClickedListener(new AdView.OnAdClickedListener() {
-            public void OnAdClicked() {
-
-            }
-        });
-
-        // 광고 내려받기 실패했을 경우에 실행할 리스너
-        ad.setOnAdFailedListener(new AdView.OnAdFailedListener() {
-            public void OnAdFailed(AdError arg0, String arg1) {
-                bGotAd = true;
-                failed();
-            }
-        });
-
-        // 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-        ad.setOnAdLoadedListener(new AdView.OnAdLoadedListener() {
-            public void OnAdLoaded() {
+        ad.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
                 bGotAd = true;
                 // 광고를 받아왔으면 이를 알려 화면에 표시합니다.
                 gotAd();
             }
-        });
 
-        // 광고를 불러올때 실행할 리스너
-        ad.setOnAdWillLoadListener(new AdView.OnAdWillLoadListener() {
-            public void OnAdWillLoad(String arg1) {
+            @Override
+            public void onAdFailed(int code) {
+                bGotAd = true;
+                failed();
             }
-        });
 
-        // 광고를 닫았을때 실행할 리스너
-        ad.setOnAdClosedListener(new AdView.OnAdClosedListener() {
-            public void OnAdClosed() {
+            @Override
+            public void onAdClicked() {
             }
         });
 
@@ -98,8 +76,8 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
         // 광고 갱신 시간 : 기본 60초
         ad.setRequestInterval(30);
 
-        // Animation 효과 : 기본 값은 AnimationType.NONE
-        ad.setAnimationType(AdView.AnimationType.FLIP_HORIZONTAL);
+        // 광고 사이즈 설정
+        ad.setAdUnitSize("320x50");
         ad.setVisibility(View.VISIBLE);
 
         this.addView(ad);
@@ -113,12 +91,12 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
 
         bGotAd = false;
 
-        if (ad == null)
-            initAdamView();
+        if (ad == null) initAdamView();
 
         queryAd();
 
-        ad.resume();
+        ad.setRequestInterval(30);
+        ad.loadAd();
 
         // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
         Handler adHandler = new Handler();
@@ -129,8 +107,7 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
                 if (bGotAd) {
                     return;
                 } else {
-                    if (ad != null)
-                        ad.pause();
+                    if (ad != null) ad.setRequestInterval(0);
 
                     failed();
                 }
@@ -151,16 +128,12 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
     }
 
     public void onResume() {
-        if (ad != null) {
-            ad.resume();
-        }
-
         super.onResume();
     }
 
     public void onPause() {
         if (ad != null) {
-            ad.pause();
+            ad.setRequestInterval(0);
         }
 
         super.onPause();
@@ -173,52 +146,5 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
         }
 
         super.onDestroy();
-    }
-
-    public static void loadInterstitial(Context ctx, final Handler h, final String adlibKey) {
-        AdInterstitial mAdInterstitial = new AdInterstitial((Activity) ctx);
-        mAdInterstitial.setClientId(adamInterstitialID);
-        mAdInterstitial.setOnAdLoadedListener(new AdView.OnAdLoadedListener() {
-
-            @Override
-            public void OnAdLoaded() {
-                try {
-                    if (h != null) {
-                        h.sendMessage(Message.obtain(h, AdlibManager.DID_SUCCEED, "ADAM"));
-                    }
-                } catch (Exception e) {
-                }
-
-            }
-        });
-        mAdInterstitial.setOnAdFailedListener(new AdView.OnAdFailedListener() {
-
-            @Override
-            public void OnAdFailed(AdError arg0, String arg1) {
-
-                try {
-                    if (h != null) {
-                        h.sendMessage(Message.obtain(h, AdlibManager.DID_ERROR, "ADAM"));
-                    }
-                } catch (Exception e) {
-                }
-            }
-        });
-        mAdInterstitial.setOnAdClosedListener(new AdView.OnAdClosedListener() {
-
-            @Override
-            public void OnAdClosed() {
-
-                try {
-                    if (h != null) {
-                        h.sendMessage(Message.obtain(h, AdlibManager.INTERSTITIAL_CLOSED, "ADAM"));
-                    }
-                } catch (Exception e) {
-                }
-
-            }
-        });
-
-        mAdInterstitial.loadAd();
     }
 }

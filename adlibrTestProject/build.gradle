@@ -17,6 +17,7 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+
         // mobfox sdk
         maven { url "https://jitpack.io" }
         flatDir {

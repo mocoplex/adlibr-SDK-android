@@ -32,10 +32,9 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
 
     // Adfit
-    compile(name: 'AdfitSDK-2.4.2', ext: 'aar')
+    compile(name: 'AdfitSDK-3.0.0', ext: 'aar')
 
     // facebook audiencenetwork
-    // Audience Network SDK. Only versions 4.6.0 and above are available
     compile 'com.facebook.android:audience-network-sdk:4.23.0'
 
     // Inmobi
@@ -43,12 +42,12 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:recyclerview-v7:25.3.1'
 
-    // For banners
+    // mopub For banners
     compile('com.mopub:mopub-sdk-banner:4.15.0@aar') {
         transitive = true
     }
 
-    // For interstitials
+    // mopub For interstitials
     compile('com.mopub:mopub-sdk-interstitial:4.15.0@aar') {
         transitive = true
     }
@@ -59,7 +58,7 @@ dependencies {
     //MobFox
     compile 'com.github.mobfox:MobFox-Android-SDK-Core:3.2.7'
 
-    // Image Loading(샘플 프로젝트 전용)
+    // Glide : Image Loading Library (샘플 프로젝트에 사용)
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 

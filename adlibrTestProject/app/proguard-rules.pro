@@ -62,8 +62,9 @@
 
 # Inmobi 사용을 위한 설정입니다. -- END
 
-# Adam 사용을 위한 설정입니다.
--keep class net.daum.adam.publisher.* { public *; }
+# Adam(Adfit) 사용을 위한 설정입니다.
+-keep class com.kakao.adfit.ads.* { public *; }
+-keep class com.kakao.adfit.ads.ba.* { public *; }
 -keep class test.adlib.project.ads.SubAdlibAdViewAdam { *; }
 
 # AdMob 사용을 위한 설정입니다.
