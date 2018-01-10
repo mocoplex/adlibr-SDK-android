@@ -18,8 +18,9 @@ allprojects {
         mavenCentral()
         jcenter()
 
-        // mobfox sdk
-        maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io" } // MobFox sdk
+        maven { url "https://s3.amazonaws.com/moat-sdk-builds" } // MobFox sdk
+        maven { url 'https://maven.google.com' } // necessary for Android API 26
         flatDir {
             dirs 'libs'
         }

@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId 'test.adlib.project'
         minSdkVersion 16
@@ -26,37 +26,38 @@ android {
 dependencies {
     //default
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.google.android.gms:play-services-base:11.0.1'
-    compile 'com.google.android.gms:play-services-ads:11.0.1'
+    compile 'com.google.android.gms:play-services-ads:11.4.0'
+    compile 'com.google.android.gms:play-services-base:11.4.0'
+    compile 'com.android.support:support-v4:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:multidex:1.0.1'
 
     // Adfit
-    compile(name: 'AdfitSDK-3.0.0', ext: 'aar')
+    compile(name: 'AdfitSDK-3.0.2', ext: 'aar')
 
     // facebook audiencenetwork
-    compile 'com.facebook.android:audience-network-sdk:4.23.0'
+    compile 'com.facebook.android:audience-network-sdk:4.27.0'
 
     // Inmobi
-    compile 'com.inmobi.monetization:inmobi-ads:6.2.0'
+    compile 'com.inmobi.monetization:inmobi-ads:7.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
 
     // mopub For banners
-    compile('com.mopub:mopub-sdk-banner:4.15.0@aar') {
+    compile('com.mopub:mopub-sdk-banner:4.19.0@aar') {
         transitive = true
     }
 
     // mopub For interstitials
-    compile('com.mopub:mopub-sdk-interstitial:4.15.0@aar') {
+    compile('com.mopub:mopub-sdk-interstitial:4.19.0@aar') {
         transitive = true
     }
 
     // MillenialMedia
-    compile(name: 'mm-ad-skd-v6.4.0', ext: 'aar')
+    compile(name: 'mm-android-ad-sdk-dist-6.6.1', ext: 'aar')
 
     //MobFox
-    compile 'com.github.mobfox:MobFox-Android-SDK-Core:3.2.7'
+    compile 'com.github.mobfox.MobFox-Android-SDK-Core:MobFox-Android-SDK-Core:v3.3.0'
+    compile 'com.moat.analytics.mobile.mpub:moat-mobile-app-kit:2.1.0'
 
     // Glide : Image Loading Library (샘플 프로젝트에 사용)
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'

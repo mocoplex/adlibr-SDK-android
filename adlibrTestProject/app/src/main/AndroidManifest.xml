@@ -60,21 +60,11 @@
         </receiver>
         <!-- T-AD -->
 
-
-        <!-- Adfit - 전면광고 노출을 위해 필요한 선언입니다. -->
-        <activity
-            android:name="com.kakao.adfit.publisher.impl.AdInterstitialActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
-        <!-- ADAM -->
-
-
         <!-- ADMOB - Google Play 버전을 위한 선언입니다. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
         <!-- ADMOB -->
-
 
         <!-- INMOBI - 광고 노출을 위해 필요한 선언입니다. -->
         <activity

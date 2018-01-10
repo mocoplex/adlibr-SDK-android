@@ -21,6 +21,9 @@ import com.kakao.adfit.ads.AdListener;
 import com.kakao.adfit.ads.ba.BannerAdView;
 import com.mocoplex.adlib.SubAdlibAdViewCore;
 
+/*
+ * ADFit SDK 업데이트로 광고 요청이 증가 할 수 있습니다.
+ */
 public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
 
     protected BannerAdView ad;
@@ -73,8 +76,10 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
         // 할당 받은 clientId 설정
         ad.setClientId(adamID);
 
+        // Adlib 관련 사항 : 반복 시간 관련 검토 필수 ADfit의 기능
         // 광고 갱신 시간 : 기본 60초
-        ad.setRequestInterval(30);
+        // 0 으로 설정할 경우, 갱신하지 않음.
+        ad.setRequestInterval(0);
 
         // 광고 사이즈 설정
         ad.setAdUnitSize("320x50");
@@ -95,7 +100,6 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
 
         queryAd();
 
-        ad.setRequestInterval(30);
         ad.loadAd();
 
         // 3초 이상 리스너 응답이 없으면 다음 플랫폼으로 넘어갑니다.
@@ -128,12 +132,15 @@ public class SubAdlibAdViewAdam extends SubAdlibAdViewCore {
     }
 
     public void onResume() {
+        if (ad != null) {
+            ad.resume();
+        }
         super.onResume();
     }
 
     public void onPause() {
         if (ad != null) {
-            ad.setRequestInterval(0);
+            ad.pause();
         }
 
         super.onPause();
