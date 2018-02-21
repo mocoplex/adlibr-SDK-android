@@ -10,6 +10,9 @@
 
 ## SDK Version History
 
+SDK version  4.5.1.8 (2018.02.21)
+> 마이너 버그 수정 <br>
+
 SDK version  4.5.1.5 (2017.12.22)
 > 광고플랫폼 라이브러리 및 SubView 업데이트<br>
 > 마이너 버그 수정 <br>
