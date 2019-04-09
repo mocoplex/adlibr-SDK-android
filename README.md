@@ -4,7 +4,7 @@
 <br>
 
 ## 프로젝트 설정 및 가이드 
-* [프로젝트 설정 가이드 링크 #1](http://developer.adlibr.com/ssp_android_guide.html)
+* [프로젝트 설정 가이드 링크 #1](https://github.com/nhnent/adlib.android_media_app)
 * [프로젝트 설정 가이드 링크 #2](./adlibrTestProject/README.md)
 <br>
 
